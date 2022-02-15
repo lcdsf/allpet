@@ -6,6 +6,13 @@ img{
     max-height: 100%;
 }
 
+h3{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
 
 body{
     display: flex;
@@ -14,21 +21,49 @@ body{
 }
 
 footer{
+    padding-top: 60px;
+    padding-bottom: 60px;
+    display: flex;
+    flex-direction: row;
     background-color: #4da5a5;
 }
 
-#moldazul{
+footer ul{
+    color: white;
+}
+
+#molditems{
     display: flex;
    /* flex-wrap: wrap;*/
-    flex-flow: row wrap;
-    justify-content: center;
-    align-items: center;
     background-color: #b5dada;
     margin: auto;
-    height: 500px;
+    height: 600px;
     width: 1200px;
-    padding: 2%;
+    padding: 5px;
 }
+
+#moldcats{
+    display: flex;
+    background-color: #b5dada;
+    margin: auto;
+    height: 150px;
+    width: 1000px;
+    padding: 5px;
+    margin-bottom: 80px;
+
+}
+
+#grupoitems, #grupocats{
+    display: flex;
+    /*align-content: flex-start;*/
+    flex-flow: row wrap;
+    justify-content: center;
+    /*align-items: center;*/
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+
 
 #item1, #item2, #item3, #item4, #item5, #item6, #item7, #item8{
     width: 256px; height: 256px;
@@ -36,10 +71,25 @@ footer{
     flex-direction: column;
     align-items: center;
     font-weight: bold;
-    border: solid 1px orange;
+   /* border: solid 1px orange;*/
     margin: 10px;
 
 }
+
+#cat1, #cat2, #cat3, #cat4, #cat5, #cat6, #cat7, #cat8{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #feae11;
+    color: white;
+    width: 200px;
+    height: 40px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 20px;
+    margin-right: 20px;
+
+} 
 
 /*#imgitem1, #imgitem2, #imgitem3, #imgitem4, #imgitem5, #imgitem6, #imgitem7, #imgitem8 {
     border: solid 2px purple;
@@ -47,3 +97,17 @@ footer{
     /*margin: auto;
 
 }*/
+
+#btnvermais{
+    display: flex;
+    justify-content: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 150px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    background-color: #0d8584;
+    color: white;
+}
