@@ -251,7 +251,7 @@
 }
 
 #btnscompraconcluida{
-   /* border: 1px solid brown; */
+   /* border: 1px solid brown; /*/
     display: flex;
     justify-content: space-evenly;
     width: 40vw;
