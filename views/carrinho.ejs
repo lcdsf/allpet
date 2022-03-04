@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+
+
+
+
+
+    <title>AllPet - Carrinho</title>
+</head>
+
+<body>
+
+    <%- include('./partials/header') %>
+    
+    <main>
+        <div id="bannercarrinho">
+            <h2>AllPet - Carrinho</h2>
+        </div>
+
+            <div id="fase1crr">
+                <h2>1. Resumo: 06 itens</h2>
+                <div id="prodscrr">
+                    <div id="prcrr1">
+                        <img src="/img/racao.png">
+                        <div id="infoprcrr1">
+
+                            <div id="nomeqtdcrr">
+                            <label>Ração FeeDog</label>
+                            <label> <button id="qtdbtn">-</button> &nbsp; 2 &nbsp; <button id="qtdbtn">+</button> </p>
+                            </div>
+
+                            <div id="vuncrr">
+                                <label>Valor unitário</label>
+                                <label>R$ 89,90</label>
+                            </div>
+
+                            <div id="vtcrr">
+                                <label>Total</label>
+                                <label>R$ 179,80</label>
+                            </div>
+
+                            
+                        </div>
+                        <button id="removeitem"> REMOVER </button>
+                    </div>
+
+
+                    <div id="prcrr1">
+                        <img src="/img/ydog.png">
+                        <div id="infoprcrr1">
+
+                            <div id="nomeqtdcrr">
+                            <label>Brinquedo YDog</label>
+                            <label> <button id="qtdbtn">-</button> &nbsp; 3 &nbsp; <button id="qtdbtn">+</button> </p>
+                            </div>
+
+                            <div id="vuncrr">
+                                <label>Valor unitário</label>
+                                <label>R$ 15,00</label>
+                            </div>
+
+                            <div id="vtcrr">
+                                <label>Total</label>
+                                <label>R$ 45,00</label>
+                            </div>
+                        </div>
+                        <button id="removeitem"> REMOVER </button>
+                    </div>
+
+
+                    <div id="prcrr1">
+                        <img src="/img/dc1.png">
+                        <div id="infoprcrr1">
+
+                            <div id="nomeqtdcrr">
+                            <label>Coleira Bibster</label>
+                            <label> <button id="qtdbtn">-</button> &nbsp; 1 &nbsp; <button id="qtdbtn">+</button> </p>
+                            </div>
+
+                            <div id="vuncrr">
+                                <label>Valor unitário</label>
+                                <label>R$ 100,00</label>
+                            </div>
+
+                            <div id="vtcrr">
+                                <label>Total</label>
+                                <label>R$ 100,00</label>
+                            </div>
+                        </div>
+                        <button id="removeitem"> REMOVER </button>
+                    </div>
+
+
+                </div>
+
+                <h2>Valor total da compra: R$ 324,80</h2>
+
+            </div>
+
+            <div id="fase2crr">
+                <h2>2. Forma de pagamento e entrega</h2>
+                
+                <div id="fase2info">
+                    <div id="divfpgto">
+                        <label>Forma de pagamento: &nbsp; </label>
+                        <select id="menufpgto">
+                            <option value="cartaocrd">Cartão de Crédito</option>
+                            <option value="cartaodbt">Cartão de Débito</option>
+                            <option value="boleto">Boleto</option>
+                            <option value="pix">Pix</option>
+                        </select>
+                    </div>
+
+                    <div id="diventrega">
+                        <label>Endereço de entrega: &nbsp; </label>
+                        <select id="enderecos">
+                            <option value="end1">Rua Mangueira, 2512, Bairro Uirapuru, Itu - SP</option>
+                            <option value="end2">Av. Ulysses Guimarães, 301, Centro, Serra Talhada - PE</option>
+                            <option value="end3">Rodovia MT-130 KM 59, S/N, Zona Rural, Poxoréu - MT</option>
+                        </select> &nbsp;
+                        
+                        <button>NOVO ENDEREÇO</button>
+                        <br><br>
+                        <label for="retirada">Não precisa entregar, vou retirar na loja</label>
+                        <input type="checkbox" name="retirada">
+                    </div>
+                </div>
+
+            </div>
+
+            <button id="finalizacompra" type="submit">FINALIZAR COMPRA</button>
+
+
+
+    </main>
+
+</body>
+
+<%- include('./partials/footer') %>
+
+</html>
