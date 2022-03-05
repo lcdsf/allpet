@@ -5,6 +5,10 @@ router.get('/', function(req, res){
     res.render('home');
 });
 
+router.get('/homeloginaberto', function(req, res){
+    res.render('homeLoginAberto');
+});
+
 router.get('/cadastrouser', function(req, res){
     res.render('cadastroUser');
 });
@@ -23,6 +27,14 @@ router.get('/carrinho', function(req, res){
 
 router.get('/compraconcluida', function(req, res){
     res.render('compraConcluida');
+});
+
+router.get('/detalhecompra', function(req, res){
+    res.render('detalheCompra');
+});
+
+router.get('/resultadobusca', function(req, res){
+    res.render('resultadoBusca');
 });
 
 
