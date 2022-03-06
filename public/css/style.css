@@ -1,10 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Rufina:wght@700&display=swap');
 
-<<<<<<< HEAD
-=======
 
-/*-------------------- TELA CARRINHO --------------------*/
+/*-------------------- TELA CARRINHO ---------------------*/
 
 #bannercarrinho{
     display: flex;
@@ -540,7 +538,6 @@ button, input{
 }
 
 
->>>>>>> 96ea6ad38cb6ce536da59fc1ce836711a8689f6f
 body{
     font-family: 'Roboto', sans-serif;
 }
