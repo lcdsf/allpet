@@ -37,10 +37,6 @@ router.get('/resultadobusca', function(req, res){
     res.render('resultadoBusca');
 });
 
-/*router.get('/bemestar', function(req, res){
-    res.render('bemEstar');
-});*/
-
 router.get('/acessoriosbrinquedos', function(req, res){
     res.render('acessoriosBrinquedos');
 });
@@ -59,6 +55,10 @@ router.get('/descartaveis', function(req, res){
 
 router.get('/areacliente', function(req, res){
     res.render('areaCliente');
+});
+
+router.get('/minhascompras', function(req, res){
+    res.render('minhasCompras');
 });
 
 
