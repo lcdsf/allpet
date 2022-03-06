@@ -82,6 +82,7 @@ header nav ul li{
 }
 
 #logcad{
+    border: none;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -327,6 +328,8 @@ footer ul li, footer p, footer a{
 }*/
 
 #btnvermais{
+    border: none;
+    font-size: 15px;
     display: flex;
     justify-content: center;
     padding-top: 10px;

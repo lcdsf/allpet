@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+
+
+
+
+
+    <title>AllPet - Compra 20220201999999</title>
+</head>
+
+<body>
+
+    <%- include('./partials/header') %>
+    
+    <main id="maindetalhecompra"> 
+
+        <div id="bannercadastro">
+            <h2>Detalhes da Compra #20220201999999</h2>
+        </div>
+
+        <div id="infodetalhecompra">
+            <h2>Data/hora: 31/01/2022 - 12:53 | Valor: R$ 324,80 | Cartão de Crédito</h2>
+
+            <div id="separador"></div>
+
+            <h3>Itens da compra</h3>
+
+                <div id="contdetalhecompra">
+                    
+                    <div id="itemdetalhecompra">
+                        <img src="/img/racao.png"> 
+                        <br>
+                        <label>Ração FeeDog</label>
+                        <br>
+                        <label>R$ 89,90</label>
+                        <br>
+                        <label>Qtd: 2</label>    
+                    </div>
+
+                    <div id="itemdetalhecompra">
+                        <img src="/img/ydog.png"> 
+                        <br>
+                        <label>Brinquedo YDog</label>
+                        <br>
+                        <label>R$ 15,00</label>
+                        <br>
+                        <label>Qtd: 3</label>    
+                    </div>
+
+                    <div id="itemdetalhecompra">
+                        <img src="/img/dc1.png"> 
+                        <br>
+                        <label>Coleira Bibster</label>
+                        <br>
+                        <label>R$ 100,00</label>
+                        <br>
+                        <label>Qtd: 1</label>   
+                    </div>
+
+                </div>
+
+        </div>
+
+        <div id="separador"></div>
+
+        <h2>Status da compra</h2>
+
+        <h3>Endereço de entrega: Rua Severino Pereira Lins, 956, Alto da Conceição, Serra Talhada - PE</h3>
+
+        <div id="statuscompra">
+
+            <div id="statuschk">
+                <div id="dotcompra">1</div>
+                <p>31/01/2022 - 12:53</p>
+                <p>Pagamento aprovado</p>
+                <p>Cartão de Crédito</p>
+            </div>
+
+            <div id="statuschk">
+                <div id="dotcompra">2</div>
+                <p>31/01/2022 - 12:55</p>
+                <p>Pedido recebido pela loja</p>
+                <p>#20220201999999</p>
+            </div>
+
+            <div id="statuschk">
+                <div id="dotcompra">3</div>
+                <p>01/02/2022 - 08:30</p>
+                <p>Pedido despachado</p>
+                <button action="https://rastreamento.correios.com.br/app/index.php">Rastreio</button>
+            </div>
+
+            <div id="statuschk">
+                <div id="dotcompra">4</div>
+                <p>03/02/2022 - 14:27</p>
+                <p>Entrega efetuada</p>
+            </div>
+
+        </div>
+
+        <div id="btnsdetalhecompra">
+            <button>VER TODAS AS MINHAS COMPRAS</button>
+            <button>AJUDA</button>
+        </div>
+      
+
+    </main>
+
+</body>
+
+<%- include('./partials/footer') %>
+
+</html>
