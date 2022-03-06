@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+
+
+
+
+
+    <title>AllPet - Cadastro de usuário</title>
+</head>
+
+<body>
+
+    <%- include('./partials/header') %>
+    
+    <main>
+
+        <div id="bannercadastro">
+            <h2>Cadastro AllPet - Usuário</h2>
+        </div>
+
+        <img src="/img/cadastro.png" id="capacadastro">
+
+        <form id="formuser">
+
+            <fieldset>
+                <legend>Complete as informações a seguir:</legend>
+
+                <br>
+
+                <label for="nomecompleto">Nome Completo</label>
+                <input type="text" name="nomecompleto" id="nomecompleto"> <br><br>
+
+                <label for="endereco">Endereço</label> 
+                <input type="text" name="endereco" id="endereco"> <br><br>
+
+                <label>Gênero</label> <br>
+
+                <input type="radio" name="genero" id="genero" value="masc">
+                <label for="masc">Masculino</label>
+
+                <input type="radio" name="genero" id="genero" value="fem">
+                <label for="fem">Feminino</label>
+
+                <input type="radio" name="genero" id="genero" value="outros">
+                <label for="outros">Outros</label>
+
+                <br><br>
+
+                <label for="cpf">CPF</label> 
+                <input type="text" name="cpf" id="cpf"> <br><br>
+
+                <label for="telefone">Telefone</label> 
+                <input type="text" name="telefone" id="telefone"> <br><br>
+
+                <label for="email">E-mail</label> 
+                <input type="email" name="email" id="email"> <br><br>
+
+                <label for="senha">Senha</label> 
+                <input type="password" name="senha" id="senha"> <br><br>
+
+                <label for="confirmaSenha">Confirmar senha</label> 
+                <input type="password" name="confirmaSenha" id="confirmaSenha"> <br><br>
+
+                
+                <label>Como nos conheceu?</label> <br>
+
+                <input type="radio" name="conheceu" id="conheceu" value="busca">
+                <label for="masc">Busca</label>
+
+                <input type="radio" name="conheceu" id="conheceu" value="recomenda">
+                <label for="fem">Recomendação</label>
+
+                <input type="radio" name="conheceu" id="conheceu" value="redessociais">
+                <label for="outros">Anúncio em redes sociais</label>
+
+                <br><br>
+
+                <label>O que você mais gostou?</label> <br>
+
+                <input type="radio" name="oqgostou" id="preco" value="preco">
+                <label for="masc">Preço</label>
+
+                <input type="radio" name="oqgostou" id="formapgto" value="formapgto">
+                <label for="fem">Formas de pagamento</label>
+
+                <input type="radio" name="oqgostou" id="frete" value="frete">
+                <label for="outros">Frete</label>
+
+                <input type="radio" name="oqgostou" id="variedade" value="variedade">
+                <label for="outros">Variedade de produtos</label>
+
+                <br><br>
+
+                <label>Quantos animais possui?</label> <br>
+
+                <input type="radio" name="qtdanimais" id="1animal" value="1animal">
+                <label for="masc">01 animal</label>
+
+                <input type="radio" name="qtdanimais" id="2a4animais" value="2a4animais">
+                <label for="fem">02 a 04 animais</label>
+
+                <input type="radio" name="qtdanimais" id="5maisanimais" value="5maisanimais">
+                <label for="outros">05 animais ou mais</label>
+
+                <br><br>
+
+                <label>O que prioriza ao comprar produtos Pet?</label> <br>
+                
+                <input type="checkbox" id="marcas" name="marcas" value="marcas">
+                <label for="marcas">Marcas</label>
+
+                <input type="checkbox" id="pripreco" name="pripreco" value="material">
+                <label for="pripreco">Preço</label>
+
+                <input type="checkbox" id="material" name="material" value="material">
+                <label for="material">Qualidade do material</label>
+
+                <br><br>
+
+                <button type="submit" id="btncaduser">Enviar</button>
+
+            </fieldset>
+
+
+
+        </form>
+
+    </main>
+
+</body>
+
+<%- include('./partials/footer') %>
+
+</html>

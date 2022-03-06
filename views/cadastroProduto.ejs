@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+
+
+
+
+
+    <title>AllPet - Cadastro de produto</title>
+</head>
+
+<body>
+
+    <%- include('./partials/header') %>
+    
+    <main>
+
+        <div id="bannercadastro">
+            <h2>Cadastro AllPet - Produto</h2>
+        </div>
+
+        <img src="/img/compcat.jpg" id="capacadastro">
+
+        <form id="formuser">
+
+            <fieldset>
+                <legend>Complete as informações a seguir:</legend>
+
+                <br>
+
+                <label for="nomeprod">Nome do produto</label>
+                <input type="text" name="nomeprod" id="nomeprod"> <br><br>
+
+                <label for="descprod">Descrição</label><br>
+                <textarea name="descprod" id="descprod"></textarea> <br><br>
+
+                <label>Categoria</label> <br>
+
+                <input type="radio" name="categoria" id="bemestar" value="bemestar">
+                <label for="bemestar">Bem-estar</label>
+
+                <input type="radio" name="categoria" id="acessorios" value="acessorios">
+                <label for="acessorios">Acessórios</label>
+
+                <input type="radio" name="categoria" id="saude" value="saude">
+                <label for="saude">Saúde</label>
+
+                <input type="radio" name="categoria" id="estetica" value="estetica">
+                <label for="estetica">Estética</label>
+
+                <input type="radio" name="categoria" id="descartaveis" value="descartaveis">
+                <label for="descartaveis">Descartáveis</label>
+
+                <br><br>
+
+                <label for="cpf">Preço</label> 
+                <input type="number" name="precoprod" id="precoprod"> <br><br>
+
+                
+                <label>Imagem</label> <br><br>
+                <input type="file" name="imagem" id="imagem">
+
+                <br><br>
+
+                <button type="submit" id="btncaduser">Enviar</button>
+
+            </fieldset>
+
+
+
+        </form>
+
+    </main>
+
+</body>
+
+<%- include('./partials/footer') %>
+
+</html>
