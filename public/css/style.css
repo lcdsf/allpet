@@ -431,6 +431,8 @@
     height: 100vh;
     justify-content: space-evenly;
     margin: 30px auto 0px auto;
+    margin-bottom: 50px;
+
 }
 
 #divisoriafiltro{
@@ -445,12 +447,21 @@
     border-radius: 4px;
     background-color: #d1d1d1;
     width: 20vw;
-    height: 90%;
+    height: 80%;
     padding: 20px;
    /* z-index: 2;
     margin-top: 100px;*/
     
 }
+
+/*#filtrobuscacat{
+    border-radius: 4px;
+    background-color: #d1d1d1;
+    width: 20vw;
+    height: 90%;
+    padding: 20px;
+    height: 100%;
+}*/
 
 #filtrobusca p{
     font-weight: bold;
@@ -468,6 +479,7 @@
     flex-flow: wrap;
     justify-content: center;
     align-items: center;
+
 
 }
 
@@ -489,6 +501,34 @@
 #prodresbusca img{
     width: 100%;
 }
+
+
+
+
+/*-------------------- TELA AREA CLIENTE     -------------*/
+#containerpaineluser{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 70vw;
+    margin: 50px auto 0px auto;
+}
+
+#painelconfiguser{
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    text-align: center;
+}
+
+#painelconfiguser img{
+    width: 30%;
+    margin-left: auto; margin-right: auto;
+    border-radius: 60px;
+}
+
+
+
 
 
 /*-----------------------------------------------------*/
