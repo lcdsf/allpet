@@ -12,7 +12,7 @@
 
 
 
-    <title>AllPet - Resultados da busca</title>
+    <title>AllPet - Descartáveis</title>
 </head>
 
 <body>
@@ -22,12 +22,28 @@
     <main> 
 
         <div id="bannercadastro">
-            <h2>Produtos encontrados com a busca "acessorio" - (9)</h2>
+            <h2>Descartáveis</h2>
         </div>
 
         <div id="containerbusca">
             <div id="filtrobusca">
-                
+
+                <p>CATEGORIA</p>
+                <input type="checkbox" id="embalagens"> &nbsp; <label id="embalagens">Embalagens</label>
+                <br>
+                <input type="checkbox" id="tapete_hig"> &nbsp; <label id="tapete_hig">Tapetes higiênicos</label>
+                <br>
+                <input type="checkbox" id="curativos"> &nbsp; <label id="curativos">Curativos</label>
+                <br>
+                <input type="checkbox" id="seringas"> &nbsp; <label id="seringas">Seringas</label>
+                <br>
+                <input type="checkbox" id="comebebedesc"> &nbsp; <label id="comebebedesc">Comedouros/Bebedouros descartáveis</label>
+                <br>
+
+
+
+                <div id="divisoriafiltro"></div>
+
                 <%- include('./partials/filtroBusca') %>
 
             </div>

@@ -1,6 +1,546 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Rufina:wght@700&display=swap');
 
+<<<<<<< HEAD
+=======
+
+/*-------------------- TELA CARRINHO --------------------*/
+
+#bannercarrinho{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #0d8584;
+    color: white;
+    height: 80px;
+    width: 100vw;
+    margin-top: -70px;
+}
+
+
+
+
+
+#prcrr1 label{
+    text-align: center;
+}
+
+#infoprcrr1{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 60%;
+}
+
+#nomeqtdcrr, #vuncrr, #vtcrr{
+    /*border: 1px solid antiquewhite;*/
+    width: 75%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+#prodscrr{
+    display: flex;
+    flex-direction: column;
+    /*border: 1px solid orange;*/
+    height: 80%;
+    overflow-y: auto;
+
+}
+
+#prcrr1{
+    border: 1px solid #b5dada;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 150px;
+    margin: 10px 0 10px 0;
+
+}
+
+#qtdbtn{
+    border: none;
+    border-radius: 50px;
+    margin: 5px 0px 5px 0px;
+    width: 20px;
+    height: 20px;
+    font-weight: bold;
+    font-size: 15px;
+    background-color: #FEAE11;
+    color: white;
+}
+
+#removeitem{
+    border: none;
+    width: 100px;
+    height: 30px;
+    border-radius: 4px;
+    background-color: #FEAE11;
+    color: white;
+    text-align: center;
+}
+
+#prcrr1 img{
+    width: 100px;
+    height: 100px;
+    border-radius: 3px;
+}
+
+#crr1{
+    border: solid 1px blue;
+    width: 80vw;
+    height: 400px;
+    margin: 50px auto 0px auto;
+}
+
+#fase1crr, #fase2crr{
+    padding: 10px 20px 10px 20px;
+    background-color: #007F7E;
+    margin: 0 auto;
+    border-radius: 3px;
+    color: white;
+    height: 100%;
+    /*border: solid 1px blue;*/
+    width: 80vw;
+    height: 600px;
+    margin: 50px auto 0px auto;
+}
+
+#fase1crr h2, #fase2crr h2{
+    text-align: center;
+}
+
+#fase2crr{
+    display: flex;
+    flex-direction: column;
+    height: 200px;
+}
+
+#fase2info{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    width: 80%;
+    height: 50%;
+    margin: 0px auto;
+    /* border: 1px solid aqua; */
+}
+
+
+
+#divfpgto{
+    width: 100%;
+   /* border: 1px solid salmon; */
+
+}
+
+#diventrega{
+    width: 100%;
+  /*  border: 1px solid salmon; */
+
+}
+
+#finalizacompra{
+    margin-top: 30px;
+    width: 200px;
+    height: 50px;
+    color: white;
+    background-color: #FEAE11;
+    margin-left: auto;
+    margin-right: auto;
+    border: none;
+    border-radius: 4px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+
+
+
+
+
+
+
+
+
+/*--------------------------------------------------------*/
+
+/*-------------------- TELA CARRINHO MOBILE -------------*/
+@media (max-width: 800px){
+
+
+}
+
+/*-----------------------------------------------------*/
+
+
+/*------------ TELA COMPRA CONCLUIDA ----------------*/
+
+#contcompraconcl1{
+ /*   border: 1px solid green; */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 90vw;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#msgcompraconcl{
+    width: 30%;
+   /* border: 1px solid olivedrab; */
+    text-align: center;
+    color: #007F7E;
+}
+#msgcompraconcl svg{
+    width: 250px;
+    height: 250px;
+}
+
+#msgcompraconcl p{
+    font-style: italic;
+    font-size: 20px;
+}
+
+
+#detalhescompra{
+    /*border: 1px solid #d54b4b;*/
+    background-color: #b5dada;
+    text-align: center;
+    width: 65%;
+    height: 95%;
+    border-radius: 4px;
+
+}
+
+#detalhescompra p{
+    font-weight: bold;
+
+}
+
+#contdetcompra{
+    /*border: 1px solid black;*/
+    display: flex;
+    flex-direction: row;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: space-between;
+    width: 95%;
+    height: 50%;
+    padding-bottom: 20px;
+    overflow-x: auto;
+}
+
+#itemcompra{
+    border: 1px solid white;
+    border-radius: 4px;
+    width: 30%;
+    height: 60%;
+    margin: 0px 3px;
+}
+
+#itemcompra img {
+    height: 150px;
+    width: 150px;
+}
+
+#btnscompraconcluida{
+   /* border: 1px solid brown; /*/
+    display: flex;
+    justify-content: space-evenly;
+    width: 40vw;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+
+}
+
+#btnscompraconcluida button{
+    background-color: #007F7E;
+    color: white;
+    border: none;
+    width: 200px;
+    height: 30px;
+    font-size: 15px;
+    border-radius: 4px;
+}
+
+#maincompraconcluida{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+
+#sugestoescc{
+    margin-top: 40px;
+    padding-bottom: 30px;
+    width: 100vw;
+    background-color: #FEAE11;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+#thumbspgcc{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80vw;
+}
+
+#thumbspgcc img{
+    border-radius: 4px;
+}
+
+#thumbspgcc svg{
+    width: 60px;
+    height: 60px;
+}
+
+#dotsthumbpgcc{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 20vw;
+    margin-left: auto; margin-right: auto;
+}
+
+#dotpgcc{
+    background-color: #027E7E;
+    width: 20px;
+    height: 20px;
+    border-radius: 50px;
+}
+
+
+/*-------------------------------------------------*/
+
+
+/*-------------------- TELA DETALHES DA COMPRA -------------*/
+
+#maindetalhecompra{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#maindetalhecompra h2, #maindetalhecompra h3{
+    text-align: center;
+}
+
+#statuscompra{
+    display: flex;
+    flex-direction: row;
+    width: 70vw;
+    justify-content: space-evenly;
+    text-align: center;
+    margin-left: auto; margin-right: auto;
+}
+
+#dotcompra{
+    background-color: #007F7E;
+    width: 20px;
+    height: 20px;
+    border-radius: 50px;
+    margin-left: auto; margin-right: auto;
+    padding: 3px;
+    color: white;
+}
+
+#separador{
+    background-color: #007F7E;
+    height: 2px;
+    width: 80vw;
+    margin: 20px auto 20px auto;
+}
+
+#contdetalhecompra{
+    /*border: 1px solid darkblue;*/
+    display: flex;
+    flex-direction: row;
+    height: 200px;
+    width: 80vw;
+    margin-left: auto; margin-right: auto;
+    padding: 20px 0px;
+    justify-content: space-around;
+    border-radius: 4px;
+    background-color: #4DA5A5;
+}
+
+#itemdetalhecompra{
+    /*border: 1px solid sienna;*/
+    text-align: center;
+    width: 14%;
+    padding: 8px;
+    border-radius: 4px;
+    background-color: #FEAE11;
+}
+
+#itemdetalhecompra img{
+    width: 100%;
+    height: 70%;
+    border-radius: 3px;
+}
+
+#statuschk button{
+    font-weight: bold;
+    border: none;
+    border-radius: 4px;
+    background-color: #FEAE11;
+    padding: 5px 20px;
+}
+
+#btnsdetalhecompra{
+    width: 40vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin-left: auto; margin-right: auto;
+    margin-top: 50px;
+}
+
+#btnsdetalhecompra button{
+    border: none;
+    border-radius: 3px;
+    background-color: #007F7E;
+    color: white;
+    font-size: 15px;
+    padding: 10px 30px;
+}
+
+/*-----------------------------------------------------*/
+
+/*-------------------- TELA RESULTADO BUSCA -------------*/
+
+#containerbusca{
+   /* border: 1px solid aquamarine; */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 90vw;
+    height: 100vh;
+    justify-content: space-evenly;
+    margin: 30px auto 0px auto;
+    margin-bottom: 50px;
+
+}
+
+#divisoriafiltro{
+    width: 70%;
+    height: 1px;
+    background-color: black;
+    margin: 20px auto;
+}
+
+#filtrobusca{
+   /* border: 1px solid blueviolet; */
+    border-radius: 4px;
+    background-color: #d1d1d1;
+    width: 20vw;
+    height: 80%;
+    padding: 20px;
+   /* z-index: 2;
+    margin-top: 100px;*/
+    
+}
+
+/*#filtrobuscacat{
+    border-radius: 4px;
+    background-color: #d1d1d1;
+    width: 20vw;
+    height: 90%;
+    padding: 20px;
+    height: 100%;
+}*/
+
+#filtrobusca p{
+    font-weight: bold;
+}
+
+#itensresultadobusca{
+   /* border: 1px solid darkgreen; */
+    width: 60vw;
+    height: 100%;
+    margin: auto 0px;
+    background-color: #8fc7c6;
+    border-radius: 4px;
+    padding: 20px;
+    display: flex;
+    flex-flow: wrap;
+    justify-content: center;
+    align-items: center;
+
+
+}
+
+#prodresbusca{
+  /*  border: 1px solid gray; */
+    width: 25%;
+    height: 45%;
+    text-align: center;
+    margin: 10px;
+    border-radius: 4px;
+    background-color: #eea91f;
+    padding-bottom: 10px;
+}
+
+#prodresbusca label{
+    font-weight: bold;
+}
+
+#prodresbusca img{
+    width: 100%;
+}
+
+
+
+
+/*-------------------- TELA AREA CLIENTE     -------------*/
+#containerpaineluser{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 70vw;
+    margin: 50px auto 0px auto;
+}
+
+#painelconfiguser{
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    text-align: center;
+}
+
+#painelconfiguser img{
+    width: 30%;
+    margin-left: auto; margin-right: auto;
+    border-radius: 60px;
+}
+
+
+
+
+
+/*-----------------------------------------------------*/
+
+button, input{
+    font-family: 'Roboto', 'sans-serif';
+}
+
+
+>>>>>>> 96ea6ad38cb6ce536da59fc1ce836711a8689f6f
 body{
     font-family: 'Roboto', sans-serif;
 }

@@ -12,7 +12,7 @@
 
 
 
-    <title>AllPet - Resultados da busca</title>
+    <title>AllPet - Saúde</title>
 </head>
 
 <body>
@@ -22,12 +22,28 @@
     <main> 
 
         <div id="bannercadastro">
-            <h2>Produtos encontrados com a busca "acessorio" - (9)</h2>
+            <h2>Saúde</h2>
         </div>
 
         <div id="containerbusca">
             <div id="filtrobusca">
-                
+
+                <p>CATEGORIA</p>
+                <input type="checkbox" id="racoespetiscos"> &nbsp; <label id="racoespetiscos">Rações e Petiscos</label>
+                <br>
+                <input type="checkbox" id="vermifugos"> &nbsp; <label id="vermifugos">Vermífugos</label>
+                <br>
+                <input type="checkbox" id="pomadas"> &nbsp; <label id="coleiras">Pomadas</label>
+                <br>
+                <input type="checkbox" id="roupacirurgica"> &nbsp; <label id="roupacirurgica">Medicamentos</label>
+                <br>
+                <input type="checkbox" id="antipulgascarr"> &nbsp; <label id="antipulgascarr">Antipulgas e Carrapatos</label>
+                <br>
+
+
+
+                <div id="divisoriafiltro"></div>
+
                 <%- include('./partials/filtroBusca') %>
 
             </div>
