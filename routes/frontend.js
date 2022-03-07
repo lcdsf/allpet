@@ -61,5 +61,21 @@ router.get('/minhascompras', function(req, res){
     res.render('minhasCompras');
 });
 
+router.get('/ajuda', function(req, res){
+    res.render('ajuda');
+});
+
+router.get('/ajuda2', function(req, res){
+    res.render('ajuda2');
+});
+
+router.get('/meusrequerimentos', function(req, res){
+    res.render('meusRequerimentos');
+});
+
+router.get('/detalhereq', function(req, res){
+    res.render('detalheRequerimento');
+});
+
 
 module.exports = router;

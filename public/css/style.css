@@ -570,7 +570,7 @@
 
 #painelminhascompras{
     background-color: #8fc7c6;
-    padding: 10px;
+    padding: 20px;
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -578,6 +578,8 @@
     height: 60vh;
     margin: 50px auto 0px auto;
     border-radius: 4px;
+    overflow-y: auto;
+
 }
 
 #contcompra{
@@ -626,7 +628,95 @@
 
 }
 
+/*--------------- TELA AJUDA COMPRA PASSO 1 -------------*/
 
+#contajudacompra{
+    text-align: center;
+    width: 90vw;
+    /*display: flex;
+    flex-direction: column;*/
+    margin-left: auto; margin-right: auto;
+}
+
+#painelajudacompra{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-evenly;
+    background-color: #4DA5A5;
+    border-radius: 4px;
+    color: white;
+    padding: 20px 0px;
+    
+}
+
+#contajudacompra button, #btnsajudacompra2 button, #contreqcompra button{
+    padding: 10px 30px;
+    border: none;
+    border-radius: 4px;
+    background-color: #eea91f;
+    text-transform: uppercase;
+    margin-top: 30px;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+
+/*--------------- TELA AJUDA COMPRA PASSO 2 -------------*/
+
+#contajudacompra2{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+#inforequerimento{
+    text-align: center;
+    padding: 10px 20px;
+    background-color: #4DA5A5;
+    color: white;
+    border-radius: 4px;
+}
+
+#btnsajudacompra2{
+    margin-left: auto;
+    margin-right: auto;
+    width: 50vw;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+
+/*--------------- TELA DETALHES REQUERIMENTO ------------*/
+
+#contreqcompra{
+    width: 40VW;
+    margin-left: auto; margin-right: auto;
+    text-align: center;
+    background-color: #197271;
+    color: white;
+    padding: 20px 0px;
+    border-radius: 4px;
+
+}
+
+#btnsdetalhereq{
+    width: 60vw;
+    display: flex;
+    justify-content: space-evenly;
+    margin-left: auto; margin-right: auto;
+    margin-top: 20px;
+}
+
+#btnsdetalhereq button{
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    background-color: #197271;
+    color: white;
+    
+}
 
 /*-----------------------------------------------------*/
 
@@ -1205,7 +1295,7 @@ footer ul li, footer p, footer a{
     flex-direction: row;
     justify-content: center;
     margin-top: 50px;
-    border: 1px solid gold;
+   /* border: 1px solid gold; */
     margin-left: auto;
     margin-right: auto;
 }
