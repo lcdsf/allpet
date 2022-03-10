@@ -720,6 +720,10 @@
 
 /*-----------------------------------------------------*/
 
+a{
+    text-decoration: none;
+}
+
 button, input{
     font-family: 'Roboto', 'sans-serif';
 }
@@ -735,13 +739,7 @@ main{
 
 }
 
-#telalogcad{
-    position: absolute;
-    background-color: #8fc7c6;
-    margin-right: 10px;
-    padding: 10px;
-    border-radius: 4px;
-}
+
 
 
 @media (max-width: 800px){
@@ -1094,6 +1092,68 @@ header nav ul li{
 
 }
 
+#menulateral{
+    width: 20vw;
+    height: 100vh;
+    background-color: #255C5C;
+  /*  display: flex; */
+    flex-direction: column;
+    align-items: flex-start;
+    display: none;
+}
+
+#areabusca{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    justify-content: space-evenly;
+    margin-top: 20px;
+}
+
+#menuhamburger{
+    width: 40px;
+    height: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+
+}
+
+#menunav{
+    color: white;
+}
+
+#menunav ul li{
+    margin: 10px 0px;
+    text-transform: uppercase;
+    list-style-type: none;
+}
+
+#menunav ul li a{
+    color: inherit;
+}
+
+#menunav p {
+    text-align: center;
+    font-weight: bold;
+}
+
+#traco1, #traco2, #traco3{
+    width: 100%;
+    height: 5px;
+    background-color: white;
+}
+
+#telalogcad{
+    position: absolute;
+    background-color: #8fc7c6;
+    margin-right: 10px;
+    padding: 10px;
+    border-radius: 4px;
+    display: none;
+}
+
 
 
 #logoheader{
@@ -1139,7 +1199,18 @@ header nav ul li{
     margin-left: 10px;
 }
 
-#conteudoheader, #conteudofooter{
+#conteudoheader{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+#conteudofooter{
     margin: auto;
     display: flex;
     flex-direction: row;
@@ -1416,9 +1487,9 @@ footer ul li, footer p, footer a{
 /* LAYOUT RESPONSIVO */
 @media (max-width: 800px){
     
-    #campobusca, #btnbusca {
+    /*#campobusca, #btnbusca {
         display: none;
-    }
+    }*/
 
     #mainprod{
         display: flex;
@@ -1501,30 +1572,30 @@ footer ul li, footer p, footer a{
 
     }
 
-    header{
+  /*  header{
         position: relative;
     }
 
     #conteudoheader{
         display: flex;
-        flex-flow: column;
-        align-items: space-around;
-        /*position: absolute;*/
+        flex-direction: row;
+        align-items: space-evenly;
+        position: absolute;
         padding-bottom: 20px;
         background-color: #8fc7c6;
         box-shadow: 0px 9px 6px -1px rgba(0, 0, 0, 0.25);
 
-    }
+    }*/
 
-    body, header, #logoheader, #bemvindo, #carrossel, #sugestoes, #molditems, #moldcats, #conteudoheader, footer{
+    body, header, #bemvindo, #carrossel, #sugestoes, #molditems, #moldcats, footer{
         width: 100vw;
     }
 
 
-    #menuheader{
+    /*#menuheader{
         text-align: center;
         font-weight: bold;
-    }
+    }*/
 
     
 
