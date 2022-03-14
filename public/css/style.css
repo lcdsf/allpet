@@ -510,6 +510,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
+    align-items: center;
     width: 70vw;
     margin: 50px auto 0px auto;
 }
@@ -527,11 +528,201 @@
     border-radius: 60px;
 }
 
+#painelopuser{
+    display: flex;
+    flex-direction: column;
+}
+
+#painelopuser button{
+    padding: 10px 30px;
+    text-transform: uppercase;
+    background-color: #eea91f;
+    border: none;
+    border-radius: 4px;
+    color: white;
+}
+
+/*------ TELA AREA CLIENTE RESPONSIVO -----------------*/
+
+@media (max-width: 800px) {
+
+    #containerpaineluser{
+        display: flex;
+        flex-direction: column;
+        width: 95vw;
+    }
+
+    #painelopuser {
+       margin-top: 30px;
+    }
+
+    #painelconfiguser img{
+        width: 100%;
+    }
+    
+    
+}
+/*-----------------------------------------------------*/
 
 
+/*----------------- TELA MINHAS COMPRAS -----------------*/
 
+
+#painelminhascompras{
+    background-color: #8fc7c6;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 60vw;
+    height: 60vh;
+    margin: 50px auto 0px auto;
+    border-radius: 4px;
+    overflow-y: auto;
+
+}
+
+#contcompra{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: 10px auto 10px auto;
+    background-color: #eea91f;
+    border-radius: 4px;
+    padding: 15px;
+    width: 70%;
+    text-align: center;
+    color: white;
+}
+
+#infocompra{
+    width: 50%;
+}
+
+#contcompra button{
+    padding: 10px 40px;
+    text-transform: uppercase;
+    color: white;
+    background-color: #197271;
+    border-radius: 4px;
+    border: none;
+
+}
+
+#btnsminhascompras{
+    display: flex;
+    justify-content: space-evenly;
+    margin: 30px auto 0px auto;
+    width: 60vw;
+    /*border: 1px solid black;*/
+}
+
+#btnsminhascompras button{
+    padding: 10px 60px;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 4px;
+    background-color: #007F7E;
+    color: white;
+
+}
+
+/*--------------- TELA AJUDA COMPRA PASSO 1 -------------*/
+
+#contajudacompra{
+    text-align: center;
+    width: 90vw;
+    /*display: flex;
+    flex-direction: column;*/
+    margin-left: auto; margin-right: auto;
+}
+
+#painelajudacompra{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-evenly;
+    background-color: #4DA5A5;
+    border-radius: 4px;
+    color: white;
+    padding: 20px 0px;
+    
+}
+
+#contajudacompra button, #btnsajudacompra2 button, #contreqcompra button{
+    padding: 10px 30px;
+    border: none;
+    border-radius: 4px;
+    background-color: #eea91f;
+    text-transform: uppercase;
+    margin-top: 30px;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+
+/*--------------- TELA AJUDA COMPRA PASSO 2 -------------*/
+
+#contajudacompra2{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+#inforequerimento{
+    text-align: center;
+    padding: 10px 20px;
+    background-color: #4DA5A5;
+    color: white;
+    border-radius: 4px;
+}
+
+#btnsajudacompra2{
+    margin-left: auto;
+    margin-right: auto;
+    width: 50vw;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+
+/*--------------- TELA DETALHES REQUERIMENTO ------------*/
+
+#contreqcompra{
+    width: 40VW;
+    margin-left: auto; margin-right: auto;
+    text-align: center;
+    background-color: #197271;
+    color: white;
+    padding: 20px 0px;
+    border-radius: 4px;
+
+}
+
+#btnsdetalhereq{
+    width: 60vw;
+    display: flex;
+    justify-content: space-evenly;
+    margin-left: auto; margin-right: auto;
+    margin-top: 20px;
+}
+
+#btnsdetalhereq button{
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    background-color: #197271;
+    color: white;
+    
+}
 
 /*-----------------------------------------------------*/
+
+a{
+    text-decoration: none;
+}
 
 button, input{
     font-family: 'Roboto', 'sans-serif';
@@ -542,6 +733,319 @@ body{
     font-family: 'Roboto', sans-serif;
 }
 
+<<<<<<< HEAD
+=======
+main{
+    margin-top: 150px;
+    margin-bottom: 100px;
+
+}
+
+
+
+
+@media (max-width: 800px){
+    #telalogcad{
+        position: fixed;
+        width: 90vw;
+        margin-left: auto;
+        margin-right: auto;
+        display: flex;
+    }
+
+}
+
+fieldset{
+    width: 70vw;
+    margin-left: auto;
+    margin-right: auto;
+    color: #197271;
+    padding: 20px;
+}
+
+#capacadastro{
+    width: 100vw;
+    height: 320px;
+    margin-bottom: 30px;
+}
+
+#fotosprod{
+    width: 30vw;
+    /*margin-left: 10vw;*/
+    display: flex;
+    flex-flow: column;
+}
+
+#maisthumbs{
+    display: flex;
+    flex-flow: row;
+    justify-content: space-evenly;
+    margin-top: 10px;
+    align-items: center;
+}
+
+#dotsthumb{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin: 5px auto 5px auto;
+}
+
+#tdot1, #tdot2, #tdot3{
+    width: 10px;
+    height: 10px;
+    border-radius: 50px;
+    background-color: #027E7E;
+    margin: 0 10px 0 10px;
+}
+
+#maisthumbs img{
+    width: 100px;
+    height: 100px;
+}
+
+#infoprod label{
+    font-style: italic;
+}
+
+#containerprod img, #containerprodcont img{
+    border: 2px solid gainsboro;
+    border-radius: 4px;
+}
+
+#containerprod h1{
+    color: #4da5a5;
+}
+
+#containerprod{
+    display: flex;
+    flex-flow: row;
+    margin-left: auto;
+    margin-right: auto;
+    width: 90vw;
+    justify-content: space-evenly;
+    padding-bottom: 5vh;
+    
+
+   /* border: 1px solid green;*/
+}
+
+#infoprod{
+    display: flex;
+    flex-flow: column;
+    width: 30vw;
+}
+
+#avaliacao{
+    font-weight: bold;
+}
+
+#stars{
+    display: flex;
+    flex-flow: row;
+    width: 30%;
+}
+
+#stars svg{
+    max-width: 100%;
+    max-height: 100%;
+}
+
+#descprod{
+    text-align: justify;
+    width: 100%;
+}
+
+#containerprodcont{
+    display: flex;
+    flex-flow: row;
+    margin-bottom: -100px;  
+ /*   border: 1px solid blue; */
+}
+
+#opinioesprod{
+    width: 50vw;
+    height: 500px;
+    background-color: #b5dada;
+}
+
+#thumbesq svg, #thumbdir svg{
+    width: 40px;
+    height: 40px;
+}
+
+
+#sugestoesprod{
+    display: flex;
+    flex-flow: column;
+    width: 50vw;
+    height: 500px;
+    background-color: #feae11;
+}
+
+#opinioesprod h3, #sugestoesprod h3{
+    text-align: center;
+}
+
+#grpopinioes{
+    width: 90%;
+    max-height: 70%;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto 0 auto;
+}
+
+#containerpg{
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+}
+
+#tresthumbspg img{
+    width: 100%;
+    height: 60%;
+    border: none;
+}
+
+#tresthumbspg svg{
+    width: 50px;
+    height: 50px;
+}
+
+#tpg1{
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    width: 150px;
+    height: 250px;
+  /*  border: 1px solid darkblue; */
+}
+
+#tpg1 label{
+    margin: 0 auto 0 auto;
+    padding: 5px;
+    font-weight: bold;
+}
+
+#tpg1preco, #tpg2preco, #tpg3preco{
+    color: #255C5C;
+    font-size: 25px;
+}
+
+#tresthumbspg{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 300px;
+    justify-content: space-evenly;
+    align-items: center;
+   /* border: 1px solid violet; */
+}
+
+#thumbspg{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 95%;
+    height: 300px;
+  /*  border: 1px solid forestgreen; */
+}
+
+
+#dotsthumbpg{
+    width: 30%;
+    height: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin: 0 auto 0 auto;
+   /* border: 1px solid darkcyan; */
+}
+
+#tdot1pg, #tdot2pg, #tdot3pg{
+    background-color: #4DA5A5;
+    width: 20px;
+    height: 20px;
+    border-radius: 50px;
+}
+
+#grpopinioes img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+    border: none;
+    margin: 0 15px 0 15px;
+}
+
+#opiniao1, #opiniao2, #opiniao3, #opiniao4{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: white;
+    border-radius: 3px;
+    padding: 10px;
+    margin: 5px;
+}
+
+#lbopuser{
+    font-weight: bold;
+}
+
+#lbopdata{
+    font-style: italic;
+}
+
+#grpopinioes label {
+    margin: 5px;
+}
+
+
+#btnsprod{
+    display: flex;
+    flex-flow: row;
+    justify-content: space-evenly;
+}
+
+#btnsprod button{
+    width: 150px;
+    height: 40px;
+    background-color: #027E7E;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    text-transform: uppercase;
+}
+
+
+#bannercadastro{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #0d8584;
+    color: white;
+    height: 80px;
+    width: 100vw;
+    margin-top: -70px;
+}
+
+
+#btncaduser{
+    font-family: 'Roboto', sans-serif;
+    border: none;
+    text-transform: uppercase;
+    color: white;
+    font-size: 20px;
+    background-color: #eea91f;
+    padding: 10px 20px 10px 20px;
+
+}
+
+
+
+>>>>>>> 1dcafa4254624ee6d9ae68a39512dc0e6e99edd6
 img{
     max-width: 100%;
     max-height: 100%;
@@ -591,6 +1095,68 @@ header nav ul li{
 
 }
 
+#menulateral{
+    width: 20vw;
+    height: 100vh;
+    background-color: #255C5C;
+  /*  display: flex; */
+    flex-direction: column;
+    align-items: flex-start;
+    display: none;
+}
+
+#areabusca{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    justify-content: space-evenly;
+    margin-top: 20px;
+}
+
+#menuhamburger{
+    width: 40px;
+    height: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+
+}
+
+#menunav{
+    color: white;
+}
+
+#menunav ul li{
+    margin: 10px 0px;
+    text-transform: uppercase;
+    list-style-type: none;
+}
+
+#menunav ul li a{
+    color: inherit;
+}
+
+#menunav p {
+    text-align: center;
+    font-weight: bold;
+}
+
+#traco1, #traco2, #traco3{
+    width: 100%;
+    height: 5px;
+    background-color: white;
+}
+
+#telalogcad{
+    position: absolute;
+    background-color: #8fc7c6;
+    margin-right: 10px;
+    padding: 10px;
+    border-radius: 4px;
+    display: none;
+}
+
 
 
 #logoheader{
@@ -636,7 +1202,18 @@ header nav ul li{
     margin-left: 10px;
 }
 
-#conteudoheader, #conteudofooter{
+#conteudoheader{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+#conteudofooter{
     margin: auto;
     display: flex;
     flex-direction: row;
@@ -771,7 +1348,7 @@ footer ul li, footer p, footer a{
     flex-direction: row;
     justify-content: center;
     margin-top: 50px;
-    border: 1px solid gold;
+   /* border: 1px solid gold; */
     margin-left: auto;
     margin-right: auto;
 }
@@ -884,8 +1461,22 @@ footer ul li, footer p, footer a{
 /* LAYOUT RESPONSIVO */
 @media (max-width: 800px){
     
-    #campobusca, #btnbusca {
+    /*#campobusca, #btnbusca {
         display: none;
+<<<<<<< HEAD
+=======
+    }*/
+
+    #mainprod{
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+        justify-items: center;
+        width: 100vw;
+       /* border: 2px solid purple; */
+        margin-left: auto;
+        margin-right: auto;
+>>>>>>> 1dcafa4254624ee6d9ae68a39512dc0e6e99edd6
     }
     
     body{
@@ -897,30 +1488,30 @@ footer ul li, footer p, footer a{
 
     }
 
-    header{
+  /*  header{
         position: relative;
     }
 
     #conteudoheader{
         display: flex;
-        flex-flow: column;
-        align-items: space-around;
-        /*position: absolute;*/
+        flex-direction: row;
+        align-items: space-evenly;
+        position: absolute;
         padding-bottom: 20px;
         background-color: #8fc7c6;
         box-shadow: 0px 9px 6px -1px rgba(0, 0, 0, 0.25);
 
-    }
+    }*/
 
-    body, header, #logoheader, #bemvindo, #carrossel, #sugestoes, #molditems, #moldcats, #conteudoheader, footer{
+    body, header, #bemvindo, #carrossel, #sugestoes, #molditems, #moldcats, footer{
         width: 100vw;
     }
 
 
-    #menuheader{
+    /*#menuheader{
         text-align: center;
         font-weight: bold;
-    }
+    }*/
 
     
 
