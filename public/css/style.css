@@ -1504,7 +1504,7 @@ footer ul li, footer p, footer a{
 
 
 
-
+/*************************************************************************************************/
 
 
 /* LAYOUT RESPONSIVO */
@@ -1524,6 +1524,45 @@ footer ul li, footer p, footer a{
         margin-left: auto;
         margin-right: auto;
     }
+
+    #menuecarrinho{
+        width: 25%;
+        height: 50px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    
+    } 
+
+    #menuhamburger{
+        width: 30px;
+        height: 40px;
+    }
+
+    
+    #logoheader{
+        width: 70%;
+    }
+
+    #btnlogcad button{
+        padding: 1px 5px;
+    }
+
+    #menulateral{
+        width: 80vw;
+    }
+
+    #menuecarrinho svg{
+        width: 30px;
+    }
+
+    #conteudoheader{
+        width: 90%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
     
     #containerprod, #containerprodcont{
         display: flex;
@@ -1610,8 +1649,8 @@ footer ul li, footer p, footer a{
 
     }*/
 
-    body, header, #bemvindo, #carrossel, #sugestoes, #molditems, #moldcats, footer{
-        max-width: 100vw;
+    body, #bemvindo, #carrossel, #sugestoes, #molditems, #moldcats, footer{
+        width: 100vw;
     }
 
 
@@ -1672,30 +1711,12 @@ footer ul li, footer p, footer a{
     }
 
 
-    #conteudoheader{
-        width: 90%;
-        display: flex;
-        flex-direction: row;
-        border: 1px solid greenyellow;
-    }
 
-    #logoheader{
-        width: 30%;
-    }
-
-    #btnlogcad button{
-        padding: 3px 1px;
-    }
-
-    #menulateral{
-        width: 80vw;
-    }
-
-    #menuecarrinho{
+    /*#menuecarrinho{
         display: flex;
         flex-direction: row;
         width: 10%;
-    }
+    }*/
 
 
     #conteudofooter{
