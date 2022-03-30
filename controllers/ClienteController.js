@@ -2,6 +2,11 @@ const {Cliente, Endereco} = require("../database/models");
 
 const ClienteController = {
 
+    index: async (req, res) =>{
+        const clientes = await Cliente.findAll();
+        res.render('listaClientes', { clientes } );
+    },
+
     create: (req, res) => {
         res.render("cadastroUser");
     }, 
@@ -40,9 +45,11 @@ const ClienteController = {
                     clientes_id: cliente.id
                 }
             );
+
+            res.redirect('/');
         }
 
-        res.redirect('/');
+        
     }
 };
 
