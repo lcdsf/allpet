@@ -32,7 +32,7 @@ module.exports = (sequelize, DataTypes) => {
         },
         clientes_id:{
             type: DataTypes.INTEGER,
-            allowNull: true
+            allowNull: false
         }
     }, 
     {tableName: 'enderecos', timestamps: false}
