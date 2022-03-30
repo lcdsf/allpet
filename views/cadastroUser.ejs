@@ -27,37 +27,76 @@
 
         <img src="/img/cadastro.png" id="capacadastro">
 
-        <form id="formuser">
+        <form action="/cliente/cadastro" method="POST" id="formuser">
 
             <fieldset>
                 <legend>Complete as informações a seguir:</legend>
 
-                <br>
+                <h3>Dados pessoais</h3>
 
-                <label for="nomecompleto">Nome Completo</label>
-                <input type="text" name="nomecompleto" id="nomecompleto"> <br><br>
+                <label for="nome">Nome</label>
+                <input type="text" name="nome" id="nome"> <br><br>
 
-                <label for="endereco">Endereço</label> 
-                <input type="text" name="endereco" id="endereco"> <br><br>
+                <label for="sobrenome">Sobrenome</label>
+                <input type="text" name="sobrenome" id="sobrenome"> <br><br>
 
-                <label>Gênero</label> <br>
 
-                <input type="radio" name="genero" id="genero" value="masc">
-                <label for="masc">Masculino</label>
-
-                <input type="radio" name="genero" id="genero" value="fem">
-                <label for="fem">Feminino</label>
-
-                <input type="radio" name="genero" id="genero" value="outros">
-                <label for="outros">Outros</label>
-
-                <br><br>
-
-                <label for="cpf">CPF</label> 
+                <label for="cpf">CPF (apenas números)</label> 
                 <input type="text" name="cpf" id="cpf"> <br><br>
 
                 <label for="telefone">Telefone</label> 
                 <input type="text" name="telefone" id="telefone"> <br><br>
+
+
+                <h3>Endereço</h3>
+
+                <label for="rua">Rua</label> 
+                <input type="text" name="rua" id="rua"> <br><br>
+
+                <label for="numero">Número</label> 
+                <input type="number" name="numero" id="numero"> <br><br>
+
+                <label for="bairro">Bairro</label> 
+                <input type="text" name="bairro" id="bairro"> <br><br>
+
+                <label for="cidade">Cidade</label> 
+                <input type="text" name="cidade" id="cidade"> <br><br>
+
+                <label for="estado">Estado</label> 
+                <select name="estado" id="estado">
+                    <option value="AC">AC</option>
+                    <option value="AL">AL</option>
+                    <option value="AP">AP</option>
+                    <option value="AM">AM</option>
+                    <option value="BA">BA</option>
+                    <option value="CE">CE</option>
+                    <option value="DF">DF</option>
+                    <option value="ES">ES</option>
+                    <option value="GO">GO</option>
+                    <option value="MA">MA</option>
+                    <option value="MT">MT</option>
+                    <option value="MS">MS</option>
+                    <option value="MG">MG</option>
+                    <option value="PA">PA</option>
+                    <option value="PB">PB</option>
+                    <option value="PR">PR</option>
+                    <option value="PE">PE</option>
+                    <option value="PI">PI</option>
+                    <option value="RJ">RJ</option>
+                    <option value="RN">RN</option>
+                    <option value="RS">RS</option>
+                    <option value="RO">RO</option>
+                    <option value="RR">RR</option>
+                    <option value="SC">SC</option>
+                    <option value="SE">SE</option>
+                    <option value="TO">TO</option>
+                </select> <br><br>
+
+                <label for="complemento">Complemento</label> 
+                <input type="text" name="complemento" id="complemento"> <br><br>
+
+
+                <h3>Dados de login</h3>
 
                 <label for="email">E-mail</label> 
                 <input type="email" name="email" id="email"> <br><br>
@@ -69,60 +108,7 @@
                 <input type="password" name="confirmaSenha" id="confirmaSenha"> <br><br>
 
                 
-                <label>Como nos conheceu?</label> <br>
-
-                <input type="radio" name="conheceu" id="conheceu" value="busca">
-                <label for="masc">Busca</label>
-
-                <input type="radio" name="conheceu" id="conheceu" value="recomenda">
-                <label for="fem">Recomendação</label>
-
-                <input type="radio" name="conheceu" id="conheceu" value="redessociais">
-                <label for="outros">Anúncio em redes sociais</label>
-
-                <br><br>
-
-                <label>O que você mais gostou?</label> <br>
-
-                <input type="radio" name="oqgostou" id="preco" value="preco">
-                <label for="masc">Preço</label>
-
-                <input type="radio" name="oqgostou" id="formapgto" value="formapgto">
-                <label for="fem">Formas de pagamento</label>
-
-                <input type="radio" name="oqgostou" id="frete" value="frete">
-                <label for="outros">Frete</label>
-
-                <input type="radio" name="oqgostou" id="variedade" value="variedade">
-                <label for="outros">Variedade de produtos</label>
-
-                <br><br>
-
-                <label>Quantos animais possui?</label> <br>
-
-                <input type="radio" name="qtdanimais" id="1animal" value="1animal">
-                <label for="masc">01 animal</label>
-
-                <input type="radio" name="qtdanimais" id="2a4animais" value="2a4animais">
-                <label for="fem">02 a 04 animais</label>
-
-                <input type="radio" name="qtdanimais" id="5maisanimais" value="5maisanimais">
-                <label for="outros">05 animais ou mais</label>
-
-                <br><br>
-
-                <label>O que prioriza ao comprar produtos Pet?</label> <br>
-                
-                <input type="checkbox" id="marcas" name="marcas" value="marcas">
-                <label for="marcas">Marcas</label>
-
-                <input type="checkbox" id="pripreco" name="pripreco" value="material">
-                <label for="pripreco">Preço</label>
-
-                <input type="checkbox" id="material" name="material" value="material">
-                <label for="material">Qualidade do material</label>
-
-                <br><br>
+ 
 
                 <button type="submit" id="btncaduser">Enviar</button>
 

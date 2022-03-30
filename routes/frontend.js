@@ -5,13 +5,9 @@ router.get('/', function(req, res){
     res.render('home');
 });
 
-router.get('/homeloginaberto', function(req, res){
-    res.render('homeLoginAberto');
-});
-
-router.get('/cadastrouser', function(req, res){
-    res.render('cadastroUser');
-});
+//router.get('/cadastrouser', function(req, res){
+//    res.render('cadastroUser');
+//});
 
 router.get('/cadastroprod', function(req, res){
     res.render('cadastroProduto');

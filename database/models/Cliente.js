@@ -26,6 +26,10 @@ module.exports = (sequelize, DataTypes) => {
                 type: DataTypes.STRING,
                 allowNull: false
             },
+            cpf:{
+                type: DataTypes.STRING,
+                allowNull: false
+            },
             data_cadastro:{
                 type: DataTypes.DATE,
                 allowNull: false

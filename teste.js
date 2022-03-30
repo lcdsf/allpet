@@ -17,5 +17,24 @@ async function buscarEnderecos(){
     console.log(JSON.stringify(enderecos, null, 4));
 }
 
+async function cadastrarCliente(){
 
-buscarClientes();
+    let clienteid;
+    
+    await Cliente.create(
+        {
+            nome: "Receba",
+            sobrenome: "Zequel",
+            email: "recebaaa@mail.com",
+            senha: "1234",
+            cpf: "00011122299",
+            telefone: "669999999",
+            data_cadastro: Date.now()
+        }
+    );
+
+
+
+}
+
+cadastrarCliente();
