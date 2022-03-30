@@ -733,8 +733,6 @@ body{
     font-family: 'Roboto', sans-serif;
 }
 
-<<<<<<< HEAD
-=======
 main{
     margin-top: 150px;
     margin-bottom: 100px;
@@ -1045,7 +1043,6 @@ fieldset{
 
 
 
->>>>>>> 1dcafa4254624ee6d9ae68a39512dc0e6e99edd6
 img{
     max-width: 100%;
     max-height: 100%;
@@ -1463,8 +1460,6 @@ footer ul li, footer p, footer a{
     
     /*#campobusca, #btnbusca {
         display: none;
-<<<<<<< HEAD
-=======
     }*/
 
     #mainprod{
@@ -1476,7 +1471,6 @@ footer ul li, footer p, footer a{
        /* border: 2px solid purple; */
         margin-left: auto;
         margin-right: auto;
->>>>>>> 1dcafa4254624ee6d9ae68a39512dc0e6e99edd6
     }
     
     body{
