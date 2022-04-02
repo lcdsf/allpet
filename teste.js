@@ -1,6 +1,6 @@
 require('dotenv').config();
 
-const {Cliente, Endereco} = require('./database/models');
+const {Cliente, Endereco, CategoriaEspecifica} = require('./database/models');
 
 async function buscarClientes(){
     const clientes = await Cliente.findAll( {include: 'enderecos'} )
@@ -19,7 +19,6 @@ async function buscarEnderecos(){
 
 async function cadastrarCliente(){
 
-    let clienteid;
     
     await Cliente.create(
         {
@@ -33,8 +32,15 @@ async function cadastrarCliente(){
         }
     );
 
-
-
 }
 
-cadastrarCliente();
+async function cadastraCatEsp(){
+    await CategoriaEspecifica.create(
+        {
+        nome: "Coleiras e Guias",
+        categorias_principais_id: 1
+        }
+    );
+}
+
+cadastraCatEsp();

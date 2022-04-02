@@ -18,7 +18,7 @@ module.exports = {
           allowNull: false,
           references: {
             model: 'categorias_principais',
-            key: 'id'
+            key: 'id',
           },
           onUpdate: 'cascade',
           onDelete: 'cascade'
