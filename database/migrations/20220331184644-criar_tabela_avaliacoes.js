@@ -13,6 +13,10 @@ module.exports = {
             type: Sequelize.STRING,
             allowNull: false
         },
+        datahora:{
+          type: Sequelize.DATE,
+          allowNull: false
+        },
         produtos_id: {
           type: Sequelize.INTEGER,
           allowNull: false,
