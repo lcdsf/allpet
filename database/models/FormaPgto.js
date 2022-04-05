@@ -24,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
           allowNull: true,
         }
     },
-    {tableName: 'cartoes', timestamps: false}
+    {tableName: 'formas_pgto', timestamps: false}
     );
 
     FormaPgto.associate = (models) => {
@@ -39,6 +39,10 @@ module.exports = (sequelize, DataTypes) => {
         FormaPgto.hasOne(models.ChavePix, {
             foreignKey: 'chaves_pix_id',
             as: 'chave_pix'
+        });
+        FormaPgto.hasMany(models.Compra, {
+            foreignKey: 'formas_pgto_id',
+            as: 'formas_pgto'
         });
     }
 
