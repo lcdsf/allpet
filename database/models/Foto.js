@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
     );
 
     Foto.associate = (models) => {
-        Foto.hasOne(models.Produto, {
+        Foto.belongsTo(models.Produto, {
             foreignKey: 'produtos_id',
             as: 'produto'
         });

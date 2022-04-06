@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.FLOAT,
             allowNull: false
         },
-        datahora:{
+        data:{
             type: DataTypes.DATE,
             allowNull: false
         },
@@ -27,23 +27,23 @@ module.exports = (sequelize, DataTypes) => {
     );
 
     Compra.associate = (models) => {
-        Compra.hasOne(models.Cliente, {
+        Compra.belongsTo(models.Cliente, {
             foreignKey: 'clientes_id',
             as: 'cliente'
         });
-        Compra.hasOne(models.FormaPgto, {
+        Compra.belongsTo(models.FormaPgto, {
           foreignKey: 'formas_pgto_id',
           as: 'forma_pgto'
         });
-        Compra.hasOne(models.ItemCompra, {
+        Compra.belongsTo(models.ItemCompra, {
             foreignKey: 'compras_id',
             as: 'item_compra'
         });
-        Compra.hasMany(models.StatusCompra, {
+        Compra.belongsTo(models.StatusCompra, {
             foreignKey: 'compras_id',
             as: 'status'
         });
-        Compra.hasOne(models.Requerimento, {
+        Compra.belongsTo(models.Requerimento, {
             foreignKey: 'compras_id',
             as: 'requerimento'
         });

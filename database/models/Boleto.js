@@ -19,15 +19,15 @@ module.exports = (sequelize, DataTypes) => {
           allowNull: false,
         }
     }, 
-    {tableName: 'Boletos_produtos', timestamps: false}
+    {tableName: 'boletos', timestamps: false}
     );
 
     Boleto.associate = (models) => {
-        Boleto.hasOne(models.Cliente, {
+        Boleto.belongsTo(models.Cliente, {
             foreignKey: 'clientes_id',
             as: 'cliente'
         });
-        Boleto.hasOne(models.FormaPgto, {
+        Boleto.belongsTo(models.FormaPgto, {
             foreignKey: 'boletos_id',
             as: 'boleto'
         });

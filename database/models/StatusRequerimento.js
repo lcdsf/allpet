@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
     );
 
     StatusRequerimento.associate = (models) => {
-        StatusRequerimento.hasOne(models.Requerimento, {
+        StatusRequerimento.belongsTo(models.Requerimento, {
             foreignKey: 'requerimentos_id',
             as: 'requerimento'
         });

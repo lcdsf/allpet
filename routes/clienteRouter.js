@@ -1,9 +1,9 @@
 const { Router } = require("express");
 const router = Router();
-const ClienteController = require("../controllers/ClienteController");
+const clienteController = require("../controllers/clienteController");
 
 
-router.get("/cadastro", ClienteController.create);
-router.post("/cadastro", ClienteController.store);
+router.get("/cadastro", clienteController.create);
+router.post("/cadastro", clienteController.store);
 
 module.exports = router;

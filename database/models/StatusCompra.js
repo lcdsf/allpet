@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
     );
 
     StatusCompra.associate = (models) => {
-        StatusCompra.hasOne(models.Compra, {
+        StatusCompra.belongsTo(models.Compra, {
             foreignKey: 'compras_id',
             as: 'compra'
         });

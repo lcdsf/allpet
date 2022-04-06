@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+
+
+
+
+
+    <title>AllPet - Produtos</title>
+</head>
+
+<body>
+
+    <%- include('./partials/header') %>
+    
+    <main> 
+
+        <div id="bannercadastro">
+            <h2>Lista de Produtos</h2>
+        </div>
+
+        <div id="painelminhascompras">
+
+            <% produtos.forEach(produto => { %>
+                            <div id="contcompra">
+
+                                <div id="infocompra">
+                                    
+                                    <label>ID: <%= produto.id %></label>
+                                    <br>
+                                    <label>Nome: <%= produto.nome %></label>
+                                    <br>
+                                    <label>Preço R$:  <%= produto.preco %></label>
+                                    <br>
+                                    <label>Descrição:  <%= produto.descricao %></label>
+                                    <br>
+                                    <label>Quantidade disponível:  <%= produto.quantidade %></label>
+
+                                </div>
+                                <button>Ver detalhes</button>
+                            </div>
+            <% }) %>
+
+        </div>
+
+        <!--<div id="btnsminhascompras">
+            <button>Área do Cliente</button>
+            <button>Página inicial</button>
+        </div>-->
+       
+    </main>
+
+</body>
+
+<%- include('./partials/footer') %>
+
+</html>

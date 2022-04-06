@@ -2,7 +2,7 @@
 
 module.exports = {
   async up (queryInterface, Sequelize) {
-    await queryInterface.bulkInsert('status_compra', [
+    await queryInterface.bulkInsert('compras', [
       {
         valor: 350.00,
         data: '2024-12-25T00:00:00.000-05:00',
@@ -31,7 +31,7 @@ module.exports = {
   },
 
   async down (queryInterface, Sequelize) {
-    await queryInterface.bulkDelete('status_compra', null, {});
+    await queryInterface.bulkDelete('compras', null, {});
      
     }
 };

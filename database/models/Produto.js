@@ -31,7 +31,7 @@ module.exports = (sequelize, DataTypes) => {
     );
 
     Produto.associate = (models) => {
-        Produto.hasOne(models.CategoriaEspecifica, {
+        Produto.belongsTo(models.CategoriaEspecifica, {
             foreignKey: 'categorias_especificas_id',
             as: 'categoria'
         });
@@ -40,7 +40,7 @@ module.exports = (sequelize, DataTypes) => {
           as: 'avaliacoes'
         });
         Produto.hasMany(models.ItemCompra, {
-          foreignKey: 'compras_id',
+          foreignKey: 'produtos_id',
           as: 'itens_compras'
         });
     }

@@ -1,26 +1,26 @@
 module.exports = (sequelize, DataTypes) => {
     const FormaPgto = sequelize.define("FormaPgto", {
         id:{
-            type: Sequelize.INTEGER,
+            type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true,
             allowNull: false
         },
         tipo:{
-            type: Sequelize.STRING,
+            type: DataTypes.STRING,
             allowNull: false
         },
         cartoes_id: {
-          type: Sequelize.INTEGER,
+          type: DataTypes.INTEGER,
           allowNull: true,
         },
         boletos_id: {
-          type: Sequelize.INTEGER,
+          type: DataTypes.INTEGER,
           allowNull: true,
 
         },
         chaves_pix_id: {
-          type: Sequelize.INTEGER,
+          type: DataTypes.INTEGER,
           allowNull: true,
         }
     },
@@ -28,15 +28,15 @@ module.exports = (sequelize, DataTypes) => {
     );
 
     FormaPgto.associate = (models) => {
-        FormaPgto.hasOne(models.Cartao, {
+        FormaPgto.belongsTo(models.Cartao, {
             foreignKey: 'cartoes_id',
             as: 'cartao'
         });
-        FormaPgto.hasOne(models.Boleto, {
+        FormaPgto.belongsTo(models.Boleto, {
             foreignKey: 'boletos_id',
             as: 'boleto'
         });
-        FormaPgto.hasOne(models.ChavePix, {
+        FormaPgto.belongsTo(models.ChavePix, {
             foreignKey: 'chaves_pix_id',
             as: 'chave_pix'
         });

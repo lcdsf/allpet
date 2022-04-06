@@ -23,11 +23,11 @@ module.exports = (sequelize, DataTypes) => {
     );
 
     ItemCompra.associate = (models) => {
-        ItemCompra.hasMany(models.Produto, {
+        ItemCompra.belongsTo(models.Produto, {
             foreignKey: 'produtos_id',
             as: 'produtos'
         });
-        ItemCompra.hasOne(models.Compra, {
+        ItemCompra.belongsTo(models.Compra, {
             foreignKey: 'compras_id',
             as: 'compra'
         });

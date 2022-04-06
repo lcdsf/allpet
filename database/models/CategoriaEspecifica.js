@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
     );
 
     CategoriaEspecifica.associate = (models) => {
-        CategoriaEspecifica.hasOne(models.CategoriaPrincipal, {
+        CategoriaEspecifica.belongsTo(models.CategoriaPrincipal, {
             foreignKey: 'categorias_principais_id',
             as: 'categoria_principal'
         });

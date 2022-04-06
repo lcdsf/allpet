@@ -1,6 +1,6 @@
 const {Cliente, Endereco} = require("../database/models");
 
-const ClienteController = {
+const clienteController = {
 
     index: async (req, res) =>{
         const clientes = await Cliente.findAll();
@@ -53,4 +53,4 @@ const ClienteController = {
     }
 };
 
-module.exports = ClienteController;
+module.exports = clienteController;

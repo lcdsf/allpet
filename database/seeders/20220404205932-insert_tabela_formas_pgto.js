@@ -9,7 +9,7 @@ module.exports = {
       },
       {
         tipo: 'boleto',
-        boletos_id: 10,
+        boletos_id: 2,
       },
       {
         tipo: 'pix',
@@ -17,7 +17,7 @@ module.exports = {
       },
       {
         tipo: 'cartao',
-        chaves_pix_id: 2,
+        cartoes_id: 2,
       }
       ], {});
   },

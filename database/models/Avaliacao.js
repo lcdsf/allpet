@@ -27,11 +27,11 @@ module.exports = (sequelize, DataTypes) => {
     );
 
     Avaliacao.associate = (models) => {
-        Avaliacao.hasOne(models.Produto, {
+        Avaliacao.belongsTo(models.Produto, {
             foreignKey: 'produtos_id',
             as: 'produto'
         });
-        Avaliacao.hasOne(models.Cliente, {
+        Avaliacao.belongsTo(models.Cliente, {
             foreignKey: 'clientes_id',
             as: 'cliente'
         });

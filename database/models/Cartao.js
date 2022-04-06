@@ -35,7 +35,7 @@ module.exports = (sequelize, DataTypes) => {
             foreignKey: 'cartoes_id',
             as: 'cartoes'
         });
-        Cartao.hasOne(models.Cliente, {
+        Cartao.belongsTo(models.Cliente, {
             foreignKey: 'clientes_id',
             as: 'cliente'
         });
