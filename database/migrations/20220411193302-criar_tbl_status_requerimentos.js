@@ -2,26 +2,26 @@
 
 module.exports = {
   async up (queryInterface, Sequelize) {
-    await queryInterface.createTable('status_compra', {
+    await queryInterface.createTable('status_requerimentos', {
         id:{
             type: Sequelize.INTEGER,
             primaryKey: true,
             autoIncrement: true,
             allowNull: false
         },
-        status:{
-            type: Sequelize.STRING,
+        datahora:{
+            type: Sequelize.DATE,
             allowNull: false
         },
-        data:{
-          type: Sequelize.DATE,
+        status:{
+          type: Sequelize.STRING,
           allowNull: false
         },
-        compras_id: {
+        requerimentos_id: {
           type: Sequelize.INTEGER,
           allowNull: false,
           references: {
-            model: 'compras',
+            model: 'requerimentos',
             key: 'id'
           },
           onUpdate: 'cascade',
@@ -32,6 +32,6 @@ module.exports = {
   },
 
   async down (queryInterface, Sequelize) {
-    await queryInterface.dropTable('status_compra');
+    await queryInterface.dropTable('status_requerimentos');
   }
 };

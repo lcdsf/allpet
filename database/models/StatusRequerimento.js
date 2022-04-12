@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false
         },
-        data:{
+        datahora:{
             type: DataTypes.DATE,
             allowNull: false
         },
@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
         }
     }, 
-    {tableName: 'status_requerimento', timestamps: false}
+    {tableName: 'status_requerimentos', timestamps: false}
     );
 
     StatusRequerimento.associate = (models) => {

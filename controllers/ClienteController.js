@@ -14,7 +14,7 @@ const clienteController = {
     store: async (req, res) =>{
 
         const {nome, sobrenome, cpf, telefone, 
-        rua, numero, bairro, cidade, estado, complemento, 
+        rua, cep, numero, bairro, cidade, estado, complemento, 
         email, senha, confirmaSenha} = req.body;
         
             
@@ -36,6 +36,7 @@ const clienteController = {
 
             await Endereco.create(
                 {
+                    cep,
                     rua,
                     numero,
                     bairro,

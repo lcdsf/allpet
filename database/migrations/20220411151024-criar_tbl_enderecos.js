@@ -9,6 +9,10 @@ module.exports = {
           autoIncrement: true,
           allowNull: false
       },
+      cep:{
+        type: Sequelize.STRING,
+        allowNull: false
+      },
       rua:{
           type: Sequelize.STRING,
           allowNull: false

@@ -1,6 +1,9 @@
 require('dotenv').config();
 
-const {Cliente, Endereco, CategoriaPrincipal, CategoriaEspecifica, Produto, Administrador} = require('./database/models');
+const {Cliente, Endereco, CategoriaPrincipal, CategoriaEspecifica, 
+    Produto, Administrador, Compra, FormaPgto, Avaliacao,
+Boleto, Cartao, ChavePix, Requerimento, StatusRequerimento,
+StatusCompra, ItemCompra, Foto} = require('./database/models');
 
 async function buscarClientes(){
     const clientes = await Cliente.findAll( {include: 'enderecos'} )
@@ -99,9 +102,9 @@ async function buscarCatEsp(){
 }
 
 async function teste(){
-    const itens = await Cliente.findAll( 
+    const itens = await Compra.findAll( 
         //{attributes: {exclude: ['clientes_id']} },
-        {include: ['enderecos', 'avaliacoes', /*'boletos',*/ 'cartoes', 'compras']}
+        {include: ['cliente']}
     )
     .then(itens => itens.map(item => item.toJSON()))
     .catch(error => console.log("ERRO AO BUSCAR DADOS: ", error));
@@ -111,4 +114,4 @@ async function teste(){
 
 
 
-buscarSoProdutos();
+teste();

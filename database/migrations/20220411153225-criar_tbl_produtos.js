@@ -34,7 +34,17 @@ module.exports = {
           },
           onUpdate: 'cascade',
           onDelete: 'cascade'
-        }
+        },
+        /*compras_id: {
+          type: Sequelize.INTEGER,
+          allowNull: true,
+          references: {
+            model: 'itens_compras',
+            key: 'id'
+          },
+          onUpdate: 'cascade',
+          onDelete: 'cascade'
+        }*/
     });
 
   },

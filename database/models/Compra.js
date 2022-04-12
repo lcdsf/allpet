@@ -21,7 +21,11 @@ module.exports = (sequelize, DataTypes) => {
         formas_pgto_id: {
             type: DataTypes.INTEGER,
             allowNull: false
-        }
+        },
+        /*produtos_id: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        }*/
     }, 
     {tableName: 'compras', timestamps: false}
     );
@@ -35,15 +39,17 @@ module.exports = (sequelize, DataTypes) => {
           foreignKey: 'formas_pgto_id',
           as: 'forma_pgto'
         });
-        Compra.belongsTo(models.ItemCompra, {
+        Compra.belongsToMany(models.Produto, {
             foreignKey: 'compras_id',
-            as: 'item_compra'
+            through: models.ItemCompra,
+            //through: 'itens_compras',
+            as: 'produtos'
         });
-        Compra.belongsTo(models.StatusCompra, {
+        Compra.hasMany(models.StatusCompra, {
             foreignKey: 'compras_id',
             as: 'status'
         });
-        Compra.belongsTo(models.Requerimento, {
+        Compra.hasOne(models.Requerimento, {
             foreignKey: 'compras_id',
             as: 'requerimento'
         });

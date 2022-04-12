@@ -2,36 +2,32 @@
 
 module.exports = {
   async up (queryInterface, Sequelize) {
-    await queryInterface.createTable('compras', {
+    await queryInterface.createTable('itens_compras', {
         id:{
             type: Sequelize.INTEGER,
             primaryKey: true,
             autoIncrement: true,
             allowNull: false
         },
-        valor:{
-            type: Sequelize.FLOAT,
+        quantidade:{
+            type: Sequelize.INTEGER,
             allowNull: false
         },
-        data:{
-          type: Sequelize.DATE,
-          allowNull: false
-        },
-        clientes_id: {
+        compras_id: {
           type: Sequelize.INTEGER,
           allowNull: false,
           references: {
-            model: 'clientes',
+            model: 'compras',
             key: 'id'
           },
           onUpdate: 'cascade',
           onDelete: 'cascade'
         },
-        formas_pgto_id: {
+        produtos_id: {
           type: Sequelize.INTEGER,
           allowNull: false,
           references: {
-            model: 'formas_pgto',
+            model: 'itens_compras',
             key: 'id'
           },
           onUpdate: 'cascade',
@@ -42,6 +38,6 @@ module.exports = {
   },
 
   async down (queryInterface, Sequelize) {
-    await queryInterface.dropTable('compras');
+    await queryInterface.dropTable('itens_compras');
   }
 };

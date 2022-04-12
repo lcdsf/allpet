@@ -25,7 +25,11 @@ module.exports = (sequelize, DataTypes) => {
         categorias_especificas_id: {
           type: DataTypes.INTEGER,
           allowNull: false
-        }
+        },
+        /*compras_id: {
+          type: DataTypes.INTEGER,
+          allowNull: true
+        }*/
     }, 
     {tableName: 'produtos', timestamps: false}
     );
@@ -39,9 +43,11 @@ module.exports = (sequelize, DataTypes) => {
           foreignKey: 'produtos_id',
           as: 'avaliacoes'
         });
-        Produto.hasMany(models.ItemCompra, {
+        Produto.belongsToMany(models.Compra, {
           foreignKey: 'produtos_id',
-          as: 'itens_compras'
+          through: models.ItemCompra,
+          //through: 'itens_compras',
+          as: 'compras'
         });
     }
   

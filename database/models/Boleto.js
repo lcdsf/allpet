@@ -27,7 +27,7 @@ module.exports = (sequelize, DataTypes) => {
             foreignKey: 'clientes_id',
             as: 'cliente'
         });
-        Boleto.belongsTo(models.FormaPgto, {
+        Boleto.hasOne(models.FormaPgto, {
             foreignKey: 'boletos_id',
             as: 'boleto'
         });

@@ -6,6 +6,10 @@ module.exports = (sequelize, DataTypes) => {
             autoIncrement: true,
             allowNull: false
         },
+        cep:{
+            type: DataTypes.STRING,
+            allowNull: false
+        },
         rua:{
             type: DataTypes.STRING,
             allowNull: false
