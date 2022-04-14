@@ -8,7 +8,7 @@ router.get("/clientes", clienteController.index);
 
 router.get("/produtos", produtoController.index);
 router.get("/produtos/cadastro", produtoController.create);
-router.post("/produtos/cadastro", produtoController.store);
+router.post("/produtos/cadastro"/*, upload.single('aaaaaaaa')*/, produtoController.store);
 router.put("/produtos/:id/editar", produtoController.update);
 
 module.exports = router;

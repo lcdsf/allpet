@@ -28,22 +28,26 @@
         <div id="painelminhascompras">
 
             <% produtos.forEach(produto => { %>
-                            <div id="contcompra">
+                            <div>
+                                <div id="contcompra">
 
-                                <div id="infocompra">
-                                    
-                                    <label>ID: <%= produto.id %></label>
-                                    <br>
-                                    <label>Nome: <%= produto.nome %></label>
-                                    <br>
-                                    <label>Preço R$:  <%= produto.preco %></label>
-                                    <br>
-                                    <label>Descrição:  <%= produto.descricao %></label>
-                                    <br>
-                                    <label>Quantidade disponível:  <%= produto.quantidade %></label>
+                                    <img src="/img/defaultprod.png" alt="foto produto">
 
+                                    <div id="infocompra">
+                                        
+                                        <label>ID: <%= produto.id %></label>
+                                        <br>
+                                        <label>Nome: <%= produto.nome %></label>
+                                        <br>
+                                        <label>Preço R$:  <%= produto.preco %></label>
+                                        <br>
+                                        <label>Descrição:  <%= produto.descricao %></label>
+                                        <br>
+                                        <label>Quantidade disponível:  <%= produto.quantidade %></label>
+
+                                    </div>
+                                    <button>Ver detalhes</button>
                                 </div>
-                                <button>Ver detalhes</button>
                             </div>
             <% }) %>
 

@@ -575,10 +575,11 @@
     justify-content: center;
     flex-direction: column;
     width: 60vw;
-    height: 60vh;
+    height: fit-content;
     margin: 50px auto 0px auto;
     border-radius: 4px;
-    overflow-y: auto;
+    /*overflow-y: hidden;*/
+    /*padding-top: 100px;*/
 
 }
 

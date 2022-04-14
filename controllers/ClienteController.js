@@ -18,24 +18,8 @@ const clienteController = {
         rua, cep, numero, bairro, cidade, estado, complemento, 
         email, senha, confirmaSenha} = req.body;
 
-        //let fotoperfil =  JSON.stringify(req.file);
-
-     //   console.log('FILENAME:      ', req.file.filename);
-        
-       // if (!fotoperfil) fotoperfil = "defaultprofile.jpg";
-
-      //  if (!req.file.filename) req.file.filename = "/img/defaultprofile.jpg";
-
-      //let filename = "defaultprofile.jpg";
-
-
-
-        
             
         if (senha === confirmaSenha){ 
-            
-            //Var cliente para guardar id a ser vinculado com o endereço
-
 
             let cliente;
 
