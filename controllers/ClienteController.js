@@ -1,4 +1,5 @@
 const {Cliente, Endereco} = require("../database/models");
+//const fs = require('fs');
 
 const clienteController = {
 
@@ -16,22 +17,55 @@ const clienteController = {
         const {nome, sobrenome, cpf, telefone, 
         rua, cep, numero, bairro, cidade, estado, complemento, 
         email, senha, confirmaSenha} = req.body;
+
+        //let fotoperfil =  JSON.stringify(req.file);
+
+     //   console.log('FILENAME:      ', req.file.filename);
+        
+       // if (!fotoperfil) fotoperfil = "defaultprofile.jpg";
+
+      //  if (!req.file.filename) req.file.filename = "/img/defaultprofile.jpg";
+
+      //let filename = "defaultprofile.jpg";
+
+
+
         
             
         if (senha === confirmaSenha){ 
             
             //Var cliente para guardar id a ser vinculado com o endereço
-            const cliente = await Cliente.create(
-                {
-                    nome,
-                    sobrenome,
-                    email,
-                    senha,
-                    cpf,
-                    telefone,
-                    data_cadastro: Date.now()
-                }
-            );
+
+
+            let cliente;
+
+            if (!req.file){
+                cliente = await Cliente.create(
+                    {
+                        nome,
+                        sobrenome,
+                        email,
+                        senha,
+                        cpf,
+                        telefone,
+                        data_cadastro: Date.now(),
+                        fotourl: "defaultprofile.jpg"
+                    }
+                );
+            }else{
+                cliente = await Cliente.create(
+                    {
+                        nome,
+                        sobrenome,
+                        email,
+                        senha,
+                        cpf,
+                        telefone,
+                        data_cadastro: Date.now(),
+                        fotourl: req.file.filename
+                    }
+                );
+            }
  
 
             await Endereco.create(

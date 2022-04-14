@@ -596,6 +596,12 @@
     color: white;
 }
 
+#contcompra img{
+    width: 80px;
+    height: 80px;
+    border-radius: 50px;
+}
+
 #infocompra{
     width: 50%;
 }
@@ -1570,6 +1576,7 @@ footer ul li, footer p, footer a{
         justify-content: center;
         width: 100%;
     }
+
 
     #fotosprod{
         margin-left: auto;

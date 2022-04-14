@@ -33,6 +33,10 @@ module.exports = (sequelize, DataTypes) => {
             data_cadastro:{
                 type: DataTypes.DATE,
                 allowNull: false
+            },
+            fotourl:{
+                type: DataTypes.STRING,
+                allowNull: true
             }
         }, 
         {tableName: 'clientes', timestamps: false}

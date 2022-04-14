@@ -30,6 +30,10 @@
             <% clientes.forEach(cliente => { %>
                             <div id="contcompra">
 
+                                <!--<img src="<%= cliente.fotourl %>" alt="foto de perfil">-->
+
+                                <img src="/img/<%= cliente.fotourl %>" alt="foto de perfil">
+
                                 <div id="infocompra">
                                     
                                     <label>ID: <%= cliente.id %></label>
@@ -37,6 +41,8 @@
                                     <label>Nome completo: <%= cliente.nome %> <%= cliente.sobrenome %></label>
                                     <br>
                                     <label>E-mail:  <%= cliente.email %></label>
+
+                                   
 
                                 </div>
                                 <button>Ver detalhes</button>
