@@ -1,4 +1,6 @@
 const {Cliente, Endereco} = require("../database/models");
+const {validationResult} = require('express-validator');
+const bcrypt = require('bcrypt');
 //const fs = require('fs');
 
 const clienteController = {
@@ -10,9 +12,20 @@ const clienteController = {
 
     create: (req, res) => {
         res.render("cadastroUser");
-    }, 
+    },
+    home: async(req, res) => {
+        res.render('home', {usuario: req.session.usuario});
+    },
+    store: async (req, res) => {
 
-    store: async (req, res) =>{
+        const erros = validationResult(req);
+
+        //console.log('CONTEUDO DE ERRROS: ', erros);
+
+        if (!erros.isEmpty()){
+            res.render('cadastroUser', { erros: erros.array().map(erro => erro.msg) });
+            //return;
+        }
 
         const {nome, sobrenome, cpf, telefone, 
         rua, cep, numero, bairro, cidade, estado, complemento, 
@@ -29,7 +42,7 @@ const clienteController = {
                         nome,
                         sobrenome,
                         email,
-                        senha,
+                        senha: bcrypt.hashSync(senha, 10),
                         cpf,
                         telefone,
                         data_cadastro: Date.now(),
@@ -42,7 +55,7 @@ const clienteController = {
                         nome,
                         sobrenome,
                         email,
-                        senha,
+                        senha: bcrypt.hashSync(senha, 10),
                         cpf,
                         telefone,
                         data_cadastro: Date.now(),
@@ -65,7 +78,9 @@ const clienteController = {
                 }
             );
 
-            res.redirect('/');
+            res.render('cadastroUser', {cadastroOK: 'Cadastro realizado com sucesso! Clique no botão acima "Entrar" para fazer o login.'});
+        }else{
+            res.render('cadastroUser', {erro: 'Senhas não coincidem, tente novamente.'});
         }
 
         

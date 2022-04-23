@@ -22,10 +22,10 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.INTEGER,
             allowNull: false
         },
-        /*produtos_id: {
+        enderecos_id: {
             type: DataTypes.INTEGER,
-            allowNull: false
-        }*/
+            allowNull: true
+        }
     }, 
     {tableName: 'compras', timestamps: false}
     );
@@ -53,6 +53,11 @@ module.exports = (sequelize, DataTypes) => {
             foreignKey: 'compras_id',
             as: 'requerimento'
         });
+        Compra.hasOne(models.Endereco, {
+            foreignKey: 'enderecos_id',
+            as: 'endereco'
+        });
+        
     }
   
     return Compra;

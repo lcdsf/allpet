@@ -24,6 +24,16 @@
     
     <div id="bemvindo">
        <!-- <p>Sejam bem-vindos, apaixonados por Pets!</p> -->
+
+        <% if (typeof erro !== 'undefined'){ %>
+            <p style="color: red; text-align: center;"><%= erro %></p><br>
+        <% } %>
+
+        <% if (typeof usuario !== 'undefined'){ %>
+            <p style="font-size: 20px; text-align: center;">Bem vindo, <%= usuario.nome %></p>
+        <% } %>
+
+
         <img src="/img/dog.png">        
     </div>
 
@@ -111,42 +121,42 @@
 
         <div id="grupoitems">
 
-            <div id="item1">
+            <div id="itemhome">
                 <img src="/img/casinha.png">
                 <p>4x de R$ 22,90</p>
             </div>
 
-            <div id="item2">
+            <div id="itemhome">
                 <img src="/img/casinha.png">
                 <p>4x de R$ 22,90</p>
             </div>
 
-            <div id="item3">
+            <div id="itemhome">
                 <img src="/img/casinha.png">
                 <p>4x de R$ 22,90</p>
             </div>
 
-            <div id="item4">
+            <div id="itemhome">
                 <img src="/img/casinha.png">
                 <p>4x de R$ 22,90</p>
             </div>
 
-            <div id="item5">
+            <div id="itemhome">
                 <img src="/img/casinha.png">
                 <p>4x de R$ 22,90</p>
             </div>
 
-            <div id="item6">
+            <div id="itemhome">
                 <img src="/img/casinha.png">
                 <p>4x de R$ 22,90</p>
             </div>
 
-            <div id="item7">
+            <div id="itemhome">
                 <img src="/img/casinha.png">
                 <p>4x de R$ 22,90</p>
             </div>
 
-            <div id="item8">
+            <div id="itemhome">
                 <img src="/img/casinha.png">
                 <p>4x de R$ 22,90</p>
             </div>

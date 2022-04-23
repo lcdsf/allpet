@@ -29,6 +29,18 @@
 
         <form action="/cliente/cadastro"  enctype="multipart/form-data" method="POST" id="formuser">
 
+            <% if (typeof erro !== 'undefined'){ %>
+                <p style="color: red; text-align: center;"><%= erro %></p>
+            <% } %>
+
+           <% if (typeof erros !== 'undefined'){ %>
+                <p style="color: red; text-align: center;"><%= erros+'\n' %></p>
+            <% } %>
+
+            <% if (typeof cadastroOK !== 'undefined'){ %>
+                <p style="color: green; text-align: center;"><%= cadastroOK %></p>
+            <% } %>
+
             <fieldset>
                 <legend>Complete as informações a seguir:</legend>
 
@@ -36,7 +48,7 @@
 
 
                 <label for="nome">Nome</label>
-                <input type="text" name="nome" id="nome" required> <br><br>
+                <input type="text" name="nome" id="nome"> <br><br>
 
                 <label for="sobrenome">Sobrenome</label>
                 <input type="text" name="sobrenome" id="sobrenome"> <br><br>

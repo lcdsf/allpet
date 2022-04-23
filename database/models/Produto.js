@@ -26,10 +26,10 @@ module.exports = (sequelize, DataTypes) => {
           type: DataTypes.INTEGER,
           allowNull: false
         },
-        /*compras_id: {
-          type: DataTypes.INTEGER,
+        fotourl: {
+          type: DataTypes.STRING,
           allowNull: true
-        }*/
+        }
     }, 
     {tableName: 'produtos', timestamps: false}
     );

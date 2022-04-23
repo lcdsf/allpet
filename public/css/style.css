@@ -1314,10 +1314,20 @@ footer ul li, footer p, footer a{
     /*margin-left: 100px;*/
 }
 
+#opcoeslista{
+    display: flex;
+    flex-direction: column;
+}
+
+#opcoeslista button{
+    width: 100%;
+    margin: 2px;
+}
 
 #bemvindo{
     /*border: solid 2px brown;*/
     display: flex;
+    flex-direction: column;
     justify-content: center;
     margin: auto;
     height: 300px;
@@ -1326,12 +1336,19 @@ footer ul li, footer p, footer a{
 }
 
 #bemvindo p{
-    font-family: 'Rufina', serif;
+   /* font-family: 'Rufina', serif;
     margin-top: 200px;
     margin-right: 250px;
     z-index: 2;
     position: absolute;
-    font-size: 30px;
+    font-size: 30px;*/
+  /*  display: block;*/
+}
+
+#bemvindo img{
+    width: 60vw;
+    /*height: max-content;*/
+    margin: 0 auto;
 }
 
 #carrossel{
@@ -1428,9 +1445,11 @@ footer ul li, footer p, footer a{
    /* flex-wrap: wrap;*/
     background-color: #b5dada;
     margin: auto;
-    height: 600px;
+    /*height: 600px;*/
+    height: fit-content;
     width: 1200px;
-    padding: 5px;
+    padding: 15px 0px;
+    border-radius: 5px;
 }
 
 #moldcats{
@@ -1456,7 +1475,7 @@ footer ul li, footer p, footer a{
 
 
 
-#item1, #item2, #item3, #item4, #item5, #item6, #item7, #item8{
+#itemhome{
     width: 256px; height: 256px;
     display: flex;
     flex-direction: column;
@@ -1465,6 +1484,11 @@ footer ul li, footer p, footer a{
    /* border: solid 1px orange;*/
     margin: 10px;
 
+
+}
+
+#itemhome img{
+    border-radius: 3px;
 }
 
 #cat1, #cat2, #cat3, #cat4, #cat5, #cat6, #cat7, #cat8{
@@ -1682,7 +1706,8 @@ footer ul li, footer p, footer a{
     }
 
     #grupoitems{
-        height: 1200px;
+        /*height: 1200px;*/
+        height: fit-content;
     }
 
     #molditems{

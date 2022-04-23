@@ -25,13 +25,20 @@
             <h2>Lista de Produtos</h2>
         </div>
 
+        <% if (typeof deletado !== 'undefined'){ %>
+            <p style="text-align: center;">O produto "<%= deletado.nome %>" foi excluído com sucesso</p><br>
+        <% } %>
+
+
         <div id="painelminhascompras">
 
+            <% let fotoprod %>
             <% produtos.forEach(produto => { %>
                             <div>
                                 <div id="contcompra">
 
-                                    <img src="/img/defaultprod.png" alt="foto produto">
+
+                                    <img src="/img/<%= produto.fotourl %>" alt="foto produto">
 
                                     <div id="infocompra">
                                         
@@ -46,17 +53,22 @@
                                         <label>Quantidade disponível:  <%= produto.quantidade %></label>
 
                                     </div>
-                                    <button>Ver detalhes</button>
+                                    <div id="opcoeslista">
+
+                                        <a href="/admin/produtos/<%= produto.id %>"><button>Detalhes</button></a>
+                                        <a href="/admin/produtos/<%= produto.id %>/editar"><button>Editar/Excluir</button></a>
+                                    </div>
+
                                 </div>
                             </div>
             <% }) %>
 
         </div>
 
-        <!--<div id="btnsminhascompras">
-            <button>Área do Cliente</button>
-            <button>Página inicial</button>
-        </div>-->
+        <div id="btnsminhascompras">
+            <a href="/admin"><button>Painel Administrativo</button></a> 
+            <a href="/admin/produtos/cadastro"><button>Cadastrar Produto</button></a>
+        </div>
        
     </main>
 

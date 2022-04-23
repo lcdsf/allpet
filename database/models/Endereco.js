@@ -47,6 +47,11 @@ module.exports = (sequelize, DataTypes) => {
             foreignKey: 'clientes_id',
             as: 'cliente'
         });
+        Endereco.belongsTo(models.Compra, {
+            foreignKey: 'enderecos_id',
+            as: 'endereco'
+        });
+        
     }
 
 

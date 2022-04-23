@@ -102,9 +102,9 @@ async function buscarCatEsp(){
 }
 
 async function teste(){
-    const itens = await Compra.findAll( 
+    const itens = await Produto.findAll( 
         //{attributes: {exclude: ['clientes_id']} },
-        {include: ['cliente']}
+        //{include: ['cliente']}
     )
     .then(itens => itens.map(item => item.toJSON()))
     .catch(error => console.log("ERRO AO BUSCAR DADOS: ", error));
@@ -115,3 +115,11 @@ async function teste(){
 
 
 teste();
+
+
+
+
+/* for (let i of x){
+     console.log(i.filename);
+ }*/
+
