@@ -1,24 +1,16 @@
-const express = require('express');
-const app = express();
-require("dotenv").config();
-const frontEnd = require('./routes/frontEnd');
-const clienteRouter = require("./routes/clienteRouter");
-const adminRouter = require('./routes/adminRouter');
-const methodOverride = require('method-override');
-
+var express = require('express');
+var app = express();
 
 app.set('view engine', 'ejs');
+app.use(express.static("public"));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.use(express.static("public"));
-app.use('/', frontEnd);
-app.use("/cliente", clienteRouter);
-app.use("/admin", adminRouter);
-app.use(methodOverride("_method"));
+app.get('/', (req, res) =>{
 
-
+    res.render('home');
+});
 
 
 

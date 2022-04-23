@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Rufina:wght@700&display=swap');
 
 
-/*-------------------- TELA CARRINHO --------------------*/
+/*-------------------- TELA CARRINHO ---------------------*/
 
 #bannercarrinho{
     display: flex;
@@ -1264,27 +1264,6 @@ footer ul li, footer p, footer a{
     color: white;
 }
 
-#redessociais{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 200px;
-    /*border: 1px solid salmon;*/
-    text-align: center;
-}
-
-#iconsrs{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    width: 100%;
-}
-
-#iconsrs svg{
-    width: 30px;
-    height: 30px;
-}
-
 /*#conteudofooter{
     display: flex;
     justify-content: space-around;
@@ -1465,7 +1444,6 @@ footer ul li, footer p, footer a{
     align-items: center;
     justify-content: center;
     background-color: #feae11;
-    border-radius: 5px;
     color: white;
     width: 200px;
     height: 40px;
@@ -1488,7 +1466,6 @@ footer ul li, footer p, footer a{
     font-size: 15px;
     display: flex;
     justify-content: center;
-    border-radius: 5px;
     padding-top: 10px;
     padding-bottom: 10px;
     width: 150px;
@@ -1501,12 +1478,15 @@ footer ul li, footer p, footer a{
 }
 
 
+<<<<<<< HEAD
 
 
 
 /*************************************************************************************************/
 
 
+=======
+>>>>>>> 68ed0c788d87cdfeaf2629272031f267ee2103a1
 /* LAYOUT RESPONSIVO */
 @media (max-width: 800px){
     
@@ -1564,67 +1544,6 @@ footer ul li, footer p, footer a{
     }
 
     
-    #containerprod, #containerprodcont{
-        display: flex;
-        flex-flow: column;
-        justify-content: center;
-        width: 100%;
-    }
-
-    #fotosprod{
-        margin-left: auto;
-        margin-right: auto;
-       /* border: 1px solid yellowgreen;*/
-        width: 90vw;
-    }
-
-    #maisthumbs{
-        display: flex;
-        flex-flow: row;
-        width: 100%;
-    }
-
-    #tresthumbs{
-        display: flex;
-        flex-direction: row;
-        justify-content: space-evenly;
-        width: 20%;
-        margin-left: 20%;
-        margin-right: 20%;
-    }
-
-    #tresthumbs img{
-        width: 90%;
-        height: 90%;
-        margin-left: 5px;
-        margin-right: 5px;
-    }
-
-    #opinioesprod, #sugestoesprod{
-        width: 100%;
-    }
-
-    #infoprod{
-        margin-left: auto;
-        margin-right: auto;
-        width: 90vw;
-    }
-
-    #infoprod h1, #infoprod h2, #avaliacao, #infoprod label{
-        text-align: center;
-    }
-
-
-
-
-    #stars{
-        margin-left: auto;
-        margin-right: auto;
-    }
-    
-    
-
-
     body{
        /* margin: 0px;
         height: 100%;*/
