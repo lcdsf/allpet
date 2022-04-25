@@ -1,21 +1,111 @@
+const req = require('express/lib/request');
 const res = require('express/lib/response');
 const {Produto, Foto, CategoriaPrincipal, CategoriaEspecifica, ItemCompra, Avaliacao} = require('../database/models');
 
 const produtoController = {
+    acessBrinqs: async (req, res) => {
+        const catprinc = await CategoriaPrincipal.findOne({raw: true, where: {nome: 'Acessórios e Brinquedos'}})
+        //.then(response => console.log('CATEGORIA PRINCIPAL ENCONTRADA COM SUCESSO!'))
+        //.catch(error => console.log('ERRO AO BUSCAR CATEGORIA PRINCIPAL: ', error));
+
+       // console.log('CATEGORIA PRINCIPAL: ', catprinc);
+
+        const catesps = await CategoriaEspecifica.findAll({raw: true, where: {categorias_principais_id: catprinc.id}})
+        //.then(response => console.log('CATEGORIAS ESPECÍFICAS ENCONTRADAS COM SUCESSO'))
+        //.catch(error => console.log('ERRO AO BUSCAR CATEGORIAS ESPECÍFICAS: ', error));
+        const ids = catesps.map(item => item.id);
+        //console.log('IDs: ', ids);        
+        const produtos = await Produto.findAll({
+            raw: true,
+            where: {categorias_especificas_id: ids}
+        });
+
+        //console.log('CATEGORIAS ESPECIFICAS: ', catesps);
+        //console.log('PRODUTOS: ', produtos);
+
+
+        res.render('acessoriosBrinquedos', {produtos});
+
+    },
+    saude: async (req, res) => {
+        const catprinc = await CategoriaPrincipal.findOne({raw: true, where: {nome: 'Saúde'}})
+        const catesps = await CategoriaEspecifica.findAll({raw: true, where: {categorias_principais_id: catprinc.id}})
+        const ids = catesps.map(item => item.id);
+        const produtos = await Produto.findAll({
+            raw: true,
+            where: {categorias_especificas_id: ids}
+        });
+        res.render('saude', {produtos});
+    },
+    estetica: async (req, res) => {
+        const catprinc = await CategoriaPrincipal.findOne({raw: true, where: {nome: 'Estética'}})
+        const catesps = await CategoriaEspecifica.findAll({raw: true, where: {categorias_principais_id: catprinc.id}})
+        const ids = catesps.map(item => item.id);
+        const produtos = await Produto.findAll({
+            raw: true,
+            where: {categorias_especificas_id: ids}
+        });
+        res.render('estetica', {produtos});
+    },
+    descartaveis: async (req, res) => {
+        const catprinc = await CategoriaPrincipal.findOne({raw: true, where: {nome: 'Descartáveis'}})
+        const catesps = await CategoriaEspecifica.findAll({raw: true, where: {categorias_principais_id: catprinc.id}})
+        const ids = catesps.map(item => item.id);
+        const produtos = await Produto.findAll({
+            raw: true,
+            where: {categorias_especificas_id: ids}
+        });
+        res.render('descartaveis', {produtos});
+    },
     index: async (req, res) => {
         const produtos = await Produto.findAll({raw: true});
         const fotosprods = await Foto.findAll({raw: true});
-
         res.render('listaProdutos', { produtos, fotosprods });
+    },
+    indexHome: async (req, res) =>{
+        const produtos = await Produto.findAll({
+            raw: true, 
+            order: [['id', 'DESC']]
+        });
 
-        
+        res.render('home', {produtos});
+    },
+    telaProduto: async (req, res) =>{
+        const {id} = req.params;
+
+        const produto = await Produto.findByPk(id);
+
+        const avaliacoes = await Avaliacao.findAll({
+            raw: true, 
+            where: {produtos_id: id},
+            include: 'cliente'
+        });
+
+        const notas = avaliacoes.map(item => item.nota);
+
+        //console.log("NOTAS: ", notas);
+
+        let mediageral = 0;
+        notas.forEach(nota => { mediageral += nota });
+        mediageral = mediageral/notas.length;
+
+        //console.log('QTD NOTAS: ', notas.length);
+       // console.log('MÉDIA DAS NOTAS: ', mediageral);
+
+        //const clientes = await Cliente.findAll({raw: true});
+
+
+
+        //console.log('AVALIAÇÕES ENCONTRADAS: ', avaliacoes)
+
+
+
+        res.render('produto', {produto, avaliacoes, mediageral});
     },
     details: async (req, res) => {
         
         const {id} = req.params;
-        
         const produto = await Produto.findByPk(id);
-
         const categoria = await CategoriaEspecifica.findByPk(produto.categorias_especificas_id);
 
         /*const compras = await Produto.findAll({
@@ -41,22 +131,16 @@ const produtoController = {
         });
 
         console.log('AVALIAÇÕES: ', avaliacoes)
-
-        
-
         res.render('detalheProduto', {produto, avaliacoes, categoria, qtdcompras});
 
 
     },
     create: async (req, res) => {
-        
         const catesps = await CategoriaEspecifica.findAll();
-
         res.render("cadastroProduto", { catesps });
     },
 
     store: async (req, res) => {
-
         const {nome, preco, descricao, quantidade, catespnome} = req.body;
 
        // let produto;
@@ -194,15 +278,18 @@ const produtoController = {
 
         const produto = await Produto.findByPk(id);
         const catesps = await CategoriaEspecifica.findAll();
-        const catprod = await CategoriaEspecifica.findByPk(produto.categorias_especificas_id);
+        const catprod = await CategoriaEspecifica.findByPk(produto.categorias_especificas_id, {raw:true});
+        //catprod = categoria.map(item => item.nome);
 
         //console.log('CATPROD: ', catprod);
 
         res.render('editaProduto', {produto, catesps, catprod});
     },
     update: async (req, res) => {
-        const {nome, preco, descricao, quantidade, categorias_especificas_id} = req.body;
-        const {id} = req.params;    
+        const {nome, preco, descricao, quantidade, catespnome} = req.body;
+        const {id} = req.params;
+        
+        const categoria = await CategoriaEspecifica.findOne({raw: true, where: {nome: catespnome}});
 
         await Produto.update(
             {
@@ -210,19 +297,15 @@ const produtoController = {
                 preco: preco,
                 descricao: descricao,
                 quantidade: quantidade,
-
+                categorias_especificas_id: categoria.id
             },
             {where: {id: id}}
         );
 
         if (req.file) await Produto.update({fotourl: req.file.filename}, {where: {id: id}});
-        
-
         res.redirect('/admin/produtos');
     },
     delete: async (req, res) => {
-
-
         const {id} = req.params;
         const deletado = await Produto.findByPk(id);
 
@@ -233,7 +316,6 @@ const produtoController = {
 
        //ENVIA LISTA ATUALIZADA DE PRODUTOS PARA A VIEW
        const produtos = await Produto.findAll({raw: true});
-
         res.render('listaProdutos', {deletado, produtos});
     }
 

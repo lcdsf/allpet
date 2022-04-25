@@ -426,7 +426,7 @@
    /* border: 1px solid aquamarine; */
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: flex-start;
     width: 90vw;
     height: 100vh;
     justify-content: space-evenly;
@@ -447,8 +447,8 @@
     border-radius: 4px;
     background-color: #d1d1d1;
     width: 20vw;
-    height: 80%;
-    padding: 20px;
+    height: fit-content%;
+    padding: 20px 20px 60px 20px;
    /* z-index: 2;
     margin-top: 100px;*/
     
@@ -470,15 +470,15 @@
 #itensresultadobusca{
    /* border: 1px solid darkgreen; */
     width: 60vw;
-    height: 100%;
-    margin: auto 0px;
+    height: fit-content;
+    /*margin: auto 0px*/
     background-color: #8fc7c6;
     border-radius: 4px;
     padding: 20px;
     display: flex;
     flex-flow: wrap;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
 
 
 }
@@ -486,12 +486,16 @@
 #prodresbusca{
   /*  border: 1px solid gray; */
     width: 25%;
-    height: 45%;
+    height: fit-content;
     text-align: center;
     margin: 10px;
     border-radius: 4px;
     background-color: #eea91f;
     padding-bottom: 10px;
+}
+
+#prodresbusca a label{
+    text-decoration: none;
 }
 
 #prodresbusca label{
@@ -500,6 +504,7 @@
 
 #prodresbusca img{
     width: 100%;
+    height: 50%;
 }
 
 
@@ -1298,6 +1303,8 @@ footer ul li, footer p, footer a{
     margin: auto;
 }*/
 
+
+
 #mapafooter{
     width: 400px;
     height: 200px;
@@ -1335,15 +1342,15 @@ footer ul li, footer p, footer a{
     margin-top: 150px;
 }
 
-#bemvindo p{
-   /* font-family: 'Rufina', serif;
+  /*#bemvindo p{
+  font-family: 'Rufina', serif;
     margin-top: 200px;
     margin-right: 250px;
     z-index: 2;
     position: absolute;
     font-size: 30px;*/
-  /*  display: block;*/
-}
+  /*  display: block;
+}*/
 
 #bemvindo img{
     width: 60vw;
@@ -1447,7 +1454,7 @@ footer ul li, footer p, footer a{
     margin: auto;
     /*height: 600px;*/
     height: fit-content;
-    width: 1200px;
+    width: 70vw;
     padding: 15px 0px;
     border-radius: 5px;
 }
@@ -1681,7 +1688,7 @@ footer ul li, footer p, footer a{
 
     }*/
 
-    body, #bemvindo, #carrossel, #sugestoes, #molditems, #moldcats, footer{
+    body, #bemvindo, #carrossel, #sugestoes, #moldcats, footer{
         width: 100vw;
     }
 
@@ -1711,7 +1718,7 @@ footer ul li, footer p, footer a{
     }
 
     #molditems{
-        height: 1200px;
+        height: fit-content;
     }
     
     #sugestoes{

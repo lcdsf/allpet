@@ -14,6 +14,10 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.DATE,
             allowNull: false
         },
+        nota:{
+            type: DataTypes.FLOAT,
+            allowNull: false
+        },
         produtos_id: {
           type: DataTypes.INTEGER,
           allowNull: false,

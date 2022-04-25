@@ -12,7 +12,7 @@
 
 
 
-    <title>AllPet - Kit Coleiras Bibster Spiked</title>
+    <title>AllPet - <%= produto.nome %></title>
 </head>
 
 <body>
@@ -23,7 +23,7 @@
 
         <div id="containerprod">
             <div id="fotosprod">
-                <img src="/img/dc1.png" id="mainthumb">
+                <img src="/img/<%= produto.fotourl %>" id="mainthumb">
 
                 <div id="maisthumbs">
 
@@ -59,10 +59,12 @@
             </div>
 
             <div id="infoprod">
-                <h2> Kit Coleiras Bibster Spiked </h2>
-                <h1>R$ 100,00</h1>
-                <p id="avaliacao">Avaliação</p>
-                <div id="stars">
+                <h2> <%= produto.nome %> </h2>
+                <h1>R$ <%= produto.preco %></h1>
+                <p id="avaliacao">Avaliação: <%= mediageral.toFixed(2) %> / 10</p>
+                <a href="/produto/"></a>
+                
+                <!--<div id="stars">
 
                     <svg width="40" height="37" viewBox="0 0 40 37" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M20 0L24.4903 13.8197H39.0211L27.2654 22.3607L31.7557 36.1803L20 27.6393L8.2443 36.1803L12.7346 22.3607L0.97887 13.8197H15.5097L20 0Z" fill="#FEAE11"/>
@@ -86,16 +88,14 @@
                 <br>
                 <label>Frete grátis</label>
                 
-                <br>
+                <br>-->
                 <div id="btnsprod">
                     <button>Comprar</button>
                     <button>Adicionar ao Carrinho</button>
                 </div>
 
                 <div id="descprod">
-                    <p>
-                        A coleira Bibster Spiked possui um mecanismo que defende o seu animal de ataques de outros animais, por meio de suas pontas feitas com material que expele um odor desagradável aos animais, mas que os humanos não sentem.
-                    </p>
+                    <p><%= produto.descricao %></p>
                 </div>
 
             </div>
@@ -107,71 +107,30 @@
                 <br>
                 <h3>OPINIÕES DE QUEM COMPROU</h3>
 
+                
+
                 <div id="grpopinioes">
-                    <div id="opiniao1">
-                        <img src="/img/profile.jpg">
+                    <% if (typeof(avaliacoes) != 'undefined'){ %>
+                        <% avaliacoes.forEach(avaliacao => { %>
+                            <div id="opiniao1">
+                                <img src="/img/profile.jpg">
+    
+                                <div id="infoopiniao1">
+                                    <label id="lbopuser"><%= avaliacao.nota %> - NOMECLIENTE</label>
+                                    <label id="lbopdata"><%= avaliacao.datahora.getDate()%>/<%= avaliacao.datahora.getMonth()+1%>/<%= avaliacao.datahora.getFullYear()%></label>
+                                </div>
+                                
+                                <div id="descopiniao1">
+                                    <p>"<%= avaliacao.descricao %>"</p>
+                                </div>
+    
+                            </div>
+                        <% }) %>
+                    <% } %>
 
-                        <div id="infoopiniao1">
-                            <label id="lbopuser">Josefina L.</label>
-                            <label id="lbopdata">21/02/2022</label>
-                        </div>
-
-                        <div id="descopiniao1">
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at risus ut nisi auctor
-                            </p>
-                        </div>
-
-                    </div>
-
-                    <div id="opiniao2">
-                        <img src="/img/profile.jpg">
-
-                        <div id="infoopiniao2">
-                            <label id="lbopuser">Beltrano</label>
-                            <label id="lbopdata">19/02/2022</label>
-                        </div>
-
-                        <div id="descopiniao2">
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at risus ut nisi auctor
-                            </p>
-                        </div>
-
-                    </div>
-
-                    <div id="opiniao3">
-                        <img src="/img/profile.jpg">
-
-                        <div id="infoopiniao3">
-                            <label id="lbopuser">Agamenon Lopes</label>
-                            <label id="lbopdata">15/02/2022</label>
-                        </div>
-
-                        <div id="descopiniao3">
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at risus ut nisi auctor
-                            </p>
-                        </div>
-
-                    </div>
-
-                    <div id="opiniao4">
-                        <img src="/img/profile.jpg">
-
-                        <div id="infoopiniao4">
-                            <label id="lbopuser">Zezé Silva</label>
-                            <label id="lbopdata">30/01/2022</label>
-                        </div>
-
-                        <div id="descopiniao4">
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at risus ut nisi auctor
-                            </p>
-                        </div>
-
-                    </div>
-
+                    <% if (avaliacoes == ""){%> 
+                        <p>Este produto ainda não possui nenhuma avaliação</p> 
+                    <% } %>
 
                 </div>
     

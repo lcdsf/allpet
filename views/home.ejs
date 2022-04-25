@@ -115,51 +115,25 @@
 
     <br><br><br><br>
 
-    <h3>Os mais desejados!</h3>
+    <h3>Nossos produtos</h3>
 
     <div id="molditems">
 
         <div id="grupoitems">
 
-            <div id="itemhome">
-                <img src="/img/casinha.png">
-                <p>4x de R$ 22,90</p>
-            </div>
-
-            <div id="itemhome">
-                <img src="/img/casinha.png">
-                <p>4x de R$ 22,90</p>
-            </div>
-
-            <div id="itemhome">
-                <img src="/img/casinha.png">
-                <p>4x de R$ 22,90</p>
-            </div>
-
-            <div id="itemhome">
-                <img src="/img/casinha.png">
-                <p>4x de R$ 22,90</p>
-            </div>
-
-            <div id="itemhome">
-                <img src="/img/casinha.png">
-                <p>4x de R$ 22,90</p>
-            </div>
-
-            <div id="itemhome">
-                <img src="/img/casinha.png">
-                <p>4x de R$ 22,90</p>
-            </div>
-
-            <div id="itemhome">
-                <img src="/img/casinha.png">
-                <p>4x de R$ 22,90</p>
-            </div>
-
-            <div id="itemhome">
-                <img src="/img/casinha.png">
-                <p>4x de R$ 22,90</p>
-            </div>
+            <% if (typeof produtos !== 'undefined'){%>
+                <% produtos.forEach(produto => {%>
+                         <div id="prodresbusca">
+                            <a href="/produto/<%= produto.id %>">
+                                <img src="/img/<%= produto.fotourl %>">
+                                <label><%=produto.nome %></label>
+                                <br>
+                                <label>R$ <%= produto.preco %></label>
+                            </a>
+                        </div>
+                     
+                <%}) %>
+            <% } %>
         </div>
 
 

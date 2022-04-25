@@ -112,9 +112,16 @@ async function teste(){
     console.log(JSON.stringify(itens, null, 4));
 }
 
+async function buscaCP(){
+    const  catprinc = await CategoriaPrincipal.findOne({raw: true, where: {nome: 'Acessórios e Brinquedos'}})
+    console.log(catprinc);
 
+    const catesps = await CategoriaEspecifica.findAll({raw: true, where: {categorias_principais_id: catprinc.id}});
 
-teste();
+    console.log(catesps);
+}
+
+buscaCP();
 
 
 

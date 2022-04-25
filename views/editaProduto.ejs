@@ -40,24 +40,20 @@
                 <label for="descricao">Descrição</label><br>
                 <textarea name="descricao" id="descricao"><%= produto.descricao %></textarea> <br><br>
 
-
-
-
-
                 <label>Categoria</label> <br>
 
-                <select name="catespnome" id="catespnome" value="<%= catprod.nome%>">
+                <select name="catespnome" id="catespnome">
                     <% catesps.forEach(catesp => { %>
-                        <option value="<%= catesp.nome %>"><%= catesp.nome %></option>
+                        <% if ( catesp.nome == catprod.nome ) { %>
+                            <option selected value="<%= catesp.nome %>"><%= catesp.nome %></option>
+                        <% }else{ %>
+                            <option value="<%= catesp.nome %>"><%= catesp.nome %></option>
+                        <% } %>
+
                     <% })%>
                 </select>
                 <br><br>
-        
-
-
-
-
-
+    
                 <label for="preco">Preço</label> 
                 <input type="number" name="preco" id="preco"  value="<%= produto.preco %>"> <br><br>
 
