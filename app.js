@@ -32,7 +32,7 @@ app.use(session({
 app.use(express.static("public"));
 app.use('/', frontEnd);
 app.use("/cliente", autenticadorCliente, clienteRouter);
-app.use("/admin", /*autenticadorAdmin,*/ adminRouter);
+app.use("/admin", autenticadorAdmin, adminRouter);
 app.use('/', loginRouter);
 app.use(logAllPet);
 
@@ -48,5 +48,5 @@ app.use(logAllPet);
 
 
 
-app.listen(4001);
-console.log("Server rodando... 4001.");
+app.listen(4000);
+console.log("Server rodando... 4000.");

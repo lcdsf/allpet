@@ -25,11 +25,12 @@ module.exports = (sequelize, DataTypes) => {
         categorias_especificas_id: {
           type: DataTypes.INTEGER,
           allowNull: false
-        },
-        fotourl: {
-          type: DataTypes.STRING,
-          allowNull: true
         }
+    //     },
+    //     fotourl: {
+    //       type: DataTypes.STRING,
+    //       allowNull: true
+    //     }
     }, 
     {tableName: 'produtos', timestamps: false}
     );
@@ -49,6 +50,10 @@ module.exports = (sequelize, DataTypes) => {
           //through: 'itens_compras',
           as: 'compras'
         });
+        Produto.hasMany(models.Foto, {
+          foreignKey: 'produtos_id',
+          as: 'fotos'
+        })
     }
   
     return Produto;

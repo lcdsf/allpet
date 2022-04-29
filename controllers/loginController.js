@@ -6,13 +6,10 @@ const loginController = {
 
     clienteStore: async (req, res) => {
         const {email, senha} = req.body;
-
-        console.log('DADOS REQ BODY - email: '+email+" | senha: "+senha);
-
+        //console.log('DADOS REQ BODY - email: '+email+" | senha: "+senha);
         const usuario = await Cliente.findOne({ raw: true, where: {email: email}} )
 
-        console.log('RESULTADO BUSCA USUARIO: ', usuario);
-
+        //console.log('RESULTADO BUSCA USUARIO: ', usuario);
 
         if (!usuario){
             res.render('home', {erro: 'E-mail e/ou senha incorretos. Tente novamente'});
@@ -21,10 +18,23 @@ const loginController = {
         if (!bcrypt.compareSync(senha, usuario.senha)){
             res.render('home', {erro: 'E-mail e/ou senha incorretos. Tente novamente'});
         }
-
-        console.log('DADOS DO REQ SESSION: ', req.session);
+        
 
         req.session.usuario = usuario;
+       // req.session.carrinho = [];
+       // req.session.cookie.historico = [];
+        // req.session.cookie.historico.push(1);
+        // req.session.cookie.historico.push(2);
+        
+
+
+
+        res.cookie('carrinho', [])
+        res.cookie('historico', []);
+
+        //console.log('RES COOKIE CARRINHO: ', )
+        //console.log('RES COOKIE HISTORICO: ', req.session.cookie.historico);
+
         res.redirect('/cliente/home');
     },
 
@@ -35,21 +45,28 @@ const loginController = {
     adminStore: async (req, res) => {
 
         const {email, senha} = req.body;
-        const usuario = await Administrador.findAll({ raw: true, where: {email: email}});
 
-        if (!usuario){
-            res.render('home', {erro: 'E-mail e/ou senha incorretos. Tente novamente'});
+        //console.log('DADOS DO REQ BODY: ', req.body);
+        //console.log('DADOS ADMIN: '+email+' '+senha);
+
+        const admin = await Administrador.findOne({ raw: true, where: {email: email}});
+
+        if (!admin){
+            res.render('loginAdmin', {erro: 'E-mail e/ou senha incorretos. Tente novamente'});
         }
 
-        if (!bcrypt.compareSync(senha, usuario.senha)){
-            res.render('home', {erro: 'E-mail e/ou senha incorretos. Tente novamente'});
+        if (!bcrypt.compareSync(senha, admin.senha)){
+            res.render('loginAdmin', {erro: 'E-mail e/ou senha incorretos. Tente novamente'});
         }
 
-        res.redirect('/');
+        req.session.admin = admin;
+
+        console.log('REQ SESSION ADMIN: ', req.session);
+
+        res.redirect('/admin');
 
     }
-    
-    
+
 };
 
 

@@ -62,11 +62,17 @@
 
                 
                 <label>Foto</label> <br><br>
-                <input type="file" name="imgprod" id="imgprod">
+                <input type="file" name="imgprod" id="imgprod" multiple>
                 <br><br>
 
-                <label>Foto atual:</label><br>
-                <img style="width: 20%;" src="/img/<%= produto.fotourl%>">
+                <label>Fotos atuais:</label><br>
+
+                <% let fotos = produto.fotos.map(foto => foto.fotourl) %>
+
+                <img style="width: 20%;" src="/img/<%= fotos[0]%>">
+                <img style="width: 20%;" src="/img/<%= fotos[1]%>">
+                <img style="width: 20%;" src="/img/<%= fotos[2]%>">
+                <img style="width: 20%;" src="/img/<%= fotos[3]%>">
                 <br><br>
 
                 <!--<label>Foto 2</label> <br><br>

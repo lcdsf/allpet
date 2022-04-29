@@ -1,4 +1,4 @@
-const {Cliente, Endereco} = require("../database/models");
+const {Cliente, Endereco, Produto} = require("../database/models");
 const {validationResult} = require('express-validator');
 const bcrypt = require('bcrypt');
 //const fs = require('fs');
@@ -14,7 +14,13 @@ const clienteController = {
         res.render("cadastroUser");
     },
     home: async(req, res) => {
-        res.render('home', {usuario: req.session.usuario});
+        const produtos = await Produto.findAll({
+            order: [['id', 'DESC']],
+            include: 'fotos' 
+        })
+        .then(result => result.map(produto => produto.toJSON()));
+
+        res.render('home', {usuario: req.session.usuario, produtos});
     },
     store: async (req, res) => {
 
@@ -84,6 +90,32 @@ const clienteController = {
         }
 
         
+    },
+    sair: async (req, res) => {
+        req.session.destroy();
+        res.redirect('/');
+    },
+    painel: async (req, res) => {
+        res.render('areaCliente', {usuario: req.session.usuario});
+    },
+    historico: async (req, res) => {
+
+        let ids = req.cookies['historico'];
+
+        console.log('IDs do histórico: ', ids);
+
+        ids = ids.map(id => parseInt(id));
+
+       // result => result.map(produto => produto.toJSON()))
+
+        const produtos = await Produto.findAll({
+            where: {id: ids},
+            include: 'fotos'
+        })
+        .then(result => result.map(produto => produto.toJSON()));
+        
+
+        res.render('historico', {produtos});
     }
 };
 

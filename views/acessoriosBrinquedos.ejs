@@ -54,9 +54,10 @@
 
                 <% if (typeof(produtos) != 'undefined'){%>
                     <% produtos.forEach(produto => {%>
+                        <% let fotos = produto.fotos.map(foto => foto.fotourl) %>
                         <div id="prodresbusca">
                             <a href="/produto/<%= produto.id %>">
-                                <img src="/img/<%= produto.fotourl %>">
+                                <img src="/img/<%= fotos[0] %>">
                                 <label><%= produto.nome %></label>
                                 <br>
                                 <label>R$ <%= produto.preco %></label>

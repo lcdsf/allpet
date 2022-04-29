@@ -4,8 +4,8 @@ const loginController = require('../controllers/loginController');
 
 
 router.post('/logincliente', loginController.clienteStore);
-router.get('/admin/login', loginController.adminIndex);
-router.post('/admin/login', loginController.adminStore);
+router.post('/loginadmin', loginController.adminStore);
+// router.get('/admin/login', loginController.adminIndex);
 
 
 module.exports  = router;

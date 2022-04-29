@@ -528,14 +528,20 @@
 }
 
 #painelconfiguser img{
-    width: 30%;
+    width: 60%;
     margin-left: auto; margin-right: auto;
-    border-radius: 60px;
+    border-radius: 100px;
 }
 
 #painelopuser{
     display: flex;
     flex-direction: column;
+}
+
+textarea{
+    resize: none;
+    width: 40%;
+    height: 100px;
 }
 
 #painelopuser button{

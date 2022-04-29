@@ -121,7 +121,44 @@ async function buscaCP(){
     console.log(catesps);
 }
 
-buscaCP();
+
+async function FotosProds(){
+    const itens = await Produto.findAll( 
+        {include: ['fotos']}
+    )
+    .then(itens => itens.map(item => item.toJSON()))
+    .catch(error => console.log("ERRO AO BUSCAR DADOS: ", error));
+
+    //console.log(itens);
+    
+    itens.forEach(item => {
+        console.log('\n\nO produto '+item.nome+' possui as seguintes fotos: ');
+
+        let fotos = item.fotos.map(foto => foto.fotourl);
+        
+        console.log(fotos[0]);
+        console.log(fotos[1]);
+        console.log(fotos[2]);
+        console.log(fotos[3]);
+        // console.log(item.fotos[1].fotourl);
+        // console.log(item.fotos[2].fotourl);
+        // console.log(item.fotos[3].fotourl);
+    })
+}
+
+
+async function insereFotos(){
+    for (let i = 0; i < 4; i++){
+        await Foto.create({
+            fotourl: 'defaultprod.png',
+            produtos_id: 21
+        })
+    }
+}
+
+
+
+insereFotos();
 
 
 

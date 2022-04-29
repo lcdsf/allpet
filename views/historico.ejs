@@ -12,7 +12,7 @@
 
 
 
-    <title>AllPet - Produtos</title>
+    <title>AllPet - Histórico</title>
 </head>
 
 <body>
@@ -22,13 +22,8 @@
     <main> 
 
         <div id="bannercadastro">
-            <h2>Lista de Produtos</h2>
+            <h2>Histórico de navegação</h2>
         </div>
-
-        <% if (typeof deletado !== 'undefined'){ %>
-            <p style="text-align: center;">O produto "<%= deletado.nome %>" foi excluído com sucesso</p><br>
-        <% } %>
-
 
         <div id="painelminhascompras">
 
@@ -54,11 +49,6 @@
                                         <label>Quantidade disponível:  <%= produto.quantidade %></label>
 
                                     </div>
-                                    <div id="opcoeslista">
-
-                                        <a href="/admin/produtos/<%= produto.id %>"><button>Detalhes</button></a>
-                                        <a href="/admin/produtos/<%= produto.id %>/editar"><button>Editar/Excluir</button></a>
-                                    </div>
 
                                 </div>
                             </div>
@@ -67,8 +57,8 @@
         </div>
 
         <div id="btnsminhascompras">
-            <a href="/admin"><button>Painel Administrativo</button></a> 
-            <a href="/admin/produtos/cadastro"><button>Cadastrar Produto</button></a>
+            <a href="/cliente/painel"><button>Painel do Cliente</button></a>
+            <a href="/cliente/home"><button>Página inicial</button></a>
         </div>
        
     </main>

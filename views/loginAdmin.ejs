@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+
+
+
+
+
+    <title>AllPet - Área Administrativa</title>
+</head>
+
+<body>
+
+    <%- include('./partials/header') %>
+    
+    <main>
+
+        <div id="bannercadastro">
+            <h2>Área Administrativa - Login</h2>
+        </div>
+
+        <!-- <img src="/img/cadastro.png" id="capacadastro"> -->
+
+        <div style="margin: 40px 0px" ></div>
+
+        <% if (typeof erro !== 'undefined'){ %>
+            <p style="color: red; text-align: center;"><%= erro %></p><br>
+        <% } %>
+
+        <form action="/loginadmin"method="POST" id="formuser">
+
+            <fieldset>
+                <legend>Informe as suas credenciais:</legend> 
+
+                <label for="email">E-mail</label> 
+                <input type="email" name="email" id="email"> <br><br>
+
+                <label for="senha">Senha</label> 
+                <input type="password" name="senha" id="senha"> <br><br>
+
+                <!-- <label for="confirmaSenha">Confirmar senha</label> 
+                <input type="password" name="confirmaSenha" id="confirmaSenha"> <br><br> -->
+
+                
+                <button type="submit" id="btncaduser">Entrar</button>
+
+            </fieldset>
+
+
+
+        </form>
+
+    </main>
+
+</body>
+
+<%- include('./partials/footer') %>
+
+</html>

@@ -1,7 +1,8 @@
 function autenticadorAdmin (req, res, next){
 
-    if (!req.session.usuario){
-        return res.redirect('/admin');
+    if (!req.session.admin){
+       res.redirect('/');
+       //res.render('home', {erro: 'Por favor, faça o login como Administrador.'})
     }
 
     return next();

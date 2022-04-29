@@ -5,24 +5,14 @@ const {Produto, Foto, CategoriaPrincipal, CategoriaEspecifica, ItemCompra, Avali
 const produtoController = {
     acessBrinqs: async (req, res) => {
         const catprinc = await CategoriaPrincipal.findOne({raw: true, where: {nome: 'Acessórios e Brinquedos'}})
-        //.then(response => console.log('CATEGORIA PRINCIPAL ENCONTRADA COM SUCESSO!'))
-        //.catch(error => console.log('ERRO AO BUSCAR CATEGORIA PRINCIPAL: ', error));
-
-       // console.log('CATEGORIA PRINCIPAL: ', catprinc);
 
         const catesps = await CategoriaEspecifica.findAll({raw: true, where: {categorias_principais_id: catprinc.id}})
-        //.then(response => console.log('CATEGORIAS ESPECÍFICAS ENCONTRADAS COM SUCESSO'))
-        //.catch(error => console.log('ERRO AO BUSCAR CATEGORIAS ESPECÍFICAS: ', error));
         const ids = catesps.map(item => item.id);
-        //console.log('IDs: ', ids);        
         const produtos = await Produto.findAll({
-            raw: true,
-            where: {categorias_especificas_id: ids}
-        });
-
-        //console.log('CATEGORIAS ESPECIFICAS: ', catesps);
-        //console.log('PRODUTOS: ', produtos);
-
+            where: {categorias_especificas_id: ids},
+            include: 'fotos'
+        })
+        .then(result => result.map(produto => produto.toJSON()));;
 
         res.render('acessoriosBrinquedos', {produtos});
 
@@ -32,71 +22,78 @@ const produtoController = {
         const catesps = await CategoriaEspecifica.findAll({raw: true, where: {categorias_principais_id: catprinc.id}})
         const ids = catesps.map(item => item.id);
         const produtos = await Produto.findAll({
-            raw: true,
-            where: {categorias_especificas_id: ids}
-        });
+            where: {categorias_especificas_id: ids},
+            include: 'fotos'
+        })
+        .then(result => result.map(produto => produto.toJSON()));
         res.render('saude', {produtos});
     },
+
     estetica: async (req, res) => {
         const catprinc = await CategoriaPrincipal.findOne({raw: true, where: {nome: 'Estética'}})
         const catesps = await CategoriaEspecifica.findAll({raw: true, where: {categorias_principais_id: catprinc.id}})
         const ids = catesps.map(item => item.id);
         const produtos = await Produto.findAll({
-            raw: true,
-            where: {categorias_especificas_id: ids}
-        });
+            where: {categorias_especificas_id: ids},
+            include: 'fotos'
+        })
+        .then(result => result.map(produto => produto.toJSON()));
         res.render('estetica', {produtos});
     },
+
     descartaveis: async (req, res) => {
         const catprinc = await CategoriaPrincipal.findOne({raw: true, where: {nome: 'Descartáveis'}})
         const catesps = await CategoriaEspecifica.findAll({raw: true, where: {categorias_principais_id: catprinc.id}})
         const ids = catesps.map(item => item.id);
         const produtos = await Produto.findAll({
-            raw: true,
-            where: {categorias_especificas_id: ids}
-        });
+            where: {categorias_especificas_id: ids},
+            include: 'fotos'
+        })
+        .then(result => result.map(produto => produto.toJSON()));
         res.render('descartaveis', {produtos});
     },
+
     index: async (req, res) => {
-        const produtos = await Produto.findAll({raw: true});
-        const fotosprods = await Foto.findAll({raw: true});
-        res.render('listaProdutos', { produtos, fotosprods });
+        const produtos = await Produto.findAll({include: 'fotos'})
+        .then(result => result.map(produto => produto.toJSON()));
+        res.render('listaProdutos', { produtos});
     },
+
     indexHome: async (req, res) =>{
         const produtos = await Produto.findAll({
-            raw: true, 
-            order: [['id', 'DESC']]
-        });
+            order: [['id', 'DESC']],
+            include: 'fotos' 
+        })
+        .then(result => result.map(produto => produto.toJSON()));
 
         res.render('home', {produtos});
     },
     telaProduto: async (req, res) =>{
         const {id} = req.params;
+        const produto = await Produto.findByPk(id, {include: 'fotos'})
+        //.then(result => result.map(produto => produto.toJSON()));
 
-        const produto = await Produto.findByPk(id);
+        //SALVAR ITEM VISITADO NO COOKIE DE HISTÓRICO
+        let histnav = req.cookies['historico'];
+        histnav.push(id);
+        res.cookie('historico', histnav);
+
 
         const avaliacoes = await Avaliacao.findAll({
-            raw: true, 
+            //raw: true, 
             where: {produtos_id: id},
             include: 'cliente'
-        });
+        })
+        .then(result => result.map(avaliacao => avaliacao.toJSON()));
+
+       // console.log('AVALIAÇÕES: ', avaliacoes);
 
         const notas = avaliacoes.map(item => item.nota);
 
-        //console.log("NOTAS: ", notas);
-
+        //GERAR NOTA MEDIA DAS AVALIACOES DO PRODUTO
         let mediageral = 0;
         notas.forEach(nota => { mediageral += nota });
         mediageral = mediageral/notas.length;
-
-        //console.log('QTD NOTAS: ', notas.length);
-       // console.log('MÉDIA DAS NOTAS: ', mediageral);
-
-        //const clientes = await Cliente.findAll({raw: true});
-
-
-
-        //console.log('AVALIAÇÕES ENCONTRADAS: ', avaliacoes)
 
 
 
@@ -149,14 +146,59 @@ const produtoController = {
 
 
         const cat_esp = await CategoriaEspecifica.findAll({raw: true,  where: {nome: catespnome} })
-        .then(console.log("CATEGORIA ESPECÍFICA ENCONTRADA"))
-        .catch(error => console.log("ERRO AO BUSCAR CATEGORIA ESPECÍFICA: ", error));
+       // .then(console.log("CATEGORIA ESPECÍFICA ENCONTRADA"))
+        //.catch(error => console.log("ERRO AO BUSCAR CATEGORIA ESPECÍFICA: ", error));
         
-        console.log("CATEGORIA ESPECÍFICA ENCONTRADA COM ID : ", cat_esp[0].id);
+        //console.log("CATEGORIA ESPECÍFICA ENCONTRADA COM ID : ", cat_esp[0].id);
 
-        //let produto
 
-        if (!req.file){
+        //console.log(req.files[0].filename);
+        //console.log('TAMANHO DO REQFILES: ',req.files.length);
+
+
+        const produtoNovo = await Produto.create(
+            {
+                nome,
+                preco,
+                descricao,
+                quantidade,
+                categorias_especificas_id: cat_esp[0].id,
+               // fotourl: "defaultprod.png"
+            }
+        );
+
+        if (req.files){
+            for (let i = 0; i < 4; i++){
+                if (req.files[i]){
+                    await Foto.create(
+                        {
+                            fotourl: req.files[i].filename,
+                            produtos_id: produtoNovo.id
+                        }
+                    )
+                }else{
+                    await Foto.create(
+                        {
+                            fotourl: "defaultprod.png",
+                            produtos_id: produtoNovo.id
+                        }
+                    )
+                }
+            }
+        }else{
+            for (let i = 0; i < 4; i++){
+                await Foto.create(
+                    {
+                        fotourl: "defaultprod.png",
+                        produtos_id: produtoNovo.id
+                    }
+                )
+            }
+        }
+
+
+        //COM UMA FOTO SO - FOTOURL
+        /*if (!req.file){
             await Produto.create(
                 {
                     nome,
@@ -182,90 +224,9 @@ const produtoController = {
             )
             .then(console.log("PRODUTO CADASTRADO COM SUCESSO"))
             .catch(error => console.log("ERRO AO CADASTRAR PRODUTO: ", error))
-        }
-
-        //.then(console.log("PRODUTO "+nome+" CADASTRADO COM SUCESSO!"))
-        //.catch(error => console.log("ERRO AO CADASTRAR PRODUTO: ", error));
-
-    
-      /*  if (!req.file){
-            await Foto.create(
-                {
-                    produtos_id: produto.id,
-                    fotourl: "defaultprod.png"
-                }
-            );
-        }else{
-            await Foto.create(
-                {
-                    produtos_id: produto.id,
-                    fotourl: req.file.filename
-                }
-            );
-        }
-        
-
-        /*for (let file of req.file.fields){
-            if (file){
-                await Foto.create(
-                    {
-                        produtos_id: produto.id,
-                        fotourl: file
-                    }
-                );
-            }else{
-                await Foto.create(
-                    {
-                        produtos_id: produto.id,
-                        fotourl: "defaultprod.png"
-                    }
-                );
-            }
         }*/
 
-        //console.log("REQ FILE: ", req.file.fields);
-
-       /* let teste = [req.files.img1[0].filename, req.files.img2[0].filename,
-            req.files.img3[0].filename, req.files.img4[0].filename];*/
-
-
-        //let teste = req.files.img1[0].filename;
-
-
-        //VER SE req.files é nulo/vazio (nenhum arquivo upado)
-
-
-       // let teste = JSON.stringify(req.files);
-
-        
-
-      //  let nomes = teste['img1'];
-
-
-
-        /*for (let file of req.files){
-            if (file){
-                teste += file;
-            }
-        }*/
-
-        /*if (!req.files.img1[0].filename) console.log('SEM ARQUIVO IMG 1');
-        if (!req.files.img2[0].filename) console.log('SEM ARQUIVO IMG 2');
-        if (!req.files.img3[0].filename) console.log('SEM ARQUIVO IMG 3');
-        if (!req.files.img4[0].filename) console.log('SEM ARQUIVO IMG 4');**/
-
-//        let dados = JSON.stringify(req.files);
-
-  //      let imgs;
-
-        /*for (let i in dados){
-            console.log('forloop: ', i);
-            imgs += dados[i].filename;
-        }*/
-//
-  //      res.send(req.files);
-
-        res.redirect("/admin/produtos");
+       res.redirect("/admin/produtos");
 
 
     },
@@ -276,7 +237,7 @@ const produtoController = {
 
         const {id} = req.params;
 
-        const produto = await Produto.findByPk(id);
+        const produto = await Produto.findByPk(id, {include: 'fotos'});
         const catesps = await CategoriaEspecifica.findAll();
         const catprod = await CategoriaEspecifica.findByPk(produto.categorias_especificas_id, {raw:true});
         //catprod = categoria.map(item => item.nome);
@@ -302,7 +263,32 @@ const produtoController = {
             {where: {id: id}}
         );
 
-        if (req.file) await Produto.update({fotourl: req.file.filename}, {where: {id: id}});
+        //if (req.file) await Produto.update({fotourl: req.file.filename}, {where: {id: id}});
+        
+        if (req.files){
+
+            let fotosatuais = await Foto.findAll({
+                where: {produtos_id: id}
+            })
+            .then(result => result.map(foto => foto.toJSON()));
+            
+
+            console.log('TAMANHO DO FOTOSATUAIS: ', fotosatuais.length);
+            console.log('CONTEUDO FOTOS ATUAIS: ', fotosatuais);
+
+            for (let i = 0; i < fotosatuais.length; i++){
+            
+                if (req.files[i]){
+                    await Foto.update(
+                        {fotourl: req.files[i].filename},
+                        {where: {id: fotosatuais[i].id}}
+                    )
+                }
+                        
+            }
+        }
+        
+        
         res.redirect('/admin/produtos');
     },
     delete: async (req, res) => {
@@ -316,7 +302,7 @@ const produtoController = {
 
        //ENVIA LISTA ATUALIZADA DE PRODUTOS PARA A VIEW
        const produtos = await Produto.findAll({raw: true});
-        res.render('listaProdutos', {deletado, produtos});
+        res.redirect('/admin/produtos');
     }
 
     

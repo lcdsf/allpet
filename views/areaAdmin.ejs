@@ -25,39 +25,38 @@
             <h2>Painel Administrativo</h2>
         </div>
 
-        <div id="containerpaineluser">
 
-            <div id="painelconfiguser">
-                <br>
-                <label href="/"> <strong>Fulano de Tal</strong></label>
-                <br><br>
-                <a href="/">Alterar dados pessoais</a>
-                <a href="/">Excluir conta</a>
-                <br><br>
-                <a href="/">Sair</a>
 
+            <div id="containerpaineluser">
+
+                <div id="painelconfiguser">
+                    <br>
+                    <label href="/"> <strong><%= admin.nome %> <%= admin.sobrenome %></strong></label>
+                    <br><br>
+                    <!-- <a href="/">Alterar dados pessoais</a> -->
+                    <a href="/">Excluir conta</a>
+                    <br><br>
+                    <a href="/admin/sair">Sair</a>
+
+                </div>
+
+                
+                <div id="painelopuser">
+                    <a href="/admin/clientes" ><button >Exibir Clientes</button></a> 
+                    <br>
+                    <a href="/admin/produtos"><button  >Exibir Produtos</button></a>
+                    <br>
+                    <a href="/admin/users"><button>Exibir Administradores</button></a> 
+                    <br>
+                    <a href="/admin/produtos/cadastro"><button>Cadastrar Produto</button></a>
+                    <br>
+                    <a href="/admin/user/cadastro"><button>Cadastrar Administrador</button></a>
+                    <br>
+                    <a href="/"><button>Página Inicial</button></a>
+
+                </div>
+            
             </div>
-
-            <div id="painelopuser">
-                <a href="/admin/clientes" ><button >Exibir Clientes</button></a> 
-                <br>
-                <a href="/admin/produtos"><button  >Exibir Produtos</button></a>
-                <br>
-                <a href="/admin/users"><button>Exibir Administradores</button></a> 
-                <br>
-                <a href="/admin/produtos/cadastro"><button>Cadastrar Produto</button></a>
-                <br>
-                <a href="/admin/user/cadastro"><button>Cadastrar Administrador</button></a>
-                <br>
-                <a href="/"><button>Página Inicial</button></a>
-
-            </div>
-        
-        
-        </div>
-
-
-
 
     </main>
 

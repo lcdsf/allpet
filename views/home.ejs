@@ -59,16 +59,16 @@
             <div id="d1"></div>
             <div id="d2"></div>
             <div id="d3"></div>
-            <div id="d4"></div>
+            <!-- <div id="d4"></div>
             <div id="d5"></div>
-            <div id="d6"></div>
+            <div id="d6"></div> -->
         </div>
 
     </div>
 
 
     <div id="sugestoes">
-        <h3>Seu pet pode gostar</h3><br>
+        <h3>Os mais vendidos</h3><br>
         <div id="petgostar">
 
             <div id="btnpgesq">
@@ -101,13 +101,15 @@
 
         </div>
 
-        <div id="visualizou">
-            <div id="grpvis">
-                <p>Você visualizou</p>
-                <img src="/img/toca.png">
-                <p>Acesse seu histórico de navegação aqui</p>
+        <% if (typeof usuario !== 'undefined'){ %>
+            <div id="visualizou">
+                <div id="grpvis">
+                    <p>Você visualizou</p>
+                    <img src="/img/toca.png">
+                    <p>Acesse seu histórico de navegação <a href="/cliente/historico">aqui</a></p>
+                </div>
             </div>
-        </div>
+        <% } %>
 
         <div id="barra"></div>
 
@@ -124,8 +126,15 @@
             <% if (typeof produtos !== 'undefined'){%>
                 <% produtos.forEach(produto => {%>
                          <div id="prodresbusca">
-                            <a href="/produto/<%= produto.id %>">
-                                <img src="/img/<%= produto.fotourl %>">
+
+                            <% let fotos = produto.fotos.map(foto => foto.fotourl) %>
+
+                            <% if (typeof usuario !== 'undefined'){ %>
+                                <a href="/cliente/produto/<%= produto.id %>">
+                            <% }else{ %>
+                                <a href="/produto/<%= produto.id %>">
+                            <% } %>
+                                <img src="/img/<%= fotos[0] %>">
                                 <label><%=produto.nome %></label>
                                 <br>
                                 <label>R$ <%= produto.preco %></label>
@@ -141,46 +150,7 @@
 
     <button id="btnvermais">VER MAIS</button>
 
-    <h3>Encontre o que precisa</h3>
 
-   <div id="moldcats">
-        <div id="grupocats">
-
-            <div id="cat1">
-                Casinhas
-            </div>
-
-            <div id="cat2">
-                Rações
-            </div>
-
-            <div id="cat3">
-                Brinquedos
-            </div>
-
-            <div id="cat4">
-                Coleiras
-            </div>
-
-            <div id="cat5">
-                Roupas
-            </div>
-
-            <div id="cat6">
-                Vermífugos
-            </div>
-
-            <div id="cat7">
-                Cosméticos & Cia
-            </div>
-
-            <div id="cat8">
-                Descartáveis
-            </div>
-
-
-        </div>
-    </div>
 
 
 </body>
