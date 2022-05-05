@@ -27,6 +27,7 @@
 
 
 
+        <% if (typeof admin !== 'undefined'){ %>
             <div id="containerpaineluser">
 
                 <div id="painelconfiguser">
@@ -57,6 +58,9 @@
                 </div>
             
             </div>
+        <% }else{ %>
+            <h2>Admin undefined</h2>
+        <% } %>
 
     </main>
 

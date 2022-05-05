@@ -28,7 +28,7 @@
         <img src="/img/cadastro.png" id="capacadastro">
 
         <form action="/cadastro"  enctype="multipart/form-data" method="POST" id="formuser">
-
+<!-- 
             <% if (typeof erro !== 'undefined'){ %>
                 <p style="color: red; text-align: center;"><%= erro %></p>
             <% } %>
@@ -39,7 +39,9 @@
 
             <% if (typeof cadastroOK !== 'undefined'){ %>
                 <p style="color: green; text-align: center;"><%= cadastroOK %></p>
-            <% } %>
+            <% } %> -->
+
+            
 
             <fieldset>
                 <legend>Complete as informações a seguir:</legend>
@@ -48,23 +50,27 @@
 
 
                 <label for="nome">Nome</label>
-                <input type="text" name="nome" id="nome"> <br><br>
+                <input type="text" name="nome" id="nome" value="<%=usuario.nome%>"> <br><br>
 
                 <label for="sobrenome">Sobrenome</label>
-                <input type="text" name="sobrenome" id="sobrenome"> <br><br>
+                <input type="text" name="sobrenome" id="sobrenome" value="<%=usuario.sobrenome%>"> <br><br>
 
 
-                <label for="cpf">CPF (apenas números)</label> 
-                <input type="text" name="cpf" id="cpf"> <br><br>
+                <!-- <label for="cpf">CPF (apenas números)</label> 
+                <input type="text" name="cpf" id="cpf" value="<%=usuario.cpf%>"> <br><br> -->
 
                 <label for="telefone">Telefone</label> 
-                <input type="text" name="telefone" id="telefone"> <br><br>
+                <input type="text" name="telefone" id="telefone" value="<%=usuario.telefone%>"> <br><br>
 
-                <label for="fotoperfil">Foto de perfil (opcional)</label>
+                <label for="fotoperfil">Foto de perfil</label> <br><br>
                 <input type="file" name="fotoperfil" id="fotoperfil"> <br><br>
 
+                <label for="fotoperfil">Foto de perfil atual: </label> <br><br>
 
-                <h3>Endereço</h3>
+                <img style="width: 30%;" src="/img/<%=usuario.fotourl%>"> <br><br>
+
+
+                <!-- <h3>Endereço</h3>
 
                 <label for="cep">CEP</label> 
                 <input type="text" name="cep" id="cep"> <br><br>
@@ -112,10 +118,10 @@
                 </select> <br><br>
 
                 <label for="complemento">Complemento</label> 
-                <input type="text" name="complemento" id="complemento"> <br><br>
+                <input type="text" name="complemento" id="complemento"> <br><br> -->
 
 
-                <h3>Dados de login</h3>
+                <!-- <h3>Dados de login</h3>
 
                 <label for="email">E-mail</label> 
                 <input type="email" name="email" id="email"> <br><br>
@@ -124,12 +130,14 @@
                 <input type="password" name="senha" id="senha"> <br><br>
 
                 <label for="confirmaSenha">Confirmar senha</label> 
-                <input type="password" name="confirmaSenha" id="confirmaSenha"> <br><br>
+                <input type="password" name="confirmaSenha" id="confirmaSenha"> <br><br> -->
 
                 
  
 
-                <button type="submit" id="btncaduser">Enviar</button>
+                <button type="submit" id="btncaduser">Atualizar</button>
+                <!-- <br><br> --> &nbsp;
+               <a href="/cliente/painel">VOLTAR</a>
 
             </fieldset>
 

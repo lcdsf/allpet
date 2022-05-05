@@ -14,7 +14,10 @@ const produtoController = {
         })
         .then(result => result.map(produto => produto.toJSON()));;
 
-        res.render('acessoriosBrinquedos', {produtos});
+        const usuariologado = req.session.usuario;
+        const adminlogado = req.session.admin;
+
+        res.render('acessoriosBrinquedos', {produtos, usuario: usuariologado, admin: adminlogado});
 
     },
     saude: async (req, res) => {
@@ -26,7 +29,9 @@ const produtoController = {
             include: 'fotos'
         })
         .then(result => result.map(produto => produto.toJSON()));
-        res.render('saude', {produtos});
+        const usuariologado = req.session.usuario;
+        const adminlogado = req.session.admin;
+        res.render('saude', {produtos, usuario: usuariologado, admin: adminlogado});
     },
 
     estetica: async (req, res) => {
@@ -38,7 +43,9 @@ const produtoController = {
             include: 'fotos'
         })
         .then(result => result.map(produto => produto.toJSON()));
-        res.render('estetica', {produtos});
+        const usuariologado = req.session.usuario;
+        const adminlogado = req.session.admin;
+        res.render('estetica', {produtos, usuario: usuariologado, admin: adminlogado});
     },
 
     descartaveis: async (req, res) => {
@@ -50,7 +57,9 @@ const produtoController = {
             include: 'fotos'
         })
         .then(result => result.map(produto => produto.toJSON()));
-        res.render('descartaveis', {produtos});
+        const usuariologado = req.session.usuario;
+        const adminlogado = req.session.admin;
+        res.render('descartaveis', {produtos, usuario: usuariologado, admin: adminlogado});
     },
 
     index: async (req, res) => {
@@ -95,9 +104,11 @@ const produtoController = {
         notas.forEach(nota => { mediageral += nota });
         mediageral = mediageral/notas.length;
 
+        const usuariologado = req.session.usuario;
+        const adminlogado = req.session.admin;
 
 
-        res.render('produto', {produto, avaliacoes, mediageral});
+        res.render('produto', {produto, avaliacoes, mediageral, usuario: usuariologado, admin: adminlogado});
     },
     details: async (req, res) => {
         
@@ -195,36 +206,6 @@ const produtoController = {
                 )
             }
         }
-
-
-        //COM UMA FOTO SO - FOTOURL
-        /*if (!req.file){
-            await Produto.create(
-                {
-                    nome,
-                    preco,
-                    descricao,
-                    quantidade,
-                    categorias_especificas_id: cat_esp[0].id,
-                    fotourl: "defaultprod.png"
-                }
-            )
-            .then(console.log("PRODUTO CADASTRADO COM SUCESSO"))
-            .catch(error => console.log("ERRO AO CADASTRAR PRODUTO: ", error))
-        }else{
-            await Produto.create(
-                {
-                    nome,
-                    preco,
-                    descricao,
-                    quantidade,
-                    categorias_especificas_id: cat_esp[0].id,
-                    fotourl: req.file.filename
-                }
-            )
-            .then(console.log("PRODUTO CADASTRADO COM SUCESSO"))
-            .catch(error => console.log("ERRO AO CADASTRAR PRODUTO: ", error))
-        }*/
 
        res.redirect("/admin/produtos");
 

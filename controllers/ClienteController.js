@@ -13,6 +13,13 @@ const clienteController = {
     create: (req, res) => {
         res.render("cadastroUser");
     },
+
+    edit: async (req, res) =>{
+        const usuario = await Cliente.findByPk(req.params.id, {raw:true});
+
+        res.render('editaCliente', {usuario});
+    },
+    
     home: async(req, res) => {
         const produtos = await Produto.findAll({
             order: [['id', 'DESC']],
@@ -22,6 +29,7 @@ const clienteController = {
 
         res.render('home', {usuario: req.session.usuario, produtos});
     },
+
     store: async (req, res) => {
 
         const erros = validationResult(req);
@@ -91,13 +99,16 @@ const clienteController = {
 
         
     },
+
     sair: async (req, res) => {
         req.session.destroy();
         res.redirect('/');
     },
+
     painel: async (req, res) => {
         res.render('areaCliente', {usuario: req.session.usuario});
     },
+
     historico: async (req, res) => {
 
         let ids = req.cookies['historico'];

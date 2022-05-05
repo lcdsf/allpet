@@ -30,27 +30,31 @@
             <% let fotoprod %>
             <% produtos.forEach(produto => { %>
                             <div>
-                                <div id="contcompra">
+                                <a href="/cliente/produto/<%= produto.id%>">
+                                    
+                                    <div id="contcompra">
 
-                                    <% let fotos = produto.fotos.map(foto => foto.fotourl) %>
+                                        <% let fotos = produto.fotos.map(foto => foto.fotourl) %>
 
-                                    <img src="/img/<%= fotos[0] %>" alt="foto produto">
+                                        <img src="/img/<%= fotos[0] %>" alt="foto produto">
 
-                                    <div id="infocompra">
-                                        
-                                        <label>ID: <%= produto.id %></label>
-                                        <br>
-                                        <label>Nome: <%= produto.nome %></label>
-                                        <br>
-                                        <label>Preço R$:  <%= produto.preco %></label>
-                                        <br>
-                                        <label>Descrição:  <%= produto.descricao %></label>
-                                        <br>
-                                        <label>Quantidade disponível:  <%= produto.quantidade %></label>
+                                        <div id="infocompra">
+                                            
+                                            <!-- <label>ID: <%= produto.id %></label> -->
+                                            <br>
+                                            <label>Nome: <%= produto.nome %></label>
+                                            <br>
+                                            <label>Preço R$:  <%= produto.preco %></label>
+                                            <br>
+                                            <label>Descrição:  <%= produto.descricao %></label>
+                                            <br>
+                                            <label>Quantidade disponível:  <%= produto.quantidade %></label>
+
+                                        </div>
+                                   
 
                                     </div>
-
-                                </div>
+                                </a>
                             </div>
             <% }) %>
 

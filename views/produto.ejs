@@ -71,13 +71,28 @@
                 <div id="infoprod">
                     <h2> <%= produto.nome %> </h2>
                     <h1>R$ <%= produto.preco %></h1>
-                    <p id="avaliacao">Avaliação: <%= mediageral.toFixed(1) %> / 10</p>
+
+                    <% if (!mediageral){ %>
+                        <p id="avaliacao">Sem avaliação</p>
+                    <% }else{ %>
+                        <p id="avaliacao">Avaliação: <%= mediageral.toFixed(1) %> / 10</p>
+                    <% } %>
                     <a href="/produto/"></a>
 
-                    <div id="btnsprod">
-                        <button>Comprar</button>
-                        <button>Adicionar ao Carrinho</button>
-                    </div>
+                    <% if (typeof usuario != 'undefined'){ %>
+                        <div id="btnsprod">
+                            <button>Comprar</button>
+                            <button>Adicionar ao Carrinho</button>
+                        </div>
+                    <% }else{ %>
+                        <% if (typeof admin != 'undefined'){ %>
+                            <div id="btnsprod">
+                                <a href="/admin/produtos/<%=produto.id%>/editar"><button>Editar</button></a>
+                            </div>
+                        <% }else{ %>
+                            <p>Faça o login como Cliente para comprar ou avaliar este produto</p>
+                        <% } %>
+                    <% } %>
 
                     <div id="descprod">
                         <p><%= produto.descricao %></p>

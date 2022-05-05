@@ -129,11 +129,10 @@
 
                             <% let fotos = produto.fotos.map(foto => foto.fotourl) %>
 
-                            <% if (typeof usuario !== 'undefined'){ %>
-                                <a href="/cliente/produto/<%= produto.id %>">
-                            <% }else{ %>
+                                <!-- <a href="/cliente/produto/<%= produto.id %>"> -->
+                       
                                 <a href="/produto/<%= produto.id %>">
-                            <% } %>
+                            
                                 <img src="/img/<%= fotos[0] %>">
                                 <label><%=produto.nome %></label>
                                 <br>

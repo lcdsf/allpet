@@ -21,19 +21,11 @@ const loginController = {
         
 
         req.session.usuario = usuario;
-       // req.session.carrinho = [];
-       // req.session.cookie.historico = [];
-        // req.session.cookie.historico.push(1);
-        // req.session.cookie.historico.push(2);
-        
-
-
-
         res.cookie('carrinho', [])
         res.cookie('historico', []);
 
-        //console.log('RES COOKIE CARRINHO: ', )
-        //console.log('RES COOKIE HISTORICO: ', req.session.cookie.historico);
+        console.log('REQ SESSION CLIENTE: ', req.session);
+
 
         res.redirect('/cliente/home');
     },
@@ -50,6 +42,7 @@ const loginController = {
         //console.log('DADOS ADMIN: '+email+' '+senha);
 
         const admin = await Administrador.findOne({ raw: true, where: {email: email}});
+        
 
         if (!admin){
             res.render('loginAdmin', {erro: 'E-mail e/ou senha incorretos. Tente novamente'});

@@ -1,7 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const produtoController = require('../controllers/produtoController');
-const adminController = require('../controllers/adminController');
+// const adminController = require('../controllers/adminController');
+const clienteController = require("../controllers/clienteController");
+const upload = require('../middlewares/multer');
+const validadores = require('../middlewares/validadores');
 const loginController = require('../controllers/loginController');
 
 router.get('/', produtoController.indexHome);
@@ -12,6 +15,8 @@ router.get('/descartaveis', produtoController.descartaveis);
 router.get('/loginadm', loginController.adminIndex);
 router.get('/produto/:id', produtoController.telaProduto);
 
+router.get("/cadastro", clienteController.create);
+router.post("/cadastro", upload.single('fotoperfil'), validadores.cadastroCliente, clienteController.store);
 
 
 //router.get('/cadastrouser', function(req, res){

@@ -2,7 +2,7 @@ const {Administrador} = require('../database/models');
 
 const adminController = {
     index: async (req, res) => {
-        res.render('areaAdmin');
+        res.render('areaAdmin', {admin: req.session.admin});
     },
 
     login: async (req, res) => {

@@ -25,4 +25,7 @@ router.get('/produtos/:id/editar', produtoController.edit);
 router.put("/produtos/:id/editar", upload.array('imgprod', 4), produtoController.update);
 router.delete("/produtos/:id/excluir", produtoController.delete);
 
+router.get('/sair', adminController.sair);
+
+
 module.exports = router;
