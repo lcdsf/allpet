@@ -101,13 +101,14 @@
 
         </div>
 
-        <% if (typeof usuario !== 'undefined'){ %>
+        <% if (typeof usuario !== 'undefined' && (ultimovisto)){ %>
             <div id="visualizou">
-                <div id="grpvis">
-                    <p>Você visualizou</p>
-                    <img src="/img/toca.png">
-                    <p>Acesse seu histórico de navegação <a href="/cliente/historico">aqui</a></p>
-                </div>
+                    <div id="grpvis">
+                        <p>Você visualizou</p>
+                        <img src="/img/<%=ultimovisto%>">
+                        <p>Acesse seu histórico de navegação <a href="/cliente/historico">aqui</a></p>
+                    </div>
+                
             </div>
         <% } %>
 

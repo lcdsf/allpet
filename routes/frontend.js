@@ -6,6 +6,7 @@ const clienteController = require("../controllers/clienteController");
 const upload = require('../middlewares/multer');
 const validadores = require('../middlewares/validadores');
 const loginController = require('../controllers/loginController');
+const autenticadorCliente = require('../middlewares/autenticadorCliente');
 
 router.get('/', produtoController.indexHome);
 router.get('/acessoriosbrinquedos', produtoController.acessBrinqs);
@@ -14,6 +15,12 @@ router.get('/estetica', produtoController.estetica);
 router.get('/descartaveis', produtoController.descartaveis);
 router.get('/loginadm', loginController.adminIndex);
 router.get('/produto/:id', produtoController.telaProduto);
+
+router.post('/produto/:id/avaliar', clienteController.avaliacao);
+
+router.post('/produto/:id/addcarrinho', autenticadorCliente, clienteController.addCarrinho);
+
+router.get('/busca', produtoController.busca);
 
 router.get("/cadastro", clienteController.create);
 router.post("/cadastro", upload.single('fotoperfil'), validadores.cadastroCliente, clienteController.store);

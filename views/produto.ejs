@@ -72,18 +72,43 @@
                     <h2> <%= produto.nome %> </h2>
                     <h1>R$ <%= produto.preco %></h1>
 
+                    <% if (produto.quantidade > 0){%>
+                        <p>Quantidade disponível: <%=produto.quantidade%></p>
+                        <!-- <label for="qtditem">Quantidade desejada: </label>
+                        <input  type="number" name="qtditem" value="1" min="1" max="<%=produto.quantidade%>" style="width: fit-content;"> -->
+                    
+                        <% }else{%>
+                        <p>Produto indisponível</p>
+                    <% } %>
+
                     <% if (!mediageral){ %>
                         <p id="avaliacao">Sem avaliação</p>
                     <% }else{ %>
                         <p id="avaliacao">Avaliação: <%= mediageral.toFixed(1) %> / 10</p>
                     <% } %>
-                    <a href="/produto/"></a>
+                    <!-- <a href="/produto/"></a> -->
 
                     <% if (typeof usuario != 'undefined'){ %>
+
                         <div id="btnsprod">
-                            <button>Comprar</button>
-                            <button>Adicionar ao Carrinho</button>
+                            <!-- <form action="/cliente/comprar" method="GET">
+                                <button type="submit">Comprar</button>
+                            </form> -->
+                            <% if (produto.quantidade > 0){%>
+                                <form action="/produto/<%=produto.id%>/addcarrinho" method="POST">
+                                    <div id="inputqtdcarrinho">
+                                        <label for="qtditem">Quantidade desejada: </label> <br>
+                                        <input  type="number" name="qtditem" value="1" min="1" max="<%=produto.quantidade%>" style="width: fit-content;">
+                                    </div>
+
+                                
+                                
+                                    <button style="width: 50%;" type="submit">Adicionar ao Carrinho</button>
+                                </form>
+                            <% } %>
                         </div>
+
+
                     <% }else{ %>
                         <% if (typeof admin != 'undefined'){ %>
                             <div id="btnsprod">
@@ -98,6 +123,29 @@
                         <p><%= produto.descricao %></p>
                     </div>
 
+                    <% if (!avaliou && (typeof usuario != 'undefined')){ %>
+                        <div>
+                            <p><strong>Avalie este produto:</strong></p>
+
+                            <form action="/produto/<%=produto.id%>/avaliar" method="POST">
+                                <label for="">Comentário: </label>
+                                <br>
+                                <textarea style="width: 100%;" name="comentario" id=""></textarea> 
+                                <br>
+                                <label for="">Nota: </label>
+                                <input type="number" name="nota" id="" min="1" max="10" style="width: 10%;">
+                                <br><br>
+
+                                <div id="btnsprod"><button type="submit" >Avaliar</button></div>
+                            </form>
+
+                        </div>
+                    <% }else{ %>
+                        <% if (avaliou && (typeof usuario != 'undefined')){ %>
+                            <h4>Você já avaliou este produto</h4>
+                        <% } %>
+                    <% } %>
+
                 </div>
             </div>
 
@@ -110,16 +158,23 @@
                     
     
                     <div id="grpopinioes">
+
+
+
+
+
+
                         <% if (typeof(avaliacoes) != 'undefined'){ %>
                             <% avaliacoes.forEach(avaliacao => { %>
-                                <div id="opiniao1">
+                                <div id="opiniao">
                                     <img src="/img/<%=avaliacao.cliente.fotourl%>">
         
                                     <div id="infoopiniao1">
-                                        <label id="lbopuser"><%= avaliacao.nota %> - <%= avaliacao.cliente.nome %> <%= avaliacao.cliente.sobrenome %></label>
-                                        <label id="lbopdata"><%= avaliacao.datahora.getDate()%>/<%= avaliacao.datahora.getMonth()+1%>/<%= avaliacao.datahora.getFullYear()%></label>
+                                        <label id="lbopuser">Nota <%= avaliacao.nota %> - <%= avaliacao.cliente.nome %> <%= avaliacao.cliente.sobrenome %></label> <br>
+                                        <label id="lbopdata"><%= avaliacao.datahora.getDate()%>/<%= avaliacao.datahora.getMonth()+1%>/<%= avaliacao.datahora.getFullYear()%> - 
+                                        <%=avaliacao.datahora.getHours()%>:<%=avaliacao.datahora.getMinutes()%>:<%=avaliacao.datahora.getSeconds()%></label>
                                     </div>
-                                    
+                                    &nbsp;&nbsp;
                                     <div id="descopiniao1">
                                         <p>"<%= avaliacao.descricao %>"</p>
                                     </div>

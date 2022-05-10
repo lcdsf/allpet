@@ -22,7 +22,7 @@ const loginController = {
 
         req.session.usuario = usuario;
         res.cookie('carrinho', [])
-        res.cookie('historico', []);
+        //res.cookie('historico', []);
 
         console.log('REQ SESSION CLIENTE: ', req.session);
 

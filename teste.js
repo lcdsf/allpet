@@ -1,9 +1,10 @@
 require('dotenv').config();
 
+const raw = require('body-parser/lib/types/raw');
 const {Cliente, Endereco, CategoriaPrincipal, CategoriaEspecifica, 
     Produto, Administrador, Compra, FormaPgto, Avaliacao,
 Boleto, Cartao, ChavePix, Requerimento, StatusRequerimento,
-StatusCompra, ItemCompra, Foto} = require('./database/models');
+StatusCompra, ItemCompra, Foto, Historico, ItemHistorico} = require('./database/models');
 
 async function buscarClientes(){
     const clientes = await Cliente.findAll( {include: 'enderecos'} )
@@ -71,7 +72,7 @@ async function buscarSoClientes(){
 }
 
 async function buscarSoProdutos(){
-    const itens = await Produto.findAll( {include: ['categoria', 'avaliacoes','itens_compras']} )
+    const itens = await Produto.findAll( {include: [/*'categoria',*/ 'avaliacoes'/*,'itens_compras'*/]} )
     .then(itens => itens.map(item => item.toJSON()))
     .catch(error => console.log("ERRO AO BUSCAR DADOS: ", error));
 
@@ -157,9 +158,99 @@ async function insereFotos(){
 }
 
 
+async function buscaCompra(id){
+   // const  itens = await Compra.findAll({raw: true, include: 'produtos'})
 
-insereFotos();
+    const  itens = await ItemCompra.findAll({where: {compras_id: id}, include: 'produto'})
+    .then(result => result.map(item => item.toJSON()))
+    .catch(error => console.log('ERRO AO BUSCAR COMPRA: ', error));
 
+    let x = itens.map(item => item.produto);
+
+    let vtotal = 0;
+    
+    x.map(item => vtotal += item.preco * item.quantidade);
+
+    console.log('====== VALOR TOTAL: R$ '+vtotal.toFixed(2)+'======\n');
+    
+    x.forEach(item => {
+        console.log('PRODUTO: '+item.nome+'\nQUANTIDADE: '+item.quantidade+'\nVALOR UNITÁRIO: '+item.preco+'\n\n');
+    });
+
+}
+
+async function buscaVendasProd(id){
+    // const  itens = await Compra.findAll({raw: true, include: 'produtos'})
+ 
+     const  itens = await ItemCompra.findAll({where: {produtos_id: id}, include: 'compra'})
+     .then(result => result.map(item => item.toJSON()))
+     .catch(error => console.log('ERRO AO BUSCAR PRODUTO: ', error));
+
+    
+
+     let produto = await Produto.findByPk(id, {raw: true})
+     //.then(result => result.map(item => item.toJSON()))
+
+     console.log(produto)
+
+     console.log('VENDAS DO PRODUTO ', produto.nome)
+
+    // console.log(itens);
+ 
+    let compras = itens.map(item => item.compra);
+
+    compras.forEach(compra => {
+        console.log(compra);
+        console.log('Foi vendido na compra ID '+compra.id+', '+compra.quantidade+' unidades');
+    });
+
+    let vtotal = 0;
+
+    compras.map( compra => vtotal += compra.quantidade * produto.preco);
+
+ 
+    //  let vtotal = 0;
+     
+    //  x.map(item => vtotal += item.preco * item.quantidade);
+ 
+    console.log('====== VALOR TOTAL DE VENDAS DO PRODUTO: R$ '+vtotal.toFixed(2)+'======\n');
+     
+    //  x.forEach(item => {
+    //      console.log('PRODUTO: '+item.nome+'\nQUANTIDADE: '+item.quantidade+'\nVALOR UNITÁRIO: '+item.preco+'\n\n');
+    //  });
+ 
+ }
+
+
+
+
+ async function buscaCompraProd(id){
+ 
+     const  itens = await ItemCompra.findAll({where: {compras_id: id}, include: 'produto'})
+     .then(result => result.map(item => item.toJSON()))
+     .catch(error => console.log('ERRO AO BUSCAR PRODUTO: ', error));
+
+     console.log(itens);
+
+ }
+
+//buscaCompraProd(1);
+
+async function testeHistorico(id){
+    const itens = await Historico.findAll( {
+        include: [/*'categoria',*/'produto'/*,'itens_compras'*/],
+        where: {clientes_id: id},
+        order: [['id', 'DESC']]
+    } )
+    .then(itens => itens.map(item => item.toJSON()))
+    .catch(error => console.log("ERRO AO BUSCAR DADOS: ", error));
+
+    console.log(JSON.stringify(itens, null, 4));
+}
+
+
+
+testeHistorico(50)
 
 
 

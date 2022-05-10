@@ -428,7 +428,8 @@
     flex-direction: row;
     align-items: flex-start;
     width: 90vw;
-    height: 100vh;
+    /*height: 100vh;*/
+    height: fit-content;
     justify-content: space-evenly;
     margin: 30px auto 0px auto;
     margin-bottom: 50px;
@@ -995,13 +996,14 @@ fieldset{
     margin: 0 15px 0 15px;
 }
 
-#opiniao1, #opiniao2, #opiniao3, #opiniao4{
+#opiniao{
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: flex-start;
     align-items: center;
     background-color: white;
     border-radius: 3px;
+    width: 90%;
     padding: 10px;
     margin: 5px;
 }
@@ -1021,8 +1023,16 @@ fieldset{
 
 #btnsprod{
     display: flex;
-    flex-flow: row;
-    justify-content: space-evenly;
+    flex-flow: column;
+    justify-content: center;
+}
+
+#inputqtdcarrinho{
+    display: flex;
+    flex-direction: row;
+    width: 50%;
+    justify-content: space-between;
+    margin: 10px 0px;
 }
 
 #btnsprod button{
@@ -1210,16 +1220,23 @@ header nav ul li{
 }
 
 #campobusca{
-   /* border: 1px solid salmon;*/
-    /*margin-left: 250px;*/
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
 }
 
-#btnbusca{
+#campobusca input{
+    font-family: 'Roboto', 'sans-serif';
+    margin-right: 5px;
+ 
+}
+
+/* #btnbusca{
     /*margin-left: 10px;
     margin-right: 180px;*/
 
    /* border: 1px solid greenyellow; */
-}
+
 
 #logcad{
     border: none;
@@ -1438,7 +1455,7 @@ footer ul li, footer p, footer a{
     justify-content: center;
     align-items: center;
     width: 300px;
-    height: 300px;
+    height: 320px;
     background-color: #8fc7c6;
     padding: 10px;
     font-weight: bold;

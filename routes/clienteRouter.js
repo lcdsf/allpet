@@ -15,6 +15,10 @@ router.get('/sair', autenticadorCliente, clienteController.sair);
 router.get('/painel', autenticadorCliente, clienteController.painel);
 //router.get('/produto/:id', autenticadorCliente, produtoController.telaProduto);
 router.get('/historico', autenticadorCliente, clienteController.historico);
+router.delete('/historico/delete', autenticadorCliente, clienteController.histdelete);
+
+
+router.get('/carrinho', autenticadorCliente, clienteController.carrinho);
 
 //NAVEGACAO SETORES LOGADO
 // router.get('/acessoriosbrinquedos', autenticadorCliente, produtoController.acessBrinqs);

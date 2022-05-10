@@ -1,8 +1,30 @@
-const req = require('express/lib/request');
-const res = require('express/lib/response');
-const {Produto, Foto, CategoriaPrincipal, CategoriaEspecifica, ItemCompra, Avaliacao} = require('../database/models');
+const {Op} = require('sequelize');
+const {Produto, Foto, CategoriaPrincipal, CategoriaEspecifica, ItemCompra, 
+    Avaliacao, ItemHistorico, Historico} = require('../database/models');
 
 const produtoController = {
+
+    busca: async (req, res) =>{
+
+        const resultado = await Produto.findAll({ 
+            where: {
+                nome: {
+                    [Op.like]: '%'+req.query.buscaprod+'%'
+                }
+            },
+            include: 'fotos'
+        })
+        .then(result => result.map(produto => produto.toJSON()));
+
+        //console.log(resultado);
+
+        const usuariologado = req.session.usuario;
+        const adminlogado = req.session.admin;
+
+
+        res.render('resultadoBusca', {produtos: resultado, strbusca: req.query.buscaprod, usuario: usuariologado, admin: adminlogado});
+    },
+
     acessBrinqs: async (req, res) => {
         const catprinc = await CategoriaPrincipal.findOne({raw: true, where: {nome: 'Acessórios e Brinquedos'}})
 
@@ -75,22 +97,78 @@ const produtoController = {
         })
         .then(result => result.map(produto => produto.toJSON()));
 
-        res.render('home', {produtos});
+        const usuariologado = req.session.usuario;
+        const adminlogado = req.session.admin;
+
+
+
+        //BUSCA FOTO DO ULTIMO ITEM VISTO - HISTORICO CLIENTE
+        let ultimovisto = "";
+        if (req.session.usuario){
+
+               const ultimoItemHistorico = await Historico.findOne({
+                   raw: true,
+                   where: {clientes_id: req.session.usuario.id},
+                   include: 'produto',
+                   order:[['id', 'DESC']]
+               });
+       
+               if (ultimoItemHistorico){
+       
+                   const FotoUltimoProd = await Foto.findOne({
+                       raw: true,
+                       where: {produtos_id: ultimoItemHistorico.produtos_id}
+                   });
+       
+                   ultimovisto = FotoUltimoProd.fotourl;
+       
+                  // console.log('ULTIMO PROD VISTO: ', FotoUltimoProd);
+               }
+        }
+
+        res.render('home', {produtos, usuario: usuariologado, admin: adminlogado, ultimovisto});
     },
+
     telaProduto: async (req, res) =>{
         const {id} = req.params;
         const produto = await Produto.findByPk(id, {include: 'fotos'})
         //.then(result => result.map(produto => produto.toJSON()));
 
-        //SALVAR ITEM VISITADO NO COOKIE DE HISTÓRICO
-        let histnav = req.cookies['historico'];
-        histnav.push(id);
-        res.cookie('historico', histnav);
+        let usuarioJaAvaliou;
+        req.session.avaliou = 0;
+
+        if (req.session.usuario){
+
+            //SALVA ITEM NO HISTORICO
+            // let histnav = req.cookies['historico'];
+            // histnav.push(id);
+            // res.cookie('historico', histnav);
+
+            //console.log('ID DO REQ SESSION: ', req.session.usuario.id);
+
+            await Historico.create({
+                clientes_id: req.session.usuario.id,
+                produtos_id: id
+            })
+            .catch(error => console.log('ERRO AO ADICIONAR ITEM NO HISTORICO: ', error));
+
+            //VERIFICA SE CLIENTE JA AVALIOU PRODUTO
+            usuarioJaAvaliou = await Avaliacao.findOne({
+                where: {
+                    clientes_id: req.session.usuario.id,
+                    produtos_id: id
+                }
+            })
+            if (usuarioJaAvaliou){
+                req.session.avaliou = 1;
+            }
+        }
 
 
         const avaliacoes = await Avaliacao.findAll({
             //raw: true, 
             where: {produtos_id: id},
+            order: [['id', 'DESC']],
             include: 'cliente'
         })
         .then(result => result.map(avaliacao => avaliacao.toJSON()));
@@ -107,8 +185,10 @@ const produtoController = {
         const usuariologado = req.session.usuario;
         const adminlogado = req.session.admin;
 
+        let ultimovisto = "";
 
-        res.render('produto', {produto, avaliacoes, mediageral, usuario: usuariologado, admin: adminlogado});
+
+        res.render('produto', {produto, avaliacoes, mediageral, usuario: usuariologado, admin: adminlogado, avaliou: req.session.avaliou, ultimovisto});
     },
     details: async (req, res) => {
         

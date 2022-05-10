@@ -25,12 +25,20 @@
             <h2>Histórico de navegação</h2>
         </div>
 
+        <br>
+        
+
+
         <div id="painelminhascompras">
+
+            <form action="/cliente/historico/delete?_method=DELETE" method="POST">
+                <button type="submit" style="color: #054a57; border: none; background: none;"><strong>LIMPAR HISTÓRICO</strong></button>
+            </form>
 
             <% let fotoprod %>
             <% produtos.forEach(produto => { %>
                             <div>
-                                <a href="/cliente/produto/<%= produto.id%>">
+                                <a href="/produto/<%= produto.id%>">
                                     
                                     <div id="contcompra">
 
