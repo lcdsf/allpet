@@ -4,7 +4,7 @@ const raw = require('body-parser/lib/types/raw');
 const {Cliente, Endereco, CategoriaPrincipal, CategoriaEspecifica, 
     Produto, Administrador, Compra, FormaPgto, Avaliacao,
 Boleto, Cartao, ChavePix, Requerimento, StatusRequerimento,
-StatusCompra, ItemCompra, Foto, Historico, ItemHistorico} = require('./database/models');
+StatusCompra, ItemCompra, Foto, Historico, ItemHistorico, ItemCarrinho} = require('./database/models');
 
 async function buscarClientes(){
     const clientes = await Cliente.findAll( {include: 'enderecos'} )
@@ -249,8 +249,44 @@ async function testeHistorico(id){
 }
 
 
+async function testeCarrinho(id){
 
-testeHistorico(50)
+    // await ItemCarrinho.create({
+    //     quantidade: 5, 
+    //     clientes_id: id,
+    //     produtos_id: 2
+    // })
+    // .catch(error => console.log("ERRO AO INSERIR DADOS: ", error));
+
+
+    const itens = await ItemCarrinho.findAll( {
+        include: [/*'categoria',*/'produto'/*,'itens_compras'*/],
+        where: {clientes_id: id},
+        //order: [['id', 'DESC']]
+    } )
+    .then(itens => itens.map(item => item.toJSON()))
+    .catch(error => console.log("ERRO AO BUSCAR DADOS: ", error));
+
+    console.log(JSON.stringify(itens, null, 4));
+}
+
+
+async function testeEndereco(id){
+
+    const itens = await Endereco.findAll({
+        //include: [/*'categoria',*/'produto'/*,'itens_compras'*/],
+        //where: {clientes_id: id},
+        //order: [['id', 'DESC']]
+    } )
+    .then(itens => itens.map(item => item.toJSON()))
+    .catch(error => console.log("ERRO AO BUSCAR DADOS: ", error));
+
+    console.log(JSON.stringify(itens, null, 4));
+}
+
+
+
+testeEndereco(50)
 
 
 

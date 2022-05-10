@@ -21,10 +21,10 @@ const loginController = {
         
 
         req.session.usuario = usuario;
-        res.cookie('carrinho', [])
-        //res.cookie('historico', []);
+        // res.cookie('carrinho', [])
+        // //res.cookie('historico', []);
 
-        console.log('REQ SESSION CLIENTE: ', req.session);
+        // console.log('REQ SESSION CLIENTE: ', req.session);
 
 
         res.redirect('/cliente/home');
