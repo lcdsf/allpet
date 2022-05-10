@@ -45,7 +45,7 @@ module.exports = (sequelize, DataTypes) => {
         Cliente.associate = (models) => {
             Cliente.hasMany(models.Endereco, {
                 foreignKey: 'clientes_id',
-                as: 'enderecos'
+                as: 'endereco'
             });
             Cliente.hasMany(models.Avaliacao, {
                 foreignKey: 'clientes_id',
@@ -66,6 +66,10 @@ module.exports = (sequelize, DataTypes) => {
             Cliente.hasMany(models.Historico, {
                 foreignKey: 'clientes_id',
                 as: 'itens_historico'
+            });
+            Cliente.hasMany(models.ItemCarrinho, {
+                foreignKey: 'clientes_id',
+                as: 'itens_carrinho'
             });
         }
 

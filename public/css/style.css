@@ -42,7 +42,7 @@
     display: flex;
     flex-direction: column;
     /*border: 1px solid orange;*/
-    height: 80%;
+    height: fit-content;
     overflow-y: auto;
 
 }
@@ -100,10 +100,10 @@
     margin: 0 auto;
     border-radius: 3px;
     color: white;
-    height: 100%;
+    height: fit-content;
     /*border: solid 1px blue;*/
     width: 80vw;
-    height: 600px;
+    /* //height: 600px; */
     margin: 50px auto 0px auto;
 }
 

@@ -1,4 +1,5 @@
-const {Foto, Cliente, Endereco, Produto, Avaliacao, Requerimento, StatusRequerimento, Compra, StatusCompra, ItemCompra, Historico} = require("../database/models");
+const {Foto, Cliente, Endereco, Produto, Avaliacao, Requerimento, StatusRequerimento, Compra, StatusCompra, ItemCompra, 
+    FormaPgto, Historico, ItemCarrinho} = require("../database/models");
 const {validationResult} = require('express-validator');
 const bcrypt = require('bcrypt');
 const session = require("express-session");
@@ -59,22 +60,80 @@ const clienteController = {
 
     carrinho: async (req, res) => {
         
-        res.render('carrinho');
+        const cliente_id = req.session.usuario.id;
+
+        const itensCarrinho = await ItemCarrinho.findAll({
+            where: {clientes_id: cliente_id},
+            include: 'produto'
+        })
+        .then(result => result.map(produto => produto.toJSON()));
+
+        // //BUSCA FORMAS DE PAGAMENTO
+        // const formasPgto = await FormaPgto.findAll()
+        // .then(result => result.map(item => item.toJSON()))
+        // .catch(error => console.log('ERRO AO BUSCAR FORMA PGTO: ', error));
+
+        //BUSCA ENDERECOS DO CLIENTE
+        const enderecos = await Endereco.findAll({
+            where: {clientes_id: cliente_id},
+        })
+        .then(result => result.map(item => item.toJSON()))
+        .catch(error => console.log('ERRO AO BUSCAR ENDERECO: ', error));
+
+
+        res.render('carrinho', {itenscarrinho: itensCarrinho, usuario: req.session.usuario, enderecos});
     },
 
     addCarrinho: async (req, res) => {
 
-        console.log('REQ: ', req.body);
-        console.log('REQ PARAMS', req.params);
-        //console.log('REQ ALL: ', req);
+        // console.log('REQ: ', req.body);
+        // console.log('REQ PARAMS', req.params);
+        // //console.log('REQ ALL: ', req);
 
-            //SALVA ITEM NO CARRINHO
-            // let carrinho = req.cookies['historico'];
-            // carrinho.push(id);
-            // res.cookie('historico', histnav);
+        //     //SALVA ITEM NO CARRINHO
+        //     // let carrinho = req.cookies['historico'];
+        //     // carrinho.push(id);
+        //     // res.cookie('historico', histnav);
+
+        const {qtditem} = req.body;
+        const produto_id = req.params.id;
+        const cliente_id = req.session.usuario.id;
+
+        const produtoAtual = await Produto.findByPk(produto_id, {raw: true});
+
+
+        if (qtditem > 0 && (qtditem <= produtoAtual.quantidade)){
+            await ItemCarrinho.create({
+                produtos_id: produto_id,
+                clientes_id: cliente_id,
+                quantidade: qtditem
+
+            });
+
+
+            res.redirect('/produto/'+req.params.id+'?success="Item adicionado ao carrinho"');
+        }else{
+            res.redirect('/produto/'+req.params.id+'?error="Erro ao adicionar ao carrinho, verifique a quantidade informada"');
+        }
         
-        res.redirect('/produto/'+req.params.id);
     },
+
+    deletaItemCarrinho: async (req, res) => {
+        
+        const {itemdelete} = req.body;
+        const cliente_id = req.session.usuario.id;
+
+        await ItemCarrinho.destroy({
+            where:{
+                clientes_id: cliente_id,
+                produtos_id: itemdelete
+            }
+        });
+
+
+       res.redirect('/cliente/carrinho');
+    },
+
 
     store: async (req, res) => {
 
