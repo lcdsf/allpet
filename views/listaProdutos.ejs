@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+
+
+
+
+
+    <title>AllPet - Produtos</title>
+</head>
+
+<body>
+
+    <%- include('./partials/header') %>
+    
+    <main> 
+
+        <div id="bannercadastro">
+            <h2>Lista de Produtos</h2>
+        </div>
+
+        <% if (typeof deletado !== 'undefined'){ %>
+            <p style="text-align: center;">O produto "<%= deletado.nome %>" foi excluído com sucesso</p><br>
+        <% } %>
+
+
+        <div id="painelminhascompras">
+
+            <% let fotoprod %>
+            <% produtos.forEach(produto => { %>
+                            <div>
+                                <div id="contcompra">
+
+                                    <% let fotos = produto.fotos.map(foto => foto.fotourl) %>
+
+                                    <img src="/img/<%= fotos[0] %>" alt="foto produto">
+
+                                    <div id="infocompra">
+                                        
+                                        <label>ID: <%= produto.id %></label>
+                                        <br>
+                                        <label>Nome: <%= produto.nome %></label>
+                                        <br>
+                                        <label>Preço R$:  <%= produto.preco %></label>
+                                        <br>
+                                        <label>Descrição:  <%= produto.descricao %></label>
+                                        <br>
+                                        <label>Quantidade disponível:  <%= produto.quantidade %></label>
+
+                                    </div>
+                                    <div id="opcoeslista">
+
+                                        <a href="/admin/produtos/<%= produto.id %>"><button>Detalhes</button></a>
+                                        <a href="/admin/produtos/<%= produto.id %>/editar"><button>Editar/Excluir</button></a>
+                                    </div>
+
+                                </div>
+                            </div>
+            <% }) %>
+
+        </div>
+
+        <div id="btnsminhascompras">
+            <a href="/admin"><button>Voltar</button></a> 
+            <a href="/admin/produtos/cadastro"><button>Cadastrar Produto</button></a>
+        </div>
+       
+    </main>
+
+</body>
+
+<%- include('./partials/footer') %>
+
+</html>

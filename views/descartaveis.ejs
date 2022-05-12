@@ -49,50 +49,25 @@
             </div>
 
             <div id="itensresultadobusca">
+                <% if (typeof(produtos) != 'undefined'){%>
+                    <% produtos.forEach(produto => {%>
+                        <% let fotos = produto.fotos.map(foto => foto.fotourl) %>
+                        <div id="prodresbusca">
+                                <a href="/produto/<%= produto.id %>">
+                                <img src="/img/<%= fotos[0] %>">
+                                <label><%= produto.nome %></label>
+                                <br>
+                                <label>R$ <%= produto.preco %></label>
+                            </a>
+                        </div>
+                    <% }) %>
+                <% } %>
 
-                <div id="prodresbusca">
-                    <img src="/img/dc1.png">
-                    <label>Kit Coleira Bibster Spiked</label>
-                    <br>
-                    <label>R$ 100,00</label>
-                </div>
+                <% if (produtos == ""){%> 
+                    <p>Não há produtos nesta categoria</p> 
+                <% } %>
 
-                <div id="prodresbusca">
-                    <img src="/img/caminhac.jpg">
-                    <label>Caminha para cachorro</label>
-                    <br>
-                    <label>R$ 75,00</label>
-                </div>
-
-                <div id="prodresbusca">
-                    <img src="/img/arranhador.jpg">
-                    <label>Arranhador p/ gato com plataforma</label>
-                    <br>
-                    <label>R$ 80,00</label>
-                </div>
-
-                <div id="prodresbusca">
-                    <img src="/img/guia5m.jpg">
-                    <label>Guia retrátil 5 metros</label>
-                    <br>
-                    <label>R$ 69,90</label>
-                </div>
-
-                <div id="prodresbusca">
-                    <img src="/img/ydog.png">
-                    <label>Brinquedo YDog</label>
-                    <br>
-                    <label>R$ 15,00</label>
-                </div>
-
-                <div id="prodresbusca">
-                    <img src="/img/casinha.png">
-                    <label>Bolinha com corda</label>
-                    <br>
-                    <label>R$ 16,90</label>
-                </div>
-
-                <button id="btnvermais">VER MAIS</button>
+                <!--<button id="btnvermais">VER MAIS</button>-->
 
 
             </div>

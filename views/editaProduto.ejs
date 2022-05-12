@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+
+
+
+
+
+    <title>AllPet - Cadastro de produto</title>
+</head>
+
+<body>
+
+    <%- include('./partials/header') %>
+    
+    <main>
+
+        <div id="bannercadastro">
+            <h2>Editar produto - <%= produto.nome %></h2>
+        </div>
+
+        <img src="/img/compcat.jpg" id="capacadastro">
+
+        <form id="formuser" action="/admin/produtos/<%= produto.id %>/editar?_method=PUT" enctype="multipart/form-data" method="POST">
+
+            <fieldset>
+                <!--<legend>Complete as informações a seguir:</legend>-->
+
+                <br>
+
+                <label for="nome">Nome do produto</label>
+                <input type="text" name="nome" id="nome" value="<%= produto.nome %>"> <br><br>
+
+                <label for="descricao">Descrição</label><br>
+                <textarea name="descricao" id="descricao"><%= produto.descricao %></textarea> <br><br>
+
+                <label>Categoria</label> <br>
+
+                <select name="catespnome" id="catespnome">
+                    <% catesps.forEach(catesp => { %>
+                        <% if ( catesp.nome == catprod.nome ) { %>
+                            <option selected value="<%= catesp.nome %>"><%= catesp.nome %></option>
+                        <% }else{ %>
+                            <option value="<%= catesp.nome %>"><%= catesp.nome %></option>
+                        <% } %>
+
+                    <% })%>
+                </select>
+                <br><br>
+    
+                <label for="preco">Preço</label> 
+                <input type="number" name="preco" id="preco"  value="<%= produto.preco %>"> <br><br>
+
+                <label for="quantidade">Quantidade</label> 
+                <input type="number" name="quantidade" id="quantidade"  value="<%= produto.quantidade %>"> <br><br>
+
+                
+                <label>Foto</label> <br><br>
+                <input type="file" name="imgprod" id="imgprod" multiple>
+                <br><br>
+
+                <label>Fotos atuais:</label><br>
+
+                <% let fotos = produto.fotos.map(foto => foto.fotourl) %>
+
+                <img style="width: 20%;" src="/img/<%= fotos[0]%>">
+                <img style="width: 20%;" src="/img/<%= fotos[1]%>">
+                <img style="width: 20%;" src="/img/<%= fotos[2]%>">
+                <img style="width: 20%;" src="/img/<%= fotos[3]%>">
+                <br><br>
+
+
+                <button type="submit" id="btncaduser">Salvar</button>
+                
+               <br><br>
+
+            
+        </form>
+
+
+        <form action="/admin/produtos/<%= produto.id %>/excluir?_method=DELETE" method="POST">
+            <button style="background-color: red;" type="submit" id="btncaduser">Excluir produto</button>
+       </form>
+
+
+    </fieldset>
+
+
+    </main>
+
+</body>
+
+<%- include('./partials/footer') %>
+
+</html>

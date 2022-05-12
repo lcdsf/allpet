@@ -42,7 +42,7 @@
     display: flex;
     flex-direction: column;
     /*border: 1px solid orange;*/
-    height: 80%;
+    height: fit-content;
     overflow-y: auto;
 
 }
@@ -100,10 +100,10 @@
     margin: 0 auto;
     border-radius: 3px;
     color: white;
-    height: 100%;
+    height: fit-content;
     /*border: solid 1px blue;*/
     width: 80vw;
-    height: 600px;
+    /* //height: 600px; */
     margin: 50px auto 0px auto;
 }
 
@@ -426,9 +426,10 @@
    /* border: 1px solid aquamarine; */
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: flex-start;
     width: 90vw;
-    height: 100vh;
+    /*height: 100vh;*/
+    height: fit-content;
     justify-content: space-evenly;
     margin: 30px auto 0px auto;
     margin-bottom: 50px;
@@ -447,8 +448,8 @@
     border-radius: 4px;
     background-color: #d1d1d1;
     width: 20vw;
-    height: 80%;
-    padding: 20px;
+    height: fit-content;
+    padding: 20px 20px 60px 20px;
    /* z-index: 2;
     margin-top: 100px;*/
     
@@ -470,15 +471,15 @@
 #itensresultadobusca{
    /* border: 1px solid darkgreen; */
     width: 60vw;
-    height: 100%;
-    margin: auto 0px;
+    height: fit-content;
+    /*margin: auto 0px*/
     background-color: #8fc7c6;
     border-radius: 4px;
     padding: 20px;
     display: flex;
     flex-flow: wrap;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
 
 
 }
@@ -486,12 +487,16 @@
 #prodresbusca{
   /*  border: 1px solid gray; */
     width: 25%;
-    height: 45%;
+    height: fit-content;
     text-align: center;
     margin: 10px;
     border-radius: 4px;
     background-color: #eea91f;
     padding-bottom: 10px;
+}
+
+#prodresbusca a label{
+    text-decoration: none;
 }
 
 #prodresbusca label{
@@ -500,6 +505,7 @@
 
 #prodresbusca img{
     width: 100%;
+    height: 50%;
 }
 
 
@@ -523,14 +529,20 @@
 }
 
 #painelconfiguser img{
-    width: 30%;
+    width: 60%;
     margin-left: auto; margin-right: auto;
-    border-radius: 60px;
+    border-radius: 100px;
 }
 
 #painelopuser{
     display: flex;
     flex-direction: column;
+}
+
+textarea{
+    resize: none;
+    width: 40%;
+    height: 100px;
 }
 
 #painelopuser button{
@@ -575,10 +587,11 @@
     justify-content: center;
     flex-direction: column;
     width: 60vw;
-    height: 60vh;
+    height: fit-content;
     margin: 50px auto 0px auto;
     border-radius: 4px;
-    overflow-y: auto;
+    /*overflow-y: hidden;*/
+    /*padding-top: 100px;*/
 
 }
 
@@ -594,6 +607,12 @@
     width: 70%;
     text-align: center;
     color: white;
+}
+
+#contcompra img{
+    width: 80px;
+    height: 80px;
+    border-radius: 50px;
 }
 
 #infocompra{
@@ -733,8 +752,6 @@ body{
     font-family: 'Roboto', sans-serif;
 }
 
-<<<<<<< HEAD
-=======
 main{
     margin-top: 150px;
     margin-bottom: 100px;
@@ -979,13 +996,14 @@ fieldset{
     margin: 0 15px 0 15px;
 }
 
-#opiniao1, #opiniao2, #opiniao3, #opiniao4{
+#opiniao{
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: flex-start;
     align-items: center;
     background-color: white;
     border-radius: 3px;
+    width: 90%;
     padding: 10px;
     margin: 5px;
 }
@@ -1005,8 +1023,16 @@ fieldset{
 
 #btnsprod{
     display: flex;
-    flex-flow: row;
-    justify-content: space-evenly;
+    flex-flow: column;
+    justify-content: center;
+}
+
+#inputqtdcarrinho{
+    display: flex;
+    flex-direction: row;
+    width: 50%;
+    justify-content: space-between;
+    margin: 10px 0px;
 }
 
 #btnsprod button{
@@ -1045,7 +1071,6 @@ fieldset{
 
 
 
->>>>>>> 1dcafa4254624ee6d9ae68a39512dc0e6e99edd6
 img{
     max-width: 100%;
     max-height: 100%;
@@ -1065,7 +1090,7 @@ header{
     /*justify-content: space-between;*/
     z-index: 3;
     width: 100%;
-    height: 90px;
+    height: 70px;
     background-color: #8fc7c6;
     margin-bottom: 50px;
     position: fixed;
@@ -1105,6 +1130,16 @@ header nav ul li{
     display: none;
 }
 
+#menulateral p{
+    background-color: #4da5a5;
+    background-size: cover;
+    padding: 5px 0px;
+}
+
+#menulateral ul li{
+    padding: 3px;
+}
+
 #areabusca{
     display: flex;
     flex-direction: row;
@@ -1121,6 +1156,16 @@ header nav ul li{
     flex-direction: column;
     justify-content: space-evenly;
 
+}
+
+#menuecarrinho{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#iconcarrinho svg{
+    height: 40px;
 }
 
 #menunav{
@@ -1161,28 +1206,37 @@ header nav ul li{
 
 #logoheader{
     width: 200px;
-    height: 70px;
+    height: 50px;
     padding: 10px;
     background: linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(255,255,255,1) 25%, rgba(255,255,255,1) 75%, rgba(143,199,198,0) 100%);
     display: flex;
     align-items: center;
+    /*position: relative;
+    margin: 0px auto 0px auto;
   /*  margin-right: 200px; */
     
 
- /*   border: 1px solid green; */
+ /*   border: 1px solid green;  */
 }
 
 #campobusca{
-   /* border: 1px solid salmon;*/
-    /*margin-left: 250px;*/
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
 }
 
-#btnbusca{
+#campobusca input{
+    font-family: 'Roboto', 'sans-serif';
+    margin-right: 5px;
+ 
+}
+
+/* #btnbusca{
     /*margin-left: 10px;
     margin-right: 180px;*/
 
    /* border: 1px solid greenyellow; */
-}
+
 
 #logcad{
     border: none;
@@ -1208,6 +1262,7 @@ header nav ul li{
     flex-direction: row;
     align-items: center;
     width: 90%;
+    height: 100%;
     margin-left: auto;
     margin-right: auto;
 }
@@ -1250,6 +1305,8 @@ footer ul li, footer p, footer a{
     margin: auto;
 }*/
 
+
+
 #mapafooter{
     width: 400px;
     height: 200px;
@@ -1266,10 +1323,20 @@ footer ul li, footer p, footer a{
     /*margin-left: 100px;*/
 }
 
+#opcoeslista{
+    display: flex;
+    flex-direction: column;
+}
+
+#opcoeslista button{
+    width: 100%;
+    margin: 2px;
+}
 
 #bemvindo{
     /*border: solid 2px brown;*/
     display: flex;
+    flex-direction: column;
     justify-content: center;
     margin: auto;
     height: 300px;
@@ -1277,13 +1344,20 @@ footer ul li, footer p, footer a{
     margin-top: 150px;
 }
 
-#bemvindo p{
-    font-family: 'Rufina', serif;
+  /*#bemvindo p{
+  font-family: 'Rufina', serif;
     margin-top: 200px;
     margin-right: 250px;
     z-index: 2;
     position: absolute;
-    font-size: 30px;
+    font-size: 30px;*/
+  /*  display: block;
+}*/
+
+#bemvindo img{
+    width: 60vw;
+    /*height: max-content;*/
+    margin: 0 auto;
 }
 
 #carrossel{
@@ -1360,7 +1434,7 @@ footer ul li, footer p, footer a{
     justify-content: center;
     align-items: center;
     width: 300px;
-    height: 300px;
+    height: 320px;
     background-color: #8fc7c6;
     padding: 10px;
     font-weight: bold;
@@ -1380,9 +1454,11 @@ footer ul li, footer p, footer a{
    /* flex-wrap: wrap;*/
     background-color: #b5dada;
     margin: auto;
-    height: 600px;
-    width: 1200px;
-    padding: 5px;
+    /*height: 600px;*/
+    height: fit-content;
+    width: 70vw;
+    padding: 15px 0px;
+    border-radius: 5px;
 }
 
 #moldcats{
@@ -1408,7 +1484,7 @@ footer ul li, footer p, footer a{
 
 
 
-#item1, #item2, #item3, #item4, #item5, #item6, #item7, #item8{
+#itemhome{
     width: 256px; height: 256px;
     display: flex;
     flex-direction: column;
@@ -1417,6 +1493,11 @@ footer ul li, footer p, footer a{
    /* border: solid 1px orange;*/
     margin: 10px;
 
+
+}
+
+#itemhome img{
+    border-radius: 3px;
 }
 
 #cat1, #cat2, #cat3, #cat4, #cat5, #cat6, #cat7, #cat8{
@@ -1458,13 +1539,17 @@ footer ul li, footer p, footer a{
 }
 
 
+
+
+
+/*************************************************************************************************/
+
+
 /* LAYOUT RESPONSIVO */
 @media (max-width: 800px){
     
     /*#campobusca, #btnbusca {
         display: none;
-<<<<<<< HEAD
-=======
     }*/
 
     #mainprod{
@@ -1476,9 +1561,109 @@ footer ul li, footer p, footer a{
        /* border: 2px solid purple; */
         margin-left: auto;
         margin-right: auto;
->>>>>>> 1dcafa4254624ee6d9ae68a39512dc0e6e99edd6
+    }
+
+    #menuecarrinho{
+        width: 25%;
+        height: 50px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    
+    } 
+
+    #menuhamburger{
+        width: 30px;
+        height: 40px;
+    }
+
+    
+    #logoheader{
+        width: 70%;
+    }
+
+    #btnlogcad button{
+        padding: 1px 5px;
+    }
+
+    #menulateral{
+        width: 80vw;
+    }
+
+    #menuecarrinho svg{
+        width: 30px;
+    }
+
+    #conteudoheader{
+        width: 90%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    
+    #containerprod, #containerprodcont{
+        display: flex;
+        flex-flow: column;
+        justify-content: center;
+        width: 100%;
+    }
+
+
+    #fotosprod{
+        margin-left: auto;
+        margin-right: auto;
+       /* border: 1px solid yellowgreen;*/
+        width: 90vw;
+    }
+
+    #maisthumbs{
+        display: flex;
+        flex-flow: row;
+        width: 100%;
+    }
+
+    #tresthumbs{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        width: 20%;
+        margin-left: 20%;
+        margin-right: 20%;
+    }
+
+    #tresthumbs img{
+        width: 90%;
+        height: 90%;
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+
+    #opinioesprod, #sugestoesprod{
+        width: 100%;
+    }
+
+    #infoprod{
+        margin-left: auto;
+        margin-right: auto;
+        width: 90vw;
+    }
+
+    #infoprod h1, #infoprod h2, #avaliacao, #infoprod label{
+        text-align: center;
+    }
+
+
+
+
+    #stars{
+        margin-left: auto;
+        margin-right: auto;
     }
     
+    
+
+
     body{
        /* margin: 0px;
         height: 100%;*/
@@ -1503,7 +1688,7 @@ footer ul li, footer p, footer a{
 
     }*/
 
-    body, header, #bemvindo, #carrossel, #sugestoes, #molditems, #moldcats, footer{
+    body, #bemvindo, #carrossel, #sugestoes, #moldcats, footer{
         width: 100vw;
     }
 
@@ -1528,11 +1713,12 @@ footer ul li, footer p, footer a{
     }
 
     #grupoitems{
-        height: 1200px;
+        /*height: 1200px;*/
+        height: fit-content;
     }
 
     #molditems{
-        height: 1200px;
+        height: fit-content;
     }
     
     #sugestoes{
@@ -1566,6 +1752,11 @@ footer ul li, footer p, footer a{
 
 
 
+    /*#menuecarrinho{
+        display: flex;
+        flex-direction: row;
+        width: 10%;
+    }*/
 
 
     #conteudofooter{

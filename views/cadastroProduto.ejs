@@ -27,45 +27,39 @@
 
         <img src="/img/compcat.jpg" id="capacadastro">
 
-        <form id="formuser">
+        <form id="formuser" enctype="multipart/form-data" method="POST">
 
             <fieldset>
                 <legend>Complete as informações a seguir:</legend>
 
                 <br>
 
-                <label for="nomeprod">Nome do produto</label>
-                <input type="text" name="nomeprod" id="nomeprod"> <br><br>
+                <label for="nome">Nome do produto</label>
+                <input type="text" name="nome" id="nome"> <br><br>
 
-                <label for="descprod">Descrição</label><br>
-                <textarea name="descprod" id="descprod"></textarea> <br><br>
+                <label for="descricao">Descrição</label><br>
+                <textarea name="descricao" id="descricao"></textarea> <br><br>
+
 
                 <label>Categoria</label> <br>
 
-                <input type="radio" name="categoria" id="bemestar" value="bemestar">
-                <label for="bemestar">Bem-estar</label>
-
-                <input type="radio" name="categoria" id="acessorios" value="acessorios">
-                <label for="acessorios">Acessórios</label>
-
-                <input type="radio" name="categoria" id="saude" value="saude">
-                <label for="saude">Saúde</label>
-
-                <input type="radio" name="categoria" id="estetica" value="estetica">
-                <label for="estetica">Estética</label>
-
-                <input type="radio" name="categoria" id="descartaveis" value="descartaveis">
-                <label for="descartaveis">Descartáveis</label>
-
+                <select name="catespnome" id="catespnome">
+                    <% catesps.forEach(catesp => { %>
+                        <option value="<%= catesp.nome %>"><%= catesp.nome %></option>
+                    <% })%>
+                </select>
                 <br><br>
 
-                <label for="cpf">Preço</label> 
-                <input type="number" name="precoprod" id="precoprod"> <br><br>
+
+                <label for="preco">Preço</label> 
+                <input type="number" name="preco" id="preco"> <br><br>
+
+                <label for="quantidade">Quantidade</label> 
+                <input type="number" name="quantidade" id="quantidade"> <br><br>
 
                 
-                <label>Imagem</label> <br><br>
-                <input type="file" name="imagem" id="imagem">
-
+                <label>Foto (No máximo 4)</label> <br><br>
+                <input type="file" name="imgprod" id="imgprod" multiple>
                 <br><br>
 
                 <button type="submit" id="btncaduser">Enviar</button>

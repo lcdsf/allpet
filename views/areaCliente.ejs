@@ -27,33 +27,36 @@
 
         <div id="containerpaineluser">
 
-            <div id="painelconfiguser">
-                
-                <img src="img/profile.jpg">
-                <br>
-                <label href="/">Fulano de Tal</label>
-                <br><br>
-                <a href="/">Alterar dados pessoais</a>
-                <a href="/">Alterar formas de pagamento</a>
-                <a href="/">Excluir conta</a>
-                <br><br>
-                <a href="/">Sair</a>
+            <% if (typeof usuario !== 'undefined'){ %>
 
-            </div>
+                <div id="painelconfiguser">
+                    
+                    <img src="/img/<%=usuario.fotourl%>">
+                    <br>
+                    <label><%= usuario.nome %> <%= usuario.sobrenome %></label>
+                    <br><br>
+                    <a href="/cliente/<%= usuario.id %>/editar">Alterar dados pessoais</a>
+                    <a href="/cliente/<%= usuario.id %>/formapgto">Alterar formas de pagamento</a>
+                    <a href="/cliente/<%= usuario.id %>/delete">Excluir conta</a>
+                    <br><br>
+                    <a href="/cliente/sair">Sair</a>
 
-            <div id="painelopuser">
-                <button>Minhas compras</button>
-                <br>
-                <button>Carrinho</button>
-                <br>
-                <button>Requerimentos</button>
-                <br>
-                <button>Histórico de navegação</button>
-                <br>
-                <button>Voltar à página inicial</button>
+                </div>
 
-            </div>
-        
+                <div id="painelopuser">
+                    <a href="/cliente/compras"><button>Minhas compras</button></a>
+                    <br>
+                    <a href="/cliente/carrinho"><button>Carrinho</button></a>
+                    <br>
+                    <a href="/cliente/requerimentos"><button>Requerimentos</button></a>
+                    <br>
+                    <a href="/cliente/historico"><button>Histórico de navegação</button></a>
+                    <br>
+                    <a href="/cliente/home"><button>Voltar à página inicial</button></a>
+
+                </div>
+            
+            <% } %>     
         
         </div>
 

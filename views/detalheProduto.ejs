@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+
+
+
+
+
+    <title>AllPet - <%= produto.nome %> </title>
+</head>
+
+<body>
+
+    <%- include('./partials/header') %>
+    
+    <main id="maindetalhecompra"> 
+
+        <div id="bannercadastro">
+            <h2>Detalhes do produto: <%= produto.nome %></h2>
+        </div>
+
+        <img style="width: 20vw; margin: 0 auto;" src="/img/<%= produto.fotourl %>">
+        
+
+        <div id="infodetalhecompra">
+            <h2>Preço: R$ <%= produto.preco %> -  Categoria: <%= categoria.nome %></h2>
+
+            <div id="separador"></div>
+
+            <h2>Vendas: <%= qtdcompras %></h2>
+
+            <h2>Avaliações do produto</h2>
+
+                <div id="contdetalhecompra">
+
+                <% avaliacoes.forEach(avaliacao => {%>
+
+                    <div> <!-- id="itemdetalhecompra"-->
+                        <label>"<%= avaliacao.descricao %>"</label>
+                        <br><br>
+                        <label><i>Cliente: <%= avaliacao.clientes_id%></i></label><br>
+                        <label><i><%=avaliacao.datahora.getDate()%>/<%=avaliacao.datahora.getMonth()+1%>/<%=avaliacao.datahora.getFullYear()%> - <%=avaliacao.datahora.getHours()%>:<%=avaliacao.datahora.getMinutes()%></i></label>
+ 
+                    </div>
+
+                <%})%>
+>
+                </div>
+
+        </div>
+
+        <div id="separador"></div>
+
+        <h2>Status da compra</h2>
+
+        <h3>Endereço de entrega: Rua Severino Pereira Lins, 956, Alto da Conceição, Serra Talhada - PE</h3>
+
+        <div id="statuscompra">
+
+            <div id="statuschk">
+                <div id="dotcompra">1</div>
+                <p>31/01/2022 - 12:53</p>
+                <p>Pagamento aprovado</p>
+                <p>Cartão de Crédito</p>
+            </div>
+
+            <div id="statuschk">
+                <div id="dotcompra">2</div>
+                <p>31/01/2022 - 12:55</p>
+                <p>Pedido recebido pela loja</p>
+                <p>#20220201999999</p>
+            </div>
+
+            <div id="statuschk">
+                <div id="dotcompra">3</div>
+                <p>01/02/2022 - 08:30</p>
+                <p>Pedido despachado</p>
+                <button action="https://rastreamento.correios.com.br/app/index.php">Rastreio</button>
+            </div>
+
+            <div id="statuschk">
+                <div id="dotcompra">4</div>
+                <p>03/02/2022 - 14:27</p>
+                <p>Entrega efetuada</p>
+            </div>
+
+        </div>
+
+        <div id="btnsdetalhecompra">
+            <button>VER TODAS AS MINHAS COMPRAS</button>
+            <button>AJUDA</button>
+        </div>
+      
+
+    </main>
+
+</body>
+
+<%- include('./partials/footer') %>
+
+</html>
