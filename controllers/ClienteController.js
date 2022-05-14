@@ -75,25 +75,19 @@ const clienteController = {
 
         //BUSCA ENDERECOS DO CLIENTE
         const enderecos = await Endereco.findAll({
+            attributes: {exclude: 'enderecos_id', include: 'id'},
             where: {clientes_id: cliente_id},
         })
         .then(result => result.map(item => item.toJSON()))
         .catch(error => console.log('ERRO AO BUSCAR ENDERECO: ', error));
+
+        //enderecos.map(end => console.log(end));
 
 
         res.render('carrinho', {itenscarrinho: itensCarrinho, usuario: req.session.usuario, enderecos});
     },
 
     addCarrinho: async (req, res) => {
-
-        // console.log('REQ: ', req.body);
-        // console.log('REQ PARAMS', req.params);
-        // //console.log('REQ ALL: ', req);
-
-        //     //SALVA ITEM NO CARRINHO
-        //     // let carrinho = req.cookies['historico'];
-        //     // carrinho.push(id);
-        //     // res.cookie('historico', histnav);
 
         const {qtditem} = req.body;
         const produto_id = req.params.id;
@@ -134,6 +128,157 @@ const clienteController = {
        res.redirect('/cliente/carrinho');
     },
 
+    alteraQtdCarrinho: async (req, res) => {
+        
+        const {qtditem, produtoaltera} = req.body;
+        const cliente_id = req.session.usuario.id;
+
+        console.log('req body: ', req.body);
+
+
+        const produtoAtual = await Produto.findByPk(produtoaltera, {raw: true});
+
+        if (qtditem > 0 &&  qtditem <= produtoAtual.quantidade){
+
+            await ItemCarrinho.update(
+                {
+                    quantidade: qtditem,
+
+                },
+
+                {
+                    where:{
+                    clientes_id: cliente_id,
+                    produtos_id: produtoaltera
+                    }
+                }
+
+            );
+
+            res.redirect('/cliente/carrinho?success="Quantidade alterada com sucesso!"');
+        }
+
+        res.redirect('/cliente/carrinho?error="Falha ao alterar quantidade, verifique a quantidade informada."');
+
+    },
+
+    compra: async (req, res) => {
+
+        // console.log('\n\n\n', req.body);
+
+        const {semfrete, enderecoid, fpgto} = req.body;
+        const cliente_id =  req.session.usuario.id;
+        let valortotal = 0
+        let compra, endereco, pagamento;
+
+
+        const itensCarrinho = await ItemCarrinho.findAll({
+            where: {clientes_id: cliente_id},
+            include: 'produto'
+        })
+        .then(result => result.map(item => item.toJSON()));
+
+        // console.log('RESULTADO CARRINHO: ', itensCarrinho);
+
+        //SOMA VALOR TOTAL DA COMPRA
+        // itensCarrinho.map(item => valortotal += (item.quantidade * item.produto.preco));
+        itensCarrinho.forEach(item => {
+            valortotal += (item.quantidade * item.produto.preco);
+        })
+
+        
+
+        //ADD NA TABELA FORMA DE PAGAMENTO
+        switch (fpgto){
+            case 'cartao':
+                pagamento = await FormaPgto.create({
+                    tipo: 'Cartão'
+                })
+            break;
+
+            case 'boleto':
+                pagamento = await FormaPgto.create({
+                    tipo: 'Boleto'
+                })
+            break;
+
+            case 'pix':
+                pagamento = await FormaPgto.create({
+                    tipo: 'Pix'
+                })
+            break;
+        }
+        
+
+        //SE TEM ENDERECO, CRIA COMPRA COM ENDERECO_ID
+        if (enderecoid !== undefined){
+
+            endereco = await Endereco.findByPk(enderecoid, {
+                raw: true,
+                //attributes: {exclude: 'enderecos_id', include: 'id'}
+            });
+
+            compra = await Compra.create({
+                valor: valortotal,
+                data: new Date(),
+                clientes_id: cliente_id,
+                formas_pgto_id: pagamento.id,
+                enderecos_id: enderecoid
+            });
+
+
+        }else{
+            compra = await Compra.create({
+                valor: valortotal,
+                data: new Date(),
+                clientes_id: cliente_id,
+                formas_pgto_id: pagamento.id,
+                enderecos_id: null
+            });
+        }
+
+        //ADD NA TABELA ITENS COMPRAS (COMPRAS N:M PRODUTOS)
+
+        // console.log('TAMANHO ITENS CARRINHO: ', itensCarrinho.length);
+
+        for (let i = 0; i < itensCarrinho.length; i++){
+
+
+            // console.log('\n\n\nITERATOR: ',i);
+            // console.log('LOOP INSERT ITEMCOMPRA:') 
+            // console.log('Quantidade: ', itensCarrinho[i].quantidade);
+            // console.log('Produto ID: ', itensCarrinho[i].produto.id);
+            // console.log('Compra ID: ', compra.id);
+
+            await ItemCompra.create({
+                quantidade: itensCarrinho[i].quantidade,
+                produtos_id: itensCarrinho[i].produto.id,
+                compras_id: compra.id
+            })
+            .catch(error => console.log('ERRO AO INSERIR ITEMCOMPRA: ', error));        
+        }
+
+
+        //DECREMENTAR QTD PRODUTOS DA COMPRA
+        console.log('AQUI ROTINA UPDATE PRODUTOS')
+
+
+
+
+        //LIMPA CARRINHO APOS COMPRA FINALIZADA
+        // await Carrinho.destroy({
+        //     where: {clientes_id: cliente_id}
+        
+        // })
+
+        console.log('AQUI ROTINA LIMPACARRINHO')
+
+        // console.log('ENDERECO ENCONTRADO: ', endereco);
+
+        res.render('compraConcluida', {usuario: req.session.usuario, valortotal, itenscompra: itensCarrinho, compra, endereco, pagamento});
+
+        //return;
+    },
 
     store: async (req, res) => {
 

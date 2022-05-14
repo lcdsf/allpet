@@ -274,11 +274,11 @@ async function testeCarrinho(id){
 async function testeEndereco(id){
 
     const itens = await Endereco.findAll({
-        //include: [/*'categoria',*/'produto'/*,'itens_compras'*/],
-        //where: {clientes_id: id},
-        //order: [['id', 'DESC']]
-    } )
-    .then(itens => itens.map(item => item.toJSON()))
+        //attributes: {exclude: 'enderecos_id', include: 'id'},
+        // where: {clientes_id: id}
+       // raw: true
+    })
+    //.then(itens => itens.map(item => item.toJSON()))
     .catch(error => console.log("ERRO AO BUSCAR DADOS: ", error));
 
     console.log(JSON.stringify(itens, null, 4));
@@ -286,7 +286,21 @@ async function testeEndereco(id){
 
 
 
-testeEndereco(50)
+// testeEndereco(50);
+
+async function testeItemCarrinho(id){
+    const itens = await ItemCarrinho.findAll({
+    //    where: {clientes_id: id},
+    //    include: 'produtos'
+    })
+    .then(itens => itens.map(item => item.toJSON()))
+    .catch(error => console.log("ERRO AO BUSCAR DADOS: ", error));
+
+    console.log(JSON.stringify(itens, null, 4));
+}
+
+
+testeEndereco(50);
 
 
 

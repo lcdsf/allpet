@@ -18,8 +18,8 @@ module.exports = (sequelize, DataTypes) => {
           type: DataTypes.INTEGER,
           allowNull: false
         },
-        formas_pgto_id: {
-            type: DataTypes.INTEGER,
+        forma_pgto: {
+            type: DataTypes.STRING,
             allowNull: false
         },
         enderecos_id: {
@@ -35,10 +35,6 @@ module.exports = (sequelize, DataTypes) => {
             foreignKey: 'clientes_id',
             as: 'cliente'
         });
-        Compra.belongsTo(models.FormaPgto, {
-          foreignKey: 'formas_pgto_id',
-          as: 'forma_pgto'
-        });
         Compra.belongsToMany(models.Produto, {
             foreignKey: 'compras_id',
             through: models.ItemCompra,
@@ -53,7 +49,7 @@ module.exports = (sequelize, DataTypes) => {
             foreignKey: 'compras_id',
             as: 'requerimento'
         });
-        Compra.hasOne(models.Endereco, {
+        Compra.belongsTo(models.Endereco, {
             foreignKey: 'enderecos_id',
             as: 'endereco'
         });

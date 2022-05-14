@@ -16,6 +16,11 @@ router.delete('/historico/delete', autenticadorCliente, clienteController.histde
 
 router.get('/carrinho', autenticadorCliente, clienteController.carrinho);
 router.delete('/carrinho/delete', autenticadorCliente, clienteController.deletaItemCarrinho);
+router.put('/carrinho/alteraqtditem', autenticadorCliente, clienteController.alteraQtdCarrinho);
+
+
+router.post('/compra', autenticadorCliente, clienteController.compra);
+
 
 router.get('/:id/editar', autenticadorCliente, clienteController.edit);
 
