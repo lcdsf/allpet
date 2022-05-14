@@ -32,10 +32,22 @@
 
 #nomeqtdcrr, #vuncrr, #vtcrr{
     /*border: 1px solid antiquewhite;*/
-    width: 75%;
+    width: fit-content;
+    justify-content: center;
     display: flex;
     align-items: center;
     flex-direction: column;
+}
+
+#nomeqtdcrr form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#nomeqtdcrr form input{
+    width: fit-content;
+    margin: 0px auto;
 }
 
 #prodscrr{
@@ -54,8 +66,9 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-evenly;
-    height: 150px;
+    height: fit-content;
     margin: 10px 0 10px 0;
+    padding: 10px 0px;
 
 }
 

@@ -4,15 +4,27 @@ module.exports = {
   async up (queryInterface, Sequelize) {
    await queryInterface.bulkInsert('enderecos', [
       {
-        rua: 'Mangueira',
-        numero: 1475,
-        bairro: '3 Américas',
+        cep: '78850000',
+        rua: 'Giotto',
+        numero: 23,
+        bairro: 'Jardim Florença',
         cidade: 'Primavera do Leste',
         estado: 'MT',
         complemento: 'Quadra 03',
         clientes_id: 1
       },
       {
+        cep: '78881000',
+        rua: 'Chile',
+        numero: 95,
+        bairro: 'Vila Poxoréu',
+        cidade: 'Poxoréu',
+        estado: 'MT',
+        complemento: 'Ao lado do Bar do Zezinho',
+        clientes_id: 1
+      },
+      {
+        cep: '99850000',
         rua: 'Senador Flinto Muller',
         numero: 2012,
         bairro: 'Centro',
@@ -22,14 +34,16 @@ module.exports = {
         clientes_id: 2
       },
       {
-        rua: 'Mirassol',
-        numero: 123,
-        bairro: 'Vila Florença',
-        cidade: 'Campo dos Goytacazes',
+        cep: '82820000',
+        rua: 'B',
+        numero: 12,
+        bairro: 'Novo Horizonte',
+        cidade: 'Seropédica',
         estado: 'RJ',
-        complemento: '',
-        clientes_id: 3
+        complemento: null,
+        clientes_id: 2
       }
+
     ], {});
   },
 

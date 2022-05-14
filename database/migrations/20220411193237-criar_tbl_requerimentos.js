@@ -17,6 +17,11 @@ module.exports = {
           type: Sequelize.STRING,
           allowNull: false
         },
+        finalizado:{
+          type: Sequelize.BOOLEAN,
+          allowNull: false,
+          defaultValue: false
+        },
         compras_id: {
           type: Sequelize.INTEGER,
           allowNull: false,

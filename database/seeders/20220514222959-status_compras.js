@@ -2,32 +2,42 @@
 
 module.exports = {
   async up (queryInterface, Sequelize) {
-    await queryInterface.bulkInsert('status_compra', [
+    await queryInterface.bulkInsert('status_compras', [
       {
         status: 'Pedido recebido pela loja',
-        data: '2024-12-25T00:00:00.000-05:00',
+        data: new Date(),
         compras_id: 1
       },
       {
         status: 'Pedido encaminhado ao Depósito para despacho',
-        data: '2024-12-25T00:00:00.000-05:00',
+        data: new Date(Date.now()+(3600*1000*1)),
         compras_id: 1
       },
       {
         status: 'Pedido recebido pela loja',
-        data: '2024-12-25T00:00:00.000-05:00',
+        data: new Date(),
         compras_id: 2
       },
       {
         status: 'Cancelamento da compra feita pelo cliente',
-        data: '2024-12-25T00:00:00.000-05:00',
+        data: new Date(Date.now()+(3600*1000*48)),
         compras_id: 2
+      },
+      {
+        status: 'Pedido recebido pela loja',
+        data: new Date(),
+        compras_id: 3
+      },
+      {
+        status: 'Pedido recebido pela loja',
+        data: new Date(),
+        compras_id: 4
       }
       ], {});
   },
 
   async down (queryInterface, Sequelize) {
-    await queryInterface.bulkDelete('status_compra', null, {});
+    await queryInterface.bulkDelete('status_compras', null, {});
      
     }
 };

@@ -35,22 +35,26 @@
             </div>
 
             <div id="detalhescompra">
-                <p>DETALHES DA COMPRA - ID: 20220201999999</p>
-                <p>Valor: R$ 324,80 - Cartão de Crédito</p>
+                <p>DETALHES DA COMPRA - ID: <%=compra.id%></p>
+                <p>Valor: R$ <%=valortotal%> - <%=pagamento.tipo%></p>
                 
                 <div id="contdetcompra">
-                    
-                    <div id="itemcompra">
-                        <img src="/img/racao.png"> 
-                        <br>
-                        <label>Ração FeeDog</label>
-                        <br>
-                        <label>R$ 89,90</label>
-                        <br>
-                        <label>Qtd: 2</label>    
-                    </div>
 
-                    <div id="itemcompra">
+                    <% if (typeof itenscompra !== 'undefined'){ %>
+                        <% itenscompra.forEach(item => { %>    
+                            <div id="itemcompra">
+                                <img src="/img/racao.png"> 
+                                <br>
+                                <label><%=item.produto.nome%></label>
+                                <br>
+                                <label>R$ <%=item.produto.preco%></label>
+                                <br>
+                                <label>Qtd: <%=item.quantidade%></label>    
+                            </div>
+                        <% }) %>
+                    <% } %>
+
+                    <!-- <div id="itemcompra">
                         <img src="/img/ydog.png"> 
                         <br>
                         <label>Brinquedo YDog</label>
@@ -68,7 +72,7 @@
                         <label>R$ 100,00</label>
                         <br>
                         <label>Qtd: 1</label>   
-                    </div>
+                    </div> -->
 
 
 
@@ -102,7 +106,17 @@
                 </div>
 
             </div>
+
+            
         </div>
+
+        <% if (typeof endereco !== 'undefined'){%>
+            <h3>Endereço para entrega</h3>
+            <p style="text-align: center;">Rua <%=endereco.rua%>, nº <%=endereco.numero%>, Bairro <%=endereco.bairro%>, <%=endereco.cidade%> - <%=endereco.estado%> - CEP: <%=endereco.cep%></p>
+        <% }else{ %>
+            <h3>Você optou por retirar a compra na loja</h3>
+        <% } %>
+
 
         <div id="btnscompraconcluida">
             <button>VER COMPRA</button>
@@ -111,7 +125,7 @@
 
         </div>
 
-        <div id="sugestoescc">
+        <!-- <div id="sugestoescc">
             
             <h2>VOCÊ TAMBÉM PODE GOSTAR</h2>
 
@@ -193,7 +207,7 @@
             </div>
 
 
-        </div>
+        </div> -->
 
     </main>
 

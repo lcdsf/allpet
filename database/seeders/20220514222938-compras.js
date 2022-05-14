@@ -5,28 +5,29 @@ module.exports = {
     await queryInterface.bulkInsert('compras', [
       {
         valor: 350.00,
-        data: '2024-12-25T00:00:00.000-05:00',
+        data: new Date(),
         clientes_id: 1,
-        formas_pgto_id: 1
+        forma_pgto: 'Cartão'
       },
       {
-        valor: 29.99,
-        data: '2024-12-25T00:00:00.000-05:00',
+        valor: 500.00,
+        data: new Date(),
         clientes_id: 1,
-        formas_pgto_id: 2
+        forma_pgto: 'Pix'
       },
       {
-        valor: 1855.42,
-        data: '2024-12-25T00:00:00.000-05:00',
+        valor: 99.96,
+        data: new Date(),
         clientes_id: 2,
-        formas_pgto_id: 3
+        forma_pgto: 'Boleto'
       },
       {
-        valor: 35,
-        data: '2024-12-25T00:00:00.000-05:00',
-        clientes_id: 3,
-        formas_pgto_id: 2
-      }
+        valor: 16.90,
+        data: new Date(),
+        clientes_id: 2,
+        forma_pgto: 'Pix'
+      },
+
       ], {});
   },
 

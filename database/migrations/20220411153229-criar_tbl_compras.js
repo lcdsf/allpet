@@ -27,26 +27,25 @@ module.exports = {
           onUpdate: 'cascade',
           onDelete: 'cascade'
         },
-        formas_pgto_id: {
-          type: Sequelize.INTEGER,
+        forma_pgto: {
+          type: Sequelize.STRING,
           allowNull: false,
-          references: {
-            model: 'formas_pgto',
-            key: 'id'
-          },
-          onUpdate: 'cascade',
-          onDelete: 'cascade'
         },
-        /*produtos_id: {
-          type: Sequelize.INTEGER,
+        finalizado:{
+          type: Sequelize.BOOLEAN,
           allowNull: false,
+          defaultValue: false
+        },
+        enderecos_id: {
+          type: Sequelize.INTEGER,
+          allowNull: true,
           references: {
-            model: 'itens_compras',
+            model: 'enderecos',
             key: 'id'
           },
           onUpdate: 'cascade',
           onDelete: 'cascade'
-        }*/
+        }
     });
 
   },

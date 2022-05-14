@@ -19,6 +19,8 @@
 
     <%- include('./partials/header') %>
     
+    <!-- <script defer src="/js/front.js"></script> -->
+    
     <main>
         <div id="bannercarrinho">
             <h2>AllPet - Carrinho</h2>
@@ -39,13 +41,25 @@
 
                             <div id="nomeqtdcrr">
                             <label><%=item.produto.nome%></label>
-                            <label> <button id="qtdbtn">-</button> &nbsp; <%= item.quantidade %> &nbsp; <button id="qtdbtn">+</button> </p>
-                            <!-- <input type="number" name="qtditem" id="" value="<%= item.quantidade %>"> -->
+                            <br>
+                            <!-- <label> <button id="qtdbtn">-</button> &nbsp; <%= item.quantidade %> &nbsp; <button id="qtdbtn">+</button> </p> -->
+                                <label>Quantidade:</label> <br>
+                            <form action="/cliente/carrinho/alteraqtditem?_method=PUT" method="POST">
+
+                                <input style="display: none;" type="number" name="produtoaltera" value="<%=item.produto.id%>">
+                                
+                                <input min="1" max="<%=item.produto.quantidade%>" type="number" name="qtditem" id="" value="<%= item.quantidade %>">
+                            
+                                <button  style="font-weight: bold; color: #ffc550; border: none; background: none;" type="submit"> <br> Se precisar, altere a quantidade e clique aqui para salvar <br> Min: 1 - Max: <%= item.produto.quantidade %></button>
+                            </form>
+
+
+
                             </div>
 
                             <div id="vuncrr">
                                 <label>Valor unitário</label>
-                                <label><%=item.produto.preco%></label>
+                                <label>R$ <%=item.produto.preco%></label>
                             </div>
 
                             <div id="vtcrr">
@@ -79,34 +93,47 @@
                 <h2>2. Forma de pagamento e entrega</h2>
                 
                 <div id="fase2info">
-                    <div id="divfpgto">
-                        <label>Forma de pagamento: &nbsp; </label>
-                        <select id="menufpgto">
-                            <option value="cartaocrd" name="fpgto" >Cartão de Crédito</option>
-                            <option value="cartaodbt" name="fpgto" >Cartão de Débito</option>
-                            <option value="boleto" name="fpgto" >Boleto</option>
-                            <option value="pix" name="fpgto" >Pix</option>
-                        </select>
-                    </div>
+                    <form action="/cliente/compra" method="POST">
 
-                    <div id="diventrega">
-                        <label>Endereço de entrega: &nbsp; </label>
-                        <select id="enderecos">
-                            <option value="end1">Rua Mangueira, 2512, Bairro Uirapuru, Itu - SP</option>
-                            <option value="end2">Av. Ulysses Guimarães, 301, Centro, Serra Talhada - PE</option>
-                            <option value="end3">Rodovia MT-130 KM 59, S/N, Zona Rural, Poxoréu - MT</option>
-                        </select> &nbsp;
-                        
-                        <button>NOVO ENDEREÇO</button>
-                        <br><br>
-                        <label for="retirada">Não precisa entregar, vou retirar na loja</label>
-                        <input type="checkbox" name="retirada">
-                    </div>
-                </div>
+                            <div id="divfpgto">
+                                <label>Forma de pagamento: &nbsp; </label>
 
-            </div>
+                                    <select id="menufpgto" name="fpgto">
+                                        <option value="cartao">Cartão</option>
+                                        <option value="boleto">Boleto</option>
+                                        <option value="pix">Pix</option>
+                                    </select>
+                                </div>
 
-            <button id="finalizacompra" type="submit">FINALIZAR COMPRA</button>
+                                <br>
+
+                                <div id="diventrega">
+                                    <label>Endereço de entrega: &nbsp; </label>
+                                    <select id="enderecos" name="enderecoid">
+                                        <!-- <option value="end1">Rua Mangueira, 2512, Bairro Uirapuru, Itu - SP</option>
+                                        <option value="end2">Av. Ulysses Guimarães, 301, Centro, Serra Talhada - PE</option>
+                                        <option value="end3">Rodovia MT-130 KM 59, S/N, Zona Rural, Poxoréu - MT</option> -->
+
+                                        <% enderecos.forEach(endereco => { %>
+                                            <option  value="<%=endereco.id%>"> ID: <%=endereco.id%> Rua <%= endereco.rua %>, nº <%= endereco.numero %>, Bairro <%= endereco.bairro %>, <%= endereco.cidade %> - <%= endereco.estado %></option>
+                                            <!-- <option value=""><%=endereco.id%></option> -->
+                                            <% }) %>
+                                    </select> &nbsp;
+                                    
+                                    <!-- <button>NOVO ENDEREÇO</button> -->
+
+
+
+                                    <br><br>
+                                    <label for="retirada">Não precisa entregar, vou retirar na loja</label>
+                                    <input type="checkbox" name="semfrete" id="semfrete">
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <button id="finalizacompra" type="submit">FINALIZAR COMPRA</button>
+                    </form>
 
         <% }else{%>
             <h2>Adicione algum item no carrinho</h2>
