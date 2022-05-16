@@ -18,6 +18,8 @@
 <body>
 
     <%- include('./partials/header') %>
+
+    <script defer src="/js/painelCliente.js" ></script>
     
     <main> 
 
@@ -36,8 +38,8 @@
                     <label><%= usuario.nome %> <%= usuario.sobrenome %></label>
                     <br><br>
                     <a href="/cliente/<%= usuario.id %>/editar">Alterar dados pessoais</a>
-                    <a href="/cliente/<%= usuario.id %>/formapgto">Alterar formas de pagamento</a>
-                    <a href="/cliente/<%= usuario.id %>/delete">Excluir conta</a>
+                    <!-- <a href="/cliente/<%= usuario.id %>/formapgto">Alterar formas de pagamento</a> -->
+                    <a id="deletaCliente" href="/cliente/<%= usuario.id %>/deleteeee">Excluir conta</a>
                     <br><br>
                     <a href="/cliente/sair">Sair</a>
 

@@ -300,7 +300,41 @@ async function testeItemCarrinho(id){
 }
 
 
-testeEndereco(50);
+async function testeProdutosCompra(id){
+    const itens = await Compra.findAll({
+       where: {id: id},
+       include: 'produtos'
+    })
+    .then(itens => itens.map(item => item.toJSON()))
+    .catch(error => console.log("ERRO AO BUSCAR DADOS: ", error));
+
+    console.log(JSON.stringify(itens, null, 4));
+}
+
+
+async function testeProdutosStatusCompra(id){
+    const itens = await Compra.findByPk(id, {
+        // raw: true,
+       //  where: {clientes_id: cliente_id},
+         include: ['produtos', 'statuscompra', 'endereco']
+     })
+
+    // .then(itens => itens.map(item => item.toJSON()))
+    .catch(error => console.log("ERRO AO BUSCAR DADOS: ", error));
+
+    itens.produtos.forEach(item => {
+        console.log(item.ItemCompra.quantidade);
+    })
+    
+    
+    
+}
+
+
+
+
+
+testeProdutosStatusCompra(16);
 
 
 

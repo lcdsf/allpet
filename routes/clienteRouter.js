@@ -20,6 +20,9 @@ router.put('/carrinho/alteraqtditem', autenticadorCliente, clienteController.alt
 
 
 router.post('/compra', autenticadorCliente, clienteController.compra);
+router.get('/compra/:id', autenticadorCliente, clienteController.detalheCompra);
+router.get('/compras', autenticadorCliente, clienteController.listaCompras);
+
 
 
 router.get('/:id/editar', autenticadorCliente, clienteController.edit);

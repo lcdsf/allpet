@@ -5,7 +5,14 @@ const bcrypt = require('bcrypt');
 const loginController = {
 
     clienteStore: async (req, res) => {
+
+        // if (req.session.admin !== undefined) req.session.admin = null;
+
+
         const {email, senha} = req.body;
+
+
+
         //console.log('DADOS REQ BODY - email: '+email+" | senha: "+senha);
         const usuario = await Cliente.findOne({ raw: true, where: {email: email}} )
 
@@ -35,6 +42,8 @@ const loginController = {
     },
 
     adminStore: async (req, res) => {
+
+        // if (req.session.usuario !== undefined) req.session.usuario = null;
 
         const {email, senha} = req.body;
 

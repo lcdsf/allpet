@@ -191,26 +191,20 @@ const clienteController = {
         //ADD NA TABELA FORMA DE PAGAMENTO
         switch (fpgto){
             case 'cartao':
-                pagamento = await FormaPgto.create({
-                    tipo: 'Cartão'
-                })
+                pagamento = 'Cartão'
             break;
 
             case 'boleto':
-                pagamento = await FormaPgto.create({
-                    tipo: 'Boleto'
-                })
+                pagamento = 'Boleto'
             break;
 
             case 'pix':
-                pagamento = await FormaPgto.create({
-                    tipo: 'Pix'
-                })
+                pagamento = 'Pix'
             break;
         }
         
 
-        //SE TEM ENDERECO, CRIA COMPRA COM ENDERECO_ID
+        //SE TEM FRETE, ENTAO BUSCA ENDERECO PARA ADD NA COMPRA
         if (enderecoid !== undefined){
 
             endereco = await Endereco.findByPk(enderecoid, {
@@ -222,62 +216,90 @@ const clienteController = {
                 valor: valortotal,
                 data: new Date(),
                 clientes_id: cliente_id,
-                formas_pgto_id: pagamento.id,
+                forma_pgto: pagamento,
                 enderecos_id: enderecoid
             });
 
-
+        //SE CLIENTE FOR RETIRAR NA LOJA, ENTAO ENDERECO = NULL
         }else{
             compra = await Compra.create({
                 valor: valortotal,
                 data: new Date(),
                 clientes_id: cliente_id,
-                formas_pgto_id: pagamento.id,
+                forma_pgto: pagamento,
                 enderecos_id: null
             });
         }
 
-        //ADD NA TABELA ITENS COMPRAS (COMPRAS N:M PRODUTOS)
+        // ADD NA TABELA ITENS COMPRAS (COMPRAS N:M PRODUTOS)
+        // E DA BAIXA NO ESTOQUE, DENTRO DO MESMO FOR
 
-        // console.log('TAMANHO ITENS CARRINHO: ', itensCarrinho.length);
-
+     
         for (let i = 0; i < itensCarrinho.length; i++){
-
-
-            // console.log('\n\n\nITERATOR: ',i);
-            // console.log('LOOP INSERT ITEMCOMPRA:') 
-            // console.log('Quantidade: ', itensCarrinho[i].quantidade);
-            // console.log('Produto ID: ', itensCarrinho[i].produto.id);
-            // console.log('Compra ID: ', compra.id);
 
             await ItemCompra.create({
                 quantidade: itensCarrinho[i].quantidade,
                 produtos_id: itensCarrinho[i].produto.id,
                 compras_id: compra.id
             })
-            .catch(error => console.log('ERRO AO INSERIR ITEMCOMPRA: ', error));        
+            .catch(error => console.log('ERRO AO INSERIR ITEMCOMPRA: ', error));
+
+            await Produto.update(
+                {quantidade: (itensCarrinho[i].produto.quantidade -  itensCarrinho[i].quantidade)},
+                {where:{ id: itensCarrinho[i].produto.id}}
+            )
+            .catch(error => console.log('ERRO AO ATUALIZAR QTD PRODUTOS: ', error));
+            
+            
         }
 
-
-        //DECREMENTAR QTD PRODUTOS DA COMPRA
-        console.log('AQUI ROTINA UPDATE PRODUTOS')
-
-
-
+        //ADD PRIMEIRO STATUS PADRAO PARA A COMPRA
+        await StatusCompra.create({
+            status: 'Pedido recebido pela loja',
+            data: new Date(),
+            compras_id: compra.id
+        })
+        .catch(error => console.log('ERRO AO ADD STATUS COMPRA: ', error));
 
         //LIMPA CARRINHO APOS COMPRA FINALIZADA
-        // await Carrinho.destroy({
-        //     where: {clientes_id: cliente_id}
+        await ItemCarrinho.destroy({
+            where: {clientes_id: cliente_id}
         
-        // })
+        })
 
-        console.log('AQUI ROTINA LIMPACARRINHO')
+        res.render('compraConcluida', {usuario: req.session.usuario, valortotal, itenscompra: itensCarrinho, compra, endereco});
 
-        // console.log('ENDERECO ENCONTRADO: ', endereco);
+    },
 
-        res.render('compraConcluida', {usuario: req.session.usuario, valortotal, itenscompra: itensCarrinho, compra, endereco, pagamento});
+    detalheCompra: async (req, res) => {
 
-        //return;
+        const compra_id = req.params.id;
+        const cliente_id = req.session.usuario.id;
+        
+        const compra = await Compra.findByPk(compra_id, {
+            include: ['produtos', 'statuscompra', 'endereco']
+        });
+
+
+        //console.log('DADOS DA COMPRA: ', compra);
+
+        //IMPEDIR QUE CLIENTES VEJAM DADOS DOS OUTROS
+        if (compra.clientes_id == req.session.usuario.id)
+            res.render('detalheCompra', {compra, usuario: req.session.usuario});
+        else
+            res.redirect('/cliente/home');
+    },
+
+    listaCompras: async (req, res) => {
+
+        const cliente_id = req.session.usuario.id;
+
+        const compras = await Compra.findAll({
+            where: {clientes_id: cliente_id}
+        })
+
+
+        res.render('minhasCompras', {usuario: req.session.usuario, compras});
     },
 
     store: async (req, res) => {
@@ -384,7 +406,7 @@ const clienteController = {
         .then(result => result.map(produto => produto.toJSON()));
         
 
-        res.render('historico', {produtos});
+        res.render('historico', {produtos, usuario: req.session.usuario});
     },
 
     avaliacao: async (req, res) =>{

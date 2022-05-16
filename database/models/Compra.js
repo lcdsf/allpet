@@ -43,7 +43,7 @@ module.exports = (sequelize, DataTypes) => {
         });
         Compra.hasMany(models.StatusCompra, {
             foreignKey: 'compras_id',
-            as: 'status'
+            as: 'statuscompra'
         });
         Compra.hasOne(models.Requerimento, {
             foreignKey: 'compras_id',
