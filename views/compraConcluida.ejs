@@ -36,7 +36,7 @@
 
             <div id="detalhescompra">
                 <p>DETALHES DA COMPRA - ID: <%=compra.id%></p>
-                <p>Valor: R$ <%=valortotal%> - <%=pagamento.tipo%></p>
+                <p>Valor: R$ <%=valortotal%> - <%=compra.forma_pgto%></p>
                 
                 <div id="contdetcompra">
 
@@ -54,54 +54,6 @@
                         <% }) %>
                     <% } %>
 
-                    <!-- <div id="itemcompra">
-                        <img src="/img/ydog.png"> 
-                        <br>
-                        <label>Brinquedo YDog</label>
-                        <br>
-                        <label>R$ 15,00</label>
-                        <br>
-                        <label>Qtd: 3</label>    
-                    </div>
-
-                    <div id="itemcompra">
-                        <img src="/img/dc1.png"> 
-                        <br>
-                        <label>Coleira Bibster</label>
-                        <br>
-                        <label>R$ 100,00</label>
-                        <br>
-                        <label>Qtd: 1</label>   
-                    </div> -->
-
-
-
-                 <!--   <div id="itemcompra">
-                        <img src="/img/dc1.png"> 
-                        <label>Coleira Bibster</label>
-                        <br>
-                        <label>R$ 000,00</label>
-                        <br>
-                        <label>Qtd: 2</label>   
-                    </div>
-
-                    <div id="itemcompra">
-                        <img src="/img/dc1.png"> 
-                        <label>Coleira Bibster</label>
-                        <br>
-                        <label>R$ 000,00</label>
-                        <br>
-                        <label>Qtd: 2</label>   
-                    </div>
-
-                    <div id="itemcompra">
-                        <img src="/img/dc1.png"> 
-                        <label>Coleira Bibster</label>
-                        <br>
-                        <label>R$ 000,00</label>
-                        <br>
-                        <label>Qtd: 2</label>     
-                    </div> -->
 
                 </div>
 
@@ -119,7 +71,7 @@
 
 
         <div id="btnscompraconcluida">
-            <button>VER COMPRA</button>
+             <a href="/cliente/compra/<%=compra.id%>"><button>VER DETALHES</button></a> 
 
             <button>AJUDA</button>
 

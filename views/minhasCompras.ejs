@@ -26,55 +26,27 @@
         </div>
 
         <div id="painelminhascompras">
-            <div id="contcompra">
 
-                <div id="infocompra">
-                    
-                    <label>ID: #2022013105510001</label>
-                    <br>
-                    <label>31/01/2022 - 05:51</label>
-                    <br>
-                    <label>Cartão de Crédito - R$ 324,90</label>
+            <% compras.forEach(compra => {%>
+                <div id="contcompra">
+                    <div id="infocompra">
+                        
+                        <label>ID: <%=compra.id%></label>
+                        <br>
+                        <label><%=compra.data%></label>
+                        <br>
+                        <label><%=compra.forma_pgto%> - R$ <%=compra.valor%></label>
 
+                    </div>
+                    <a href="/cliente/compra/<%=compra.id%>"><button>Ver detalhes</button></a> 
                 </div>
-                <button>Ver detalhes</button>
-            </div>
-
-            <div id="contcompra">
-
-                <div id="infocompra">
-                    
-                    <label>ID: #2022012718310011</label>
-                    <br>
-                    <label>27/01/2022 - 18:31</label>
-                    <br>
-                    <label>Pix - R$ 27,00</label>
-
-                </div>
-                <button>Ver detalhes</button>
-            </div>
-
-
-            <div id="contcompra">
-
-                <div id="infocompra">
-                    
-                    <label>ID: #2022012514320007</label>
-                    <br>
-                    <label>25/01/2022 - 14:32</label>
-                    <br>
-                    <label>Boleto - R$ 109,99</label>
-
-                </div>
-                <button>Ver detalhes</button>
-            </div>
-
+            <%}) %>
 
         </div>
 
         <div id="btnsminhascompras">
-            <button>Área do Cliente</button>
-            <button>Página inicial</button>
+            <a href="/cliente/painel"><button>Área do Cliente</button></a> 
+            <a href="/cliente/home"><button>Página inicial</button></a> 
         </div>
        
     </main>

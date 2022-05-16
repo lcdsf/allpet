@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
         }
     }, 
-    {tableName: 'itens_compras', timestamps: false}
+    {tableName: 'status_compras', timestamps: false}
     );
 
     StatusCompra.associate = (models) => {
