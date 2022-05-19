@@ -560,6 +560,7 @@ textarea{
 
 #painelopuser button{
     padding: 10px 30px;
+    width: 100%;
     text-transform: uppercase;
     background-color: #eea91f;
     border: none;
@@ -1430,9 +1431,19 @@ footer ul li, footer p, footer a{
     flex-direction: row;
 }
 
+#pg1{
+    background-color: #007F7E;
+    color: white;
+    text-align: center;
+    border-radius: 3px;
+    font-weight: bold;
+    height: fit-content;
+    padding-bottom: 1px;
+}
+
 #sugestoes{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     margin-top: 50px;
    /* border: 1px solid gold; */
@@ -1451,7 +1462,12 @@ footer ul li, footer p, footer a{
     background-color: #8fc7c6;
     padding: 10px;
     font-weight: bold;
+    border-radius: 5px;
 
+}
+
+#visualizou img{
+    border-radius: 3px;
 }
 
 #grpvis{

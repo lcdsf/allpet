@@ -12,7 +12,7 @@
 
 
 
-    <title>AllPet - Requerimento 202202025999999</title>
+    <title>AllPet - Requerimento <%=requerimento.id%></title>
 </head>
 
 <body>
@@ -22,11 +22,11 @@
     <main id="maindetalhecompra"> 
 
         <div id="bannercadastro">
-            <h2>Detalhes do Requerimento #20220201999999</h2>
+            <h2>Detalhes do Requerimento #<%=requerimento.id%></h2>
         </div>
 
         <div id="infodetalhecompra">
-            <h2>Data/hora: 03/02/2022 - 09:27 | Motivo: Um ou mais produtos diferentes do que foi comprado</h2>
+            <h2>Data/hora: <%=requerimento.datahora.toLocaleString('pt-br')%> | Motivo: <%=requerimento.motivo%></h2>
 
             <div id="separador"></div>
 
@@ -35,11 +35,11 @@
                 <div id="contreqcompra">
 
                     <div id="inforeqcompra">
-                        <h3>Compra ID #2022013105510001</h3>
-                        <p>Data/hora da compra: 31/01/2022 - 12:53</p>
-                        <p>Cartão de Crédito - R$ 324,90</p>
+                        <h3>Compra ID #<%=requerimento.compra.id%></h3>
+                        <p>Data/hora da compra: <%=requerimento.compra.data.toLocaleString('pt-br')%></p>
+                        <p><%=requerimento.compra.forma_pgto%> - R$ <%=requerimento.compra.valor%></p>
 
-                        <button>Ver detalhes da compra</button>
+                        <a href="/cliente/compra/<%=requerimento.compra.id%>"><button>Ver detalhes da compra</button></a> 
                     </div>
                     
 
@@ -53,37 +53,24 @@
         <h2>Status do Requerimento</h2>
 
         <div id="statuscompra">
+            <% let i = 1%>
+            <% requerimento.status.forEach(status => { %>
 
-            <div id="statuschk">
-                <div id="dotcompra">1</div>
-                <p>03/02/2022 - 09:35</p>
-                <p>Requerimento recebido</p>
-            </div>
+                <div id="statuschk">
+                    <div id="dotcompra"><%=i%></div>
+                    <p><%=status.datahora%></p>
+                    <p><%=status.status%></p>
+                </div>
+                <%i++%>
+            <% }) %>
 
-            <div id="statuschk">
-                <div id="dotcompra">2</div>
-                <p>03/02/2022 - 10:04</p>
-                <p>Requerimento em análise</p>
-            </div>
-
-            <div id="statuschk">
-                <div id="dotcompra">3</div>
-                <p>04/02/2022 - 08:12</p>
-                <p>Encaminhamento ao setor responsável</p>
-            </div>
-
-            <div id="statuschk">
-                <div id="dotcompra">4</div>
-                <p>04/02/2022 - 11:33</p>
-                <p>Correção dos itens e reenvio realizado</p>
-            </div>
 
         </div>
 
         <div id="btnsdetalhereq">
-            <button>VER TODOS OS MEUS REQUERIMENTOS</button>
-            <button>ÁREA DO CLIENTE</button>
-            <button>PÁGINA INICIAL</button>
+            <a href="/cliente/requerimentos"><button>VER TODOS OS MEUS REQUERIMENTOS</button></a>
+            <a href="/cliente/painel"><button>ÁREA DO CLIENTE</button></a> 
+            <a href="/"><button>PÁGINA INICIAL</button></a> 
         </div>
       
 

@@ -29,7 +29,7 @@ module.exports = (sequelize, DataTypes) => {
         });
         Requerimento.hasMany(models.StatusRequerimento, {
             foreignKey: 'requerimentos_id',
-            as: 'requerimentos'
+            as: 'status'
         });
     }
   

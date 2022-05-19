@@ -3,6 +3,8 @@ const {Foto, Cliente, Endereco, Produto, Avaliacao, Requerimento, StatusRequerim
 const {validationResult} = require('express-validator');
 const bcrypt = require('bcrypt');
 const session = require("express-session");
+const sequelize = require('sequelize');
+const { resolveInclude } = require("ejs");
 //const fs = require('fs');
 
 const clienteController = {
@@ -54,8 +56,39 @@ const clienteController = {
 
            // console.log('ULTIMO PROD VISTO: ', FotoUltimoProd);
         }
-        
-        res.render('home', {usuario: req.session.usuario, produtos, ultimovisto});
+
+
+
+               //BUSCA COM SOMA DE QUANTIDADE VENDIDA, AGRUPADA POR PRODUTOS
+               let produtosVendidos = await ItemCompra.findAll({
+                attributes: [[sequelize.fn('sum', sequelize.col('quantidade')), 'total_vendido'],
+                    'produtos_id'
+                ],
+                group: ['produtos_id'],
+            })
+            //.then(result => result.map(produto => produto.toJSON()));
+    
+            //ORDENA POR MAIOR QTD VENDIDA
+            produtosVendidos = produtosVendidos.sort(function (a, b){
+                return b.total_vendido - a.total_vendido;
+            });
+    
+            //SELECIONA OS 3 COM MAIS VENDAS
+            let tresMais = produtosVendidos.slice(0, 3);
+            //GUARDA SOMENTE OS IDS DOS 3 MAIS VENDIDOS
+            tresMais = tresMais.map(item => item.produtos_id);
+    
+            //BUSCA OS 3 MAIS VENDIDOS
+            let top3Produtos = await Produto.findAll({
+                include: 'fotos',
+                where: {id: tresMais}
+            })
+            //.then(result => result.map(produto => produto.toJSON()));
+
+
+
+
+        res.render('home', {usuario: req.session.usuario, produtos, ultimovisto, top3: top3Produtos});
     },
 
     carrinho: async (req, res) => {
@@ -302,6 +335,67 @@ const clienteController = {
         res.render('minhasCompras', {usuario: req.session.usuario, compras});
     },
 
+    ajuda: async (req, res) => {
+
+        const compras = await Compra.findAll({ 
+            where: {clientes_id: req.session.usuario.id},
+            exclude: 'requerimento'
+        });
+
+        res.render('ajuda', {usuario: req.session.usuario, compras});
+    },
+
+    abreRequerimento: async (req, res) => {
+
+        const compra_id = req.body.compracontestada;
+        const {motivo} = req.body;
+
+        const compra = await Compra.findByPk(compra_id);
+
+        const requerimento = await Requerimento.create({
+            datahora: new Date(),
+            motivo,
+            compras_id: compra_id
+        });
+
+        await StatusRequerimento.create({
+            datahora: new Date(),
+            status: 'Requerimento recebido',
+            requerimentos_id: requerimento.id
+        });
+
+        res.render('ajuda2', {usuario: req.session.usuario, requerimento, compra})
+    },
+
+    detalheRequerimento: async (req, res) => {
+
+        const requerimento = await Requerimento.findByPk(req.params.id, {
+            include: ['status', 'compra']
+        })
+
+        res.render('detalheRequerimento', {usuario: req.session.usuario, requerimento})
+    },
+
+    listaRequerimentos: async (req, res) => {
+
+        const compras = await Compra.findAll({raw: true, where: {clientes_id: req.session.usuario.id}})
+        //.then(result => result.map(produto => produto.toJSON()));
+
+
+
+        let idscompras = compras.map(compra => compra.id);
+
+        const requerimentos = await Requerimento.findAll({
+            where: {
+                compras_id: idscompras,
+                finalizado: false
+            },
+            include: 'compra'
+        });
+
+        res.render('meusRequerimentos', {usuario: req.session.usuario, requerimentos})
+    },
+    
     store: async (req, res) => {
 
         const erros = validationResult(req);

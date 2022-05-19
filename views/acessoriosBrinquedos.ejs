@@ -27,26 +27,43 @@
 
         <div id="containerbusca">
             <div id="filtrobusca">
+            <form action="/filtrabuscaab?_method=PUT" method="POST">
 
                 <p>CATEGORIA</p>
-                <input type="checkbox" id="brinquedos"> &nbsp; <label id="brinquedos">Brinquedos</label>
+                <input name="Brinquedos" type="checkbox" id="brinquedos"> &nbsp; <label id="brinquedos">Brinquedos</label>
                 <br>
-                <input type="checkbox" id="roupas"> &nbsp; <label id="roupas">Roupas</label>
+                <input name="Roupas" type="checkbox" id="roupas"> &nbsp; <label id="roupas">Roupas</label>
                 <br>
-                <input type="checkbox" id="aderecos"> &nbsp; <label id="aderecos">Adereços</label>
+                <input name="Aderecos" type="checkbox" id="aderecos"> &nbsp; <label id="aderecos">Adereços</label>
                 <br>
-                <input type="checkbox" id="coleiras"> &nbsp; <label id="coleiras">Coleiras/Guias</label>
+                <input name="ColeirasGuias" type="checkbox" id="coleiras"> &nbsp; <label id="coleiras">Coleiras/Guias</label>
                 <br>
-                <input type="checkbox" id="camas"> &nbsp; <label id="camas">Camas</label>
+                <input name="Camas" type="checkbox" id="camas"> &nbsp; <label id="camas">Camas</label>
                 <br>
-                <input type="checkbox" id="tapetes"> &nbsp; <label id="tapetes">Tapetes</label>
+                <input name="Tapetes" type="checkbox" id="tapetes"> &nbsp; <label id="tapetes">Tapetes</label>
                 <br>
 
 
 
                 <div id="divisoriafiltro"></div>
 
-                <%- include('./partials/filtroBusca') %>
+                <p>PREÇO</p>
+
+                <select id="filtrapreco" name="range_preco">
+                    <option  value="<=150">Até R$ 50,00</option>
+                    <option  value="51_100">De R$ 51,00 a R$ 100,00</option>
+                    <option  value="101_200">De R$ 101,00 a R$ 200,00</option>
+                    <option  value=">200">Mais de R$ 200,00</option>
+                </select>
+
+                <br></BR>
+
+                <button type="submit">FILTRAR</button>
+                <br><br>
+                
+
+            </form>
+            <a href="/acessoriosbrinquedos"><button>LIMPAR FILTRO</button></a>
 
             </div>
 
@@ -67,7 +84,7 @@
                 <% } %>
 
                 <% if (produtos == ""){%> 
-                    <p>Não há produtos nesta categoria</p> 
+                    <p>Nenhum produto encontrado</p> 
                 <% } %>
 
 
