@@ -26,61 +26,33 @@
         </div>
 
         <div id="painelminhascompras">
-            <div id="contcompra">
 
-                <div id="infocompra">
-                    
-                    <label>Protocolo: #202202025999999</label>
-                    <br><br>
-                    <label> Compra #2022013105510001</label>
-                    <br>
-                    <label>31/01/22 - R$ 324,90</label>
-                    <br><br>
-                    <label>Motivo: Um ou mais produtos diferentes do que foi comprado</label>
+            <% requerimentos.forEach(requerimento => { %>
+                    <div id="contcompra">
+                        <div id="infocompra">
+                            
+                            <label>Protocolo: #<%=requerimento.id%></label>
+                            <br><br>
+                            <label> Compra #<%=requerimento.compra.id%></label>
+                            <br>
+                            <label><%=requerimento.compra.data.toLocaleString('pt-br')%></label>
+                            <br>
+                            <label><%=requerimento.compra.forma_pgto%> - R$ <%=requerimento.compra.valor%></label>
+                            <br><br>
+                            <label><%=requerimento.motivo%></label>
+                        </div>
+                        <a href="/cliente/requerimento/<%=requerimento.id%>"><button>Ver detalhes</button></a>
+                    </div>
 
-                </div>
-                <button>Ver detalhes</button>
-            </div>
+            <% }) %>
 
-            <div id="contcompra">
-
-                <div id="infocompra">
-                    
-                    <label>Protocolo: #202201031999999</label>
-                    <br><br>
-                    <label> Compra #2022013105510001</label>
-                    <br>
-                    <label>30/01/22 - R$ 24,90</label>
-                    <br><br>
-                    <label>Motivo: Desejo reembolso, não recebi a minha compra</label>
-
-                </div>
-                <button>Ver detalhes</button>
-            </div>
-
-
-            <div id="contcompra">
-
-                <div id="infocompra">
-                    
-                    <label>Protocolo: #202201041999999</label>
-                    <br><br>
-                    <label> Compra #2022013105510001</label>
-                    <br>
-                    <label>04/01/22 - R$ 123,45</label>
-                    <br><br>
-                    <label>Motivo: Me arrependi da compra</label>
-
-                </div>
-                <button>Ver detalhes</button>
-            </div>
 
 
         </div>
 
         <div id="btnsminhascompras">
-            <button>Área do Cliente</button>
-            <button>Página inicial</button>
+            <a href="/cliente/painel"><button>Área do Cliente</button></a> 
+            <a href="/"><button>Página inicial</button></a> 
         </div>
        
     </main>

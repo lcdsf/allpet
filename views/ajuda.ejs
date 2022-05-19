@@ -37,21 +37,22 @@
                 <div id="painelajudacompra1">
                     <h3>1. Informações iniciais</h3>
 
-                    <p>O que deseja fazer?</p>
+                    <!-- <p>O que deseja fazer?</p>
 
                     <select name="opdevcanc" id="opdevcanc">
                         <option value="devolucao">Devolver a minha compra</option>
                         <option value="cancelar">Cancelar a minha compra</option>
                         <option value="naorecebi">Ainda não recebi a minha compra</option>
-                    </select>
+                    </select> -->
+                <form action="/cliente/ajuda2" method="POST">
+                    <p>Qual é o motivo da sua solicitação?</p>
 
-                    <p>Qual é o motivo?</p>
-
-                    <select name="motivodevcanc" id="motivodevcanc">
-                        <option value="arrependimento">Me arrependi da compra</option>
-                        <option value="proddiff">Um ou mais produtos diferentes do que foi comprado</option>
-                        <option value="reembnaoentregue">Desejo reembolso, não recebi a minha compra</option>
-                        <option value="prodavariado">Um ou mais produtos avariados/defeituosos</option>
+                    <select name="motivo" id="motivodevcanc">
+                        <option value="Me arrependi da compra">Me arrependi da compra</option>
+                        <option value="Um ou mais produtos diferentes do que foi comprado">Um ou mais produtos diferentes do que foi comprado</option>
+                        <option value="Desejo reembolso, não recebi a minha compra">Desejo reembolso, não recebi a minha compra</option>
+                        <option value="Um ou mais produtos avariados/defeituosos">Um ou mais produtos avariados/defeituosos</option>
+                        <option value="Compra feita por engano, desejo cancelar">Compra feita por engano, desejo cancelar</option>
                     </select>
 
                 </div>
@@ -63,9 +64,11 @@
                     <p>Por favor, selecione a compra em questão </p>
 
                     <select name="compracontestada" id="compracontestada">
-                        <option value="">ID: #2022013105510001 - 31/01/22 - R$ 324,90 - Cartão de Crédito</option>
-                        <option value="">ID: #2022012718310011 - 27/01/22 - R$ 27,00 - Pix</option>
-                        <option value="">ID: #2022012514320007 - 25/01/22 - R$ 109,99 - Boleto</option>
+
+                        <% compras.forEach(compra => { %>
+                            <option value="<%=compra.id%>">ID: <%=compra.id%> - <%=compra.data%> - R$ <%=compra.valor%> - <%=compra.forma_pgto%></option>
+                        <%}) %>
+
                     </select>
 
                 </div>
@@ -73,6 +76,8 @@
             </div>
 
             <button>Enviar</button>
+
+            </form>
 
          </div>  
 

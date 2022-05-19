@@ -6,6 +6,8 @@ const {Cliente, Endereco, CategoriaPrincipal, CategoriaEspecifica,
 Boleto, Cartao, ChavePix, Requerimento, StatusRequerimento,
 StatusCompra, ItemCompra, Foto, Historico, ItemHistorico, ItemCarrinho} = require('./database/models');
 
+const sequelize = require('sequelize');
+
 async function buscarClientes(){
     const clientes = await Cliente.findAll( {include: 'enderecos'} )
     .then(clientes => clientes.map(cliente => cliente.toJSON()));
@@ -332,9 +334,43 @@ async function testeProdutosStatusCompra(id){
 
 
 
+async function teste3MaisVendidos(){
+
+    //BUSCA COM SOMA DE QUANTIDADE VENDIDA, AGRUPADA POR PRODUTOS
+    let itens = await ItemCompra.findAll({
+        attributes: [[sequelize.fn('sum', sequelize.col('quantidade')), 'total_vendido'],
+            'produtos_id'
+        ],
+        group: ['produtos_id'],
+    })
+    //.then(result => result.map(produto => produto.toJSON()));
+
+    //ORDENA POR MAIOR QTD VENDIDA
+    itens = itens.sort(function (a, b){
+        return b.total_vendido - a.total_vendido;
+    });
+
+    //SELECIONA OS 3 COM MAIS VENDAS
+    let tresMais = itens.slice(0, 3);
+
+    //GUARDA SOMENTE OS IDS DOS 3 MAIS VENDIDOS
+    tresMais = tresMais.map(item => item.produtos_id);
+
+    //BUSCA OS 3 MAIS VENDIDOS
+    let top3Produtos = await Produto.findAll({
+        include: ['fotos'],
+        where: {id: tresMais}
+    })
+    //.then(result => result.map(produto => produto.toJSON()));
 
 
-testeProdutosStatusCompra(16);
+    console.log(top3Produtos)
+
+}
+
+
+
+// teste3MaisVendidos();
 
 
 
@@ -342,3 +378,5 @@ testeProdutosStatusCompra(16);
      console.log(i.filename);
  }*/
 
+ let x = new Date().toLocaleString('pt-br')
+ console.log(x)

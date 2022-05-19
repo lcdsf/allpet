@@ -87,7 +87,7 @@
                 <div id="telalogcad" style="text-align: center;">
                     <br>
                     <a href="/cliente/compras"><p>Minhas Compras</p></a>
-                    <a href="/cliente/painel"><p>Painel do Cliente</p></a>
+                    <a href="/cliente/painel"><p>Área do Cliente</p></a>
                     <a href="/cliente/sair"><p>Sair</p></a>
                 </div>
             </div>
@@ -186,7 +186,7 @@
                     <li><a href="/descartaveis" >Descartáveis</a></li>
 
              </ul>
-
+             <% if (typeof usuario === 'undefined'){ %>
              <p>ÁREA ADMINISTRATIVA</p>
              <ul>
                 <% if (typeof admin !== 'undefined'){ %>
@@ -195,7 +195,7 @@
                     <li><a href="/loginadm">Login</a></li>
                 <% } %>
              </ul>
-
+             <% } %>
             </div>
 
 

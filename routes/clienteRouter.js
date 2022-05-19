@@ -23,6 +23,12 @@ router.post('/compra', autenticadorCliente, clienteController.compra);
 router.get('/compra/:id', autenticadorCliente, clienteController.detalheCompra);
 router.get('/compras', autenticadorCliente, clienteController.listaCompras);
 
+//REQUERIMENTOS
+router.get('/ajuda', autenticadorCliente, clienteController.ajuda);
+router.post('/ajuda2', autenticadorCliente, clienteController.abreRequerimento);
+router.get('/requerimento/:id', autenticadorCliente, clienteController.detalheRequerimento);
+router.get('/requerimentos', autenticadorCliente, clienteController.listaRequerimentos);
+
 
 
 router.get('/:id/editar', autenticadorCliente, clienteController.edit);

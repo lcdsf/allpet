@@ -27,24 +27,42 @@
 
         <div id="containerbusca">
             <div id="filtrobusca">
-
+            
+            <form action="/filtrabuscasa?_method=PUT" method="POST">
                 <p>CATEGORIA</p>
-                <input type="checkbox" id="racoespetiscos"> &nbsp; <label id="racoespetiscos">Rações e Petiscos</label>
+                <input name="RacoesPetiscos" type="checkbox" id="racoespetiscos"> &nbsp; <label id="racoespetiscos">Rações e Petiscos</label>
                 <br>
-                <input type="checkbox" id="vermifugos"> &nbsp; <label id="vermifugos">Vermífugos</label>
+                <input name="Vermifugos" type="checkbox" id="vermifugos"> &nbsp; <label id="vermifugos">Vermífugos</label>
                 <br>
-                <input type="checkbox" id="pomadas"> &nbsp; <label id="coleiras">Pomadas</label>
+                <input name="Pomadas" type="checkbox" id="pomadas"> &nbsp; <label id="coleiras">Pomadas</label>
                 <br>
-                <input type="checkbox" id="roupacirurgica"> &nbsp; <label id="roupacirurgica">Medicamentos</label>
+                <input name="Medicamentos" type="checkbox" id="roupacirurgica"> &nbsp; <label id="roupacirurgica">Medicamentos</label>
                 <br>
-                <input type="checkbox" id="antipulgascarr"> &nbsp; <label id="antipulgascarr">Antipulgas e Carrapatos</label>
+                <input name="PulgasCarr" type="checkbox" id="antipulgascarr"> &nbsp; <label id="antipulgascarr">Antipulgas e Carrapatos</label>
                 <br>
 
 
 
                 <div id="divisoriafiltro"></div>
 
-                <%- include('./partials/filtroBusca') %>
+                <p>PREÇO</p>
+
+                <select id="filtrapreco" name="range_preco">
+                    <option  value="<=150">Até R$ 50,00</option>
+                    <option  value="51_100">De R$ 51,00 a R$ 100,00</option>
+                    <option  value="101_200">De R$ 101,00 a R$ 200,00</option>
+                    <option  value=">200">Mais de R$ 200,00</option>
+                </select>
+
+                <br></BR>
+
+                <button type="submit">FILTRAR</button>
+                <br><br>
+                
+
+            </form>
+            <a href="/saude"><button>LIMPAR FILTRO</button></a>
+
 
             </div>
 

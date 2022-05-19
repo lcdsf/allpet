@@ -27,24 +27,41 @@
 
         <div id="containerbusca">
             <div id="filtrobusca">
-
+            
+            <form action="/filtrabuscaes?_method=PUT" method="POST">
                 <p>CATEGORIA</p>
-                <input type="checkbox" id="shampoo"> &nbsp; <label id="shampoo">Shampoos</label>
+                <input name="Shampoos" type="checkbox" id="shampoo"> &nbsp; <label id="shampoo">Shampoos</label>
                 <br>
-                <input type="checkbox" id="sabonetes"> &nbsp; <label id="sabonetes">Sabonetes</label>
+                <input name="Sabonetes" type="checkbox" id="sabonetes"> &nbsp; <label id="sabonetes">Sabonetes</label>
                 <br>
-                <input type="checkbox" id="alicate_tesoura"> &nbsp; <label id="alicate_tesoura">Alicates e Tesouras</label>
+                <input name="AlicatesTesouras" type="checkbox" id="alicate_tesoura"> &nbsp; <label id="alicate_tesoura">Alicates e Tesouras</label>
                 <br>
-                <input type="checkbox" id="perfumes"> &nbsp; <label id="perfumes">Perfumes</label>
+                <input name="Perfumes" type="checkbox" id="perfumes"> &nbsp; <label id="perfumes">Perfumes</label>
                 <br>
-                <input type="checkbox" id="cosmeticos"> &nbsp; <label id="cosmeticos">Cosméticos</label>
+                <input name="Cosmeticos" type="checkbox" id="cosmeticos"> &nbsp; <label id="cosmeticos">Cosméticos</label>
                 <br>
 
 
 
                 <div id="divisoriafiltro"></div>
 
-                <%- include('./partials/filtroBusca') %>
+                <p>PREÇO</p>
+
+                <select id="filtrapreco" name="range_preco">
+                    <option  value="<=150">Até R$ 50,00</option>
+                    <option  value="51_100">De R$ 51,00 a R$ 100,00</option>
+                    <option  value="101_200">De R$ 101,00 a R$ 200,00</option>
+                    <option  value=">200">Mais de R$ 200,00</option>
+                </select>
+
+                <br></BR>
+
+                <button type="submit">FILTRAR</button>
+                <br><br>
+                
+
+            </form>
+            <a href="/estetica"><button>LIMPAR FILTRO</button></a>
 
             </div>
 

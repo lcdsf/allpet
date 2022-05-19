@@ -18,6 +18,8 @@
 <body>
 
     <%- include('./partials/header') %>
+
+    <script defer src="/js/editaProduto.js"></script>
     
     <main>
 
@@ -85,7 +87,7 @@
 
 
         <form action="/admin/produtos/<%= produto.id %>/excluir?_method=DELETE" method="POST">
-            <button style="background-color: red;" type="submit" id="btncaduser">Excluir produto</button>
+            <button class="deletaProduto" style="background-color: red;" type="submit" id="btncaduser">Excluir produto</button>
        </form>
 
 

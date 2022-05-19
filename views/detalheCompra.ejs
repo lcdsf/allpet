@@ -26,7 +26,7 @@
         </div>
 
         <div id="infodetalhecompra">
-            <h2>Data/hora: <%=compra.data%> | Valor: R$ <%=compra.valor%> | <%=compra.forma_pgto%></h2>
+            <h2>Data/hora: <%=compra.data.toLocaleString('pt-br')%> | Valor: R$ <%=compra.valor%> | <%=compra.forma_pgto%></h2>
 
             <div id="separador"></div>
 
@@ -68,7 +68,7 @@
 
                 <div id="statuschk">
                     <div id="dotcompra"><%=i%></div>
-                    <p><%=item.data%></p>
+                    <p><%=item.data.toLocaleString('pt-br')%></p>
                     <p><%=item.status%></p>
                 </div>
                 <%i++%>

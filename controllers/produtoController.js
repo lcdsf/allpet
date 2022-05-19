@@ -1,4 +1,5 @@
 const {Op} = require('sequelize');
+const sequelize = require('sequelize');
 const {Produto, Foto, CategoriaPrincipal, CategoriaEspecifica, ItemCompra, 
     Avaliacao, ItemHistorico, Historico} = require('../database/models');
 
@@ -102,6 +103,7 @@ const produtoController = {
 
 
 
+
         //BUSCA FOTO DO ULTIMO ITEM VISTO - HISTORICO CLIENTE
         let ultimovisto = "";
         if (req.session.usuario){
@@ -126,7 +128,33 @@ const produtoController = {
                }
         }
 
-        res.render('home', {produtos, usuario: usuariologado, admin: adminlogado, ultimovisto});
+        //BUSCA COM SOMA DE QUANTIDADE VENDIDA, AGRUPADA POR PRODUTOS
+        let produtosVendidos = await ItemCompra.findAll({
+            attributes: [[sequelize.fn('sum', sequelize.col('quantidade')), 'total_vendido'],
+                'produtos_id'
+            ],
+            group: ['produtos_id'],
+        })
+        //.then(result => result.map(produto => produto.toJSON()));
+
+        //ORDENA POR MAIOR QTD VENDIDA
+        produtosVendidos = produtosVendidos.sort(function (a, b){
+            return b.total_vendido - a.total_vendido;
+        });
+
+        //SELECIONA OS 3 COM MAIS VENDAS
+        let tresMais = produtosVendidos.slice(0, 3);
+        //GUARDA SOMENTE OS IDS DOS 3 MAIS VENDIDOS
+        tresMais = tresMais.map(item => item.produtos_id);
+
+        //BUSCA OS 3 MAIS VENDIDOS
+        let top3Produtos = await Produto.findAll({
+            include: 'fotos',
+            where: {id: tresMais}
+        })
+        //.then(result => result.map(produto => produto.toJSON()));
+
+        res.render('home', {produtos, usuario: usuariologado, admin: adminlogado, ultimovisto, top3: top3Produtos});
     },
 
     telaProduto: async (req, res) =>{
@@ -190,6 +218,265 @@ const produtoController = {
 
         res.render('produto', {produto, avaliacoes, mediageral, usuario: usuariologado, admin: adminlogado, avaliou: req.session.avaliou, ultimovisto});
     },
+
+    filtraBuscaAcessBrinqs: async (req, res) =>{
+        
+        console.log(req.body);
+
+        const {range_preco} = req.body;
+        // const resultado;
+        let resultado, cat, cats_ids = [];
+
+
+        //PEGA TODOS OS IDS DAS CATEGORIAS SELECIONADAS NO CHECKBOX
+        if (req.body.Brinquedos){ cat = await CategoriaEspecifica.findOne({where: {nome: 'Brinquedos'}}); cats_ids.push(cat.id); };
+        if (req.body.Roupas){ cat = await CategoriaEspecifica.findOne({where: {nome: 'Roupas'}}); cats_ids.push(cat.id); };
+        if (req.body.Aderecos){ cat = await CategoriaEspecifica.findOne({where: {nome: 'Adereços'}}); cats_ids.push(cat.id); };
+        if (req.body.ColeirasGuias){ cat = await CategoriaEspecifica.findOne({where: {nome: 'Coleiras/Guias'}}); cats_ids.push(cat.id); };
+        if (req.body.Camas){ cat = await CategoriaEspecifica.findOne({where: {nome: 'Camas'}}); cats_ids.push(cat.id); };
+        if (req.body.Tapetes){ cat = await CategoriaEspecifica.findOne({where: {nome: 'Tapetes'}}); cats_ids.push(cat.id); };
+
+
+        //FILTRA O RESULTADO DA BUSCA PELA FAIXA DE PREÇO SELECIONADA
+        switch(range_preco){
+            case '<=150': 
+                resultado = await Produto.findAll({
+                    where: {
+                        categorias_especificas_id: cats_ids,
+                        preco: { [ Op.lte ]: 50}
+                    },
+                    include: 'fotos'
+                })
+                .then(result => result.map(produto => produto.toJSON()));
+                break;
+            case '51_100':
+                resultado = await Produto.findAll({
+                    where: {
+                        categorias_especificas_id: cats_ids,
+                        preco: { [ Op.gt ]: 50, [Op.lte]: 100}
+                    },
+                    include: 'fotos'
+                })
+                .then(result => result.map(produto => produto.toJSON()));
+                break;
+            case '101_200':
+                resultado = await Produto.findAll({
+                    where: {
+                        categorias_especificas_id: cats_ids,
+                        preco: { [ Op.gt ]: 100, [Op.lte]: 200}
+                    },
+                    include: 'fotos'
+                })
+                .then(result => result.map(produto => produto.toJSON()));
+                break;
+            case '>200':
+                resultado = await Produto.findAll({
+                    where: {
+                        categorias_especificas_id: cats_ids,
+                        preco: { [ Op.gt ]: 200}
+                    },
+                    include: 'fotos'
+                })
+                .then(result => result.map(produto => produto.toJSON()));
+                break;
+        }
+
+        res.render('acessoriosBrinquedos', {produtos: resultado, usuario: req.session.usuario, admin: req.session.admin});
+
+    },
+
+    filtraBuscaEstetica: async (req, res) =>{
+        
+        console.log(req.body);
+
+        const {range_preco} = req.body;
+        // const resultado;
+        let resultado, cat, cats_ids = [];
+
+
+        //PEGA TODOS OS IDS DAS CATEGORIAS SELECIONADAS NO CHECKBOX
+        if (req.body.Shampoos){ cat = await CategoriaEspecifica.findOne({where: {nome: 'Shampoos'}}); cats_ids.push(cat.id); };
+        if (req.body.Sabonetes){ cat = await CategoriaEspecifica.findOne({where: {nome: 'Sabonetes'}}); cats_ids.push(cat.id); };
+        if (req.body.AlicatesTesouras){ cat = await CategoriaEspecifica.findOne({where: {nome: 'Alicates e Tesouras'}}); cats_ids.push(cat.id); };
+        if (req.body.Perfumes){ cat = await CategoriaEspecifica.findOne({where: {nome: 'Perfumes'}}); cats_ids.push(cat.id); };
+        if (req.body.Cosmeticos){ cat = await CategoriaEspecifica.findOne({where: {nome: 'Cosméticos'}}); cats_ids.push(cat.id); };
+        // if (req.body.Tapetes){ cat = await CategoriaEspecifica.findOne({where: {nome: 'Tapetes'}}); cats_ids.push(cat.id); };
+
+
+        //FILTRA O RESULTADO DA BUSCA PELA FAIXA DE PREÇO SELECIONADA
+        switch(range_preco){
+            case '<=150': 
+                resultado = await Produto.findAll({
+                    where: {
+                        categorias_especificas_id: cats_ids,
+                        preco: { [ Op.lte ]: 50}
+                    },
+                    include: 'fotos'
+                })
+                .then(result => result.map(produto => produto.toJSON()));
+                break;
+            case '51_100':
+                resultado = await Produto.findAll({
+                    where: {
+                        categorias_especificas_id: cats_ids,
+                        preco: { [ Op.gt ]: 50, [Op.lte]: 100}
+                    },
+                    include: 'fotos'
+                })
+                .then(result => result.map(produto => produto.toJSON()));
+                break;
+            case '101_200':
+                resultado = await Produto.findAll({
+                    where: {
+                        categorias_especificas_id: cats_ids,
+                        preco: { [ Op.gt ]: 100, [Op.lte]: 200}
+                    },
+                    include: 'fotos'
+                })
+                .then(result => result.map(produto => produto.toJSON()));
+                break;
+            case '>200':
+                resultado = await Produto.findAll({
+                    where: {
+                        categorias_especificas_id: cats_ids,
+                        preco: { [ Op.gt ]: 200}
+                    },
+                    include: 'fotos'
+                })
+                .then(result => result.map(produto => produto.toJSON()));
+                break;
+        }
+
+        res.render('estetica', {produtos: resultado, usuario: req.session.usuario, admin: req.session.admin});
+
+    },
+
+    filtraBuscaSaude: async (req, res) =>{
+        
+        const {range_preco} = req.body;
+        let resultado, cat, cats_ids = [];
+
+
+        //PEGA TODOS OS IDS DAS CATEGORIAS SELECIONADAS NO CHECKBOX
+        if (req.body.RacoesPetiscos){ cat = await CategoriaEspecifica.findOne({where: {nome: 'Rações e Petiscos'}}); cats_ids.push(cat.id); };
+        if (req.body.Vermifugos){ cat = await CategoriaEspecifica.findOne({where: {nome: 'Vermífugos'}}); cats_ids.push(cat.id); };
+        if (req.body.Pomadas){ cat = await CategoriaEspecifica.findOne({where: {nome: 'Pomadas'}}); cats_ids.push(cat.id); };
+        if (req.body.Medicamentos){ cat = await CategoriaEspecifica.findOne({where: {nome: 'Medicamentos'}}); cats_ids.push(cat.id); };
+        if (req.body.PulgasCarr){ cat = await CategoriaEspecifica.findOne({where: {nome: 'Antipulgas e Carrapatos'}}); cats_ids.push(cat.id); };
+        // if (req.body.Tapetes){ cat = await CategoriaEspecifica.findOne({where: {nome: 'Tapetes'}}); cats_ids.push(cat.id); };
+
+
+        //FILTRA O RESULTADO DA BUSCA PELA FAIXA DE PREÇO SELECIONADA
+        switch(range_preco){
+            case '<=150': 
+                resultado = await Produto.findAll({
+                    where: {
+                        categorias_especificas_id: cats_ids,
+                        preco: { [ Op.lte ]: 50}
+                    },
+                    include: 'fotos'
+                })
+                .then(result => result.map(produto => produto.toJSON()));
+                break;
+            case '51_100':
+                resultado = await Produto.findAll({
+                    where: {
+                        categorias_especificas_id: cats_ids,
+                        preco: { [ Op.gt ]: 50, [Op.lte]: 100}
+                    },
+                    include: 'fotos'
+                })
+                .then(result => result.map(produto => produto.toJSON()));
+                break;
+            case '101_200':
+                resultado = await Produto.findAll({
+                    where: {
+                        categorias_especificas_id: cats_ids,
+                        preco: { [ Op.gt ]: 100, [Op.lte]: 200}
+                    },
+                    include: 'fotos'
+                })
+                .then(result => result.map(produto => produto.toJSON()));
+                break;
+            case '>200':
+                resultado = await Produto.findAll({
+                    where: {
+                        categorias_especificas_id: cats_ids,
+                        preco: { [ Op.gt ]: 200}
+                    },
+                    include: 'fotos'
+                })
+                .then(result => result.map(produto => produto.toJSON()));
+                break;
+        }
+
+        res.render('saude', {produtos: resultado, usuario: req.session.usuario, admin: req.session.admin});
+
+    },
+
+    filtraBuscaDescartaveis: async (req, res) =>{
+        
+        const {range_preco} = req.body;
+        let resultado, cat, cats_ids = [];
+
+
+        //PEGA TODOS OS IDS DAS CATEGORIAS SELECIONADAS NO CHECKBOX
+        if (req.body.Embalagens){ cat = await CategoriaEspecifica.findOne({where: {nome: 'Embalagens'}}); cats_ids.push(cat.id); };
+        if (req.body.TapetesHig){ cat = await CategoriaEspecifica.findOne({where: {nome: 'Tapetes Higiênicos'}}); cats_ids.push(cat.id); };
+        if (req.body.Curativos){ cat = await CategoriaEspecifica.findOne({where: {nome: 'Curativos'}}); cats_ids.push(cat.id); };
+        if (req.body.Seringas){ cat = await CategoriaEspecifica.findOne({where: {nome: 'Seringas'}}); cats_ids.push(cat.id); };
+        if (req.body.ComeBebeDesc){ cat = await CategoriaEspecifica.findOne({where: {nome: 'Comedouros/Bebedouros descartáveis'}}); cats_ids.push(cat.id); };
+
+
+        //FILTRA O RESULTADO DA BUSCA PELA FAIXA DE PREÇO SELECIONADA
+        switch(range_preco){
+            case '<=150': 
+                resultado = await Produto.findAll({
+                    where: {
+                        categorias_especificas_id: cats_ids,
+                        preco: { [ Op.lte ]: 50}
+                    },
+                    include: 'fotos'
+                })
+                .then(result => result.map(produto => produto.toJSON()));
+                break;
+            case '51_100':
+                resultado = await Produto.findAll({
+                    where: {
+                        categorias_especificas_id: cats_ids,
+                        preco: { [ Op.gt ]: 50, [Op.lte]: 100}
+                    },
+                    include: 'fotos'
+                })
+                .then(result => result.map(produto => produto.toJSON()));
+                break;
+            case '101_200':
+                resultado = await Produto.findAll({
+                    where: {
+                        categorias_especificas_id: cats_ids,
+                        preco: { [ Op.gt ]: 100, [Op.lte]: 200}
+                    },
+                    include: 'fotos'
+                })
+                .then(result => result.map(produto => produto.toJSON()));
+                break;
+            case '>200':
+                resultado = await Produto.findAll({
+                    where: {
+                        categorias_especificas_id: cats_ids,
+                        preco: { [ Op.gt ]: 200}
+                    },
+                    include: 'fotos'
+                })
+                .then(result => result.map(produto => produto.toJSON()));
+                break;
+        }
+
+        res.render('descartaveis', {produtos: resultado, usuario: req.session.usuario, admin: req.session.admin});
+
+    },
+
+
     details: async (req, res) => {
         
         const {id} = req.params;

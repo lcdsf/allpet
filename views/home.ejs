@@ -66,51 +66,47 @@
 
     </div>
 
-
+    
     <div id="sugestoes">
-        <h3>Os mais vendidos</h3><br>
+        <div id="titulosugestoes">
+            <h3>Os mais vendidos</h3>
+        </div>
+        
         <div id="petgostar">
 
-            <div id="btnpgesq">
-                <svg width="10" height="18" viewBox="0 0 10 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M9 1L1 9L9 17" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-            </div>
-        
+            <% if (typeof top3 != 'undefined'){ %>
 
-            <div id="pg1">
-                <img src="/img/casinha.png">
-                <p>3x de R$ 25,50</p>
-            </div>
+                <% top3.forEach(produto => { %>
 
-            <div id="pg2">
-                <img src="/img/casinha.png">
-                <p>3x de R$ 25,50</p>
-            </div>
+                <a href="/produto/<%=produto.id%>">
+                    <div id="pg1">
+                        <img src="/img/<%=produto.fotos[0].fotourl%>">
+                        <p><%= produto.nome %></p>
+                        <p>R$ <%= produto.preco %></p>
+                    </div>
+                </a>
+                &nbsp;&nbsp;
 
-            <div id="pg3">
-                <img src="/img/casinha.png">
-                <p>3x de R$ 25,50</p>
-            </div>
+                <% }) %>
 
-            <div id="btnpgdir">
-                <svg width="10" height="18" viewBox="0 0 10 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M1 1L9 9L1 17" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>                
-            </div>
+            <% } %>
+
+            <% if (typeof usuario !== 'undefined' && (ultimovisto)){ %>
+                <div id="visualizou">
+                        <div id="grpvis">
+                            <p>Você visualizou</p>
+                            <img src="/img/<%=ultimovisto%>">
+                            <p>Acesse seu histórico de navegação <a href="/cliente/historico">aqui</a></p>
+                        </div>
+                    
+                </div>
+            <% } %>
+
+
 
         </div>
 
-        <% if (typeof usuario !== 'undefined' && (ultimovisto)){ %>
-            <div id="visualizou">
-                    <div id="grpvis">
-                        <p>Você visualizou</p>
-                        <img src="/img/<%=ultimovisto%>">
-                        <p>Acesse seu histórico de navegação <a href="/cliente/historico">aqui</a></p>
-                    </div>
-                
-            </div>
-        <% } %>
+
 
         <div id="barra"></div>
 

@@ -16,6 +16,12 @@ router.get('/descartaveis', produtoController.descartaveis);
 router.get('/loginadm', loginController.adminIndex);
 router.get('/produto/:id', produtoController.telaProduto);
 
+
+router.put('/filtrabuscaab', produtoController.filtraBuscaAcessBrinqs);
+router.put('/filtrabuscaes', produtoController.filtraBuscaEstetica);
+router.put('/filtrabuscasa', produtoController.filtraBuscaSaude);
+router.put('/filtrabuscads', produtoController.filtraBuscaDescartaveis);
+
 router.post('/produto/:id/avaliar', clienteController.avaliacao);
 
 router.post('/produto/:id/addcarrinho', autenticadorCliente, clienteController.addCarrinho);

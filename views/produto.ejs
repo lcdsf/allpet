@@ -171,8 +171,7 @@
         
                                     <div id="infoopiniao1">
                                         <label id="lbopuser">Nota <%= avaliacao.nota %> - <%= avaliacao.cliente.nome %> <%= avaliacao.cliente.sobrenome %></label> <br>
-                                        <label id="lbopdata"><%= avaliacao.datahora.getDate()%>/<%= avaliacao.datahora.getMonth()+1%>/<%= avaliacao.datahora.getFullYear()%> - 
-                                        <%=avaliacao.datahora.getHours()%>:<%=avaliacao.datahora.getMinutes()%>:<%=avaliacao.datahora.getSeconds()%></label>
+                                        <label id="lbopdata"><%= avaliacao.datahora.toLocaleString('pt-br')%></label>
                                     </div>
                                     &nbsp;&nbsp;
                                     <div id="descopiniao1">
