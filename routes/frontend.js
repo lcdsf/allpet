@@ -22,7 +22,10 @@ router.put('/filtrabuscaes', produtoController.filtraBuscaEstetica);
 router.put('/filtrabuscasa', produtoController.filtraBuscaSaude);
 router.put('/filtrabuscads', produtoController.filtraBuscaDescartaveis);
 
+//ROTAS AVALIACAO DE PRODUTOS
 router.post('/produto/:id/avaliar', clienteController.avaliacao);
+router.delete('/produto/:id/avaliardelete', clienteController.deletaAvaliacao);
+
 
 router.post('/produto/:id/addcarrinho', autenticadorCliente, clienteController.addCarrinho);
 

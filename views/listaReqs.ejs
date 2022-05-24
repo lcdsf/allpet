@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+
+
+
+
+
+    <title>AllPet - Requerimentos</title>
+</head>
+
+<body>
+
+    <%- include('./partials/header') %>
+    
+    <main> 
+
+        <div id="bannercadastro">
+            <h2>Lista de Requerimentos</h2>
+        </div>
+
+        <div id="painelminhascompras">
+
+            <% administradores.forEach(adm => { %>
+
+                        <div>
+                            <div id="contcompra">
+
+
+                                <!-- <img src="/img/<%= adm.fotourl %>" alt="foto de perfil"> -->
+
+                                <div id="infocompra">
+                                    
+                                    <label>ID: <%= adm.id %></label>
+                                    <br>
+                                    <label>Nome: <%= adm.nome %> <%= adm.sobrenome %></label>
+                                    <br>
+                                    <label>E-mail:  <%= adm.email %></label>
+                                    <br>
+                                    <label>Data de cadastro:  <%= adm.data_cadastro.toLocaleString('pt-br') %></label>
+
+                                   
+
+                                </div>
+                                <!-- <button>Ver detalhes</button> -->
+                            </div>
+                        </div>
+            <% }) %>
+
+        </div>
+
+        <div id="btnsminhascompras">
+            <a href="/admin"><button>Voltar</button></a>
+            <!-- <button>Página inicial</button> -->
+        </div>
+       
+    </main>
+
+</body>
+
+<%- include('./partials/footer') %>
+
+</html>

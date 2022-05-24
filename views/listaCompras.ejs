@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+
+
+
+
+
+    <title>AllPet - Compras</title>
+</head>
+
+<body>
+
+    <%- include('./partials/header') %>
+    
+    <main> 
+
+        <div id="bannercadastro">
+            <h2>Lista de Compras</h2>
+        </div>
+
+        
+
+        <div id="painelminhascompras">
+
+            <h3>Compras em aberto</h3>
+
+            <% comprasabertas.forEach(compra => { %>
+
+                        <div>
+                            <div id="contcompra">
+
+                                <div id="infocompra">
+                                    
+                                    <label>ID: <%=compra.id%></label>
+                                    <br>
+                                    <label>Cliente: <%=compra.cliente.nome%> <%=compra.cliente.sobrenome%></label>
+                                    <br>
+                                    <label>Data/hora: <%=compra.data.toLocaleString('pt-br')%></label>
+                                    <br>
+                                    <label><%=compra.forma_pgto%> - R$ <%=compra.valor.toFixed(2).replace('.', ',')%></label>
+                                </div>
+                                <a href="/admin/compra/<%=compra.id%>"><button>Ver detalhes</button></a> 
+                            </div>
+                        </div>
+            <% }) %>
+
+            
+
+        
+
+        </div>
+
+        <div id="painelminhascompras">
+
+            <h3>Compras finalizadas</h3>
+
+            <% comprasfinalizadas.forEach(compra => { %>
+
+                        <div>
+                            <div id="contcompra">
+
+                                <div id="infocompra">
+                                    
+                                    <label>ID: <%=compra.id%></label>
+                                    <br>
+                                    <label>Cliente: <%=compra.cliente.nome%> <%=compra.cliente.sobrenome%></label>
+                                    <br>
+                                    <label>Data/hora: <%=compra.data.toLocaleString('pt-br')%></label>
+                                    <br>
+                                    <label><%=compra.forma_pgto%> - R$ <%=compra.valor.toFixed(2).replace('.', ',')%></label>
+                                </div>
+                                <a href="/admin/compra/<%=compra.id%>"><button>Ver detalhes</button></a> 
+                            </div>
+                        </div>
+            <% }) %>
+
+        <div id="btnsminhascompras">
+            <a href="/admin"><button>Voltar</button></a>
+            <!-- <button>Página inicial</button> -->
+        </div>
+       
+    </main>
+
+</body>
+
+<%- include('./partials/footer') %>
+
+</html>

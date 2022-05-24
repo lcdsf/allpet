@@ -165,15 +165,10 @@ const produtoController = {
         let usuarioJaAvaliou;
         req.session.avaliou = 0;
 
+        //SE CLIENTE LOGADO
         if (req.session.usuario){
 
-            //SALVA ITEM NO HISTORICO
-            // let histnav = req.cookies['historico'];
-            // histnav.push(id);
-            // res.cookie('historico', histnav);
-
-            //console.log('ID DO REQ SESSION: ', req.session.usuario.id);
-
+            //SALVA PRODUTO NO HISTORICO
             await Historico.create({
                 clientes_id: req.session.usuario.id,
                 produtos_id: id
@@ -215,8 +210,11 @@ const produtoController = {
 
         let ultimovisto = "";
 
+        // console.log('AVALIACAO DO USUARIO')
+        // console.log(usuarioJaAvaliou);
 
-        res.render('produto', {produto, avaliacoes, mediageral, usuario: usuariologado, admin: adminlogado, avaliou: req.session.avaliou, ultimovisto});
+
+        res.render('produto', {avaliacao: usuarioJaAvaliou, produto, avaliacoes, mediageral, usuario: usuariologado, admin: adminlogado, avaliou: req.session.avaliou, ultimovisto});
     },
 
     filtraBuscaAcessBrinqs: async (req, res) =>{
@@ -363,7 +361,6 @@ const produtoController = {
         if (req.body.Pomadas){ cat = await CategoriaEspecifica.findOne({where: {nome: 'Pomadas'}}); cats_ids.push(cat.id); };
         if (req.body.Medicamentos){ cat = await CategoriaEspecifica.findOne({where: {nome: 'Medicamentos'}}); cats_ids.push(cat.id); };
         if (req.body.PulgasCarr){ cat = await CategoriaEspecifica.findOne({where: {nome: 'Antipulgas e Carrapatos'}}); cats_ids.push(cat.id); };
-        // if (req.body.Tapetes){ cat = await CategoriaEspecifica.findOne({where: {nome: 'Tapetes'}}); cats_ids.push(cat.id); };
 
 
         //FILTRA O RESULTADO DA BUSCA PELA FAIXA DE PREÇO SELECIONADA
@@ -482,13 +479,6 @@ const produtoController = {
         const {id} = req.params;
         const produto = await Produto.findByPk(id);
         const categoria = await CategoriaEspecifica.findByPk(produto.categorias_especificas_id);
-
-        /*const compras = await Produto.findAll({
-            raw: true, 
-            where: {id: id},
-            include: 'compras'
-        
-        });*/
 
         const qtdcompras = await ItemCompra.count({
             where: {produtos_id: id}

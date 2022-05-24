@@ -59,12 +59,12 @@
 
                             <div id="vuncrr">
                                 <label>Valor unitário</label>
-                                <label>R$ <%=item.produto.preco%></label>
+                                <label>R$ <%=item.produto.preco.toFixed(2).replace(".", ",")%></label>
                             </div>
 
                             <div id="vtcrr">
                                 <label>Total</label>
-                                <label>R$ <%=item.produto.preco * item.quantidade%></label>
+                                <label>R$ <%=(item.produto.preco * item.quantidade).toFixed(2).replace(".", ",")%></label>
                             </div>
 
                             
@@ -85,7 +85,7 @@
 
                 </div>
 
-                <h2>Valor total da compra: R$ <%= vtotal %></h2>
+                <h2>Valor total da compra: R$ <%= vtotal.toFixed(2).replace(".", ",") %></h2>
 
             </div>
 

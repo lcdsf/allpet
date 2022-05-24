@@ -6,19 +6,19 @@ const produtoController = require('../controllers/produtoController');
 
 
 
-//ROTAS CLIENTE LOGADO
+//ROTAS DO CLIENTE
 router.get('/home', autenticadorCliente, clienteController.home);
 router.get('/sair', autenticadorCliente, clienteController.sair);
 router.get('/painel', autenticadorCliente, clienteController.painel);
 router.get('/historico', autenticadorCliente, clienteController.historico);
 router.delete('/historico/delete', autenticadorCliente, clienteController.histdelete);
 
-
+//CARRINHO
 router.get('/carrinho', autenticadorCliente, clienteController.carrinho);
 router.delete('/carrinho/delete', autenticadorCliente, clienteController.deletaItemCarrinho);
 router.put('/carrinho/alteraqtditem', autenticadorCliente, clienteController.alteraQtdCarrinho);
 
-
+//COMPRAS
 router.post('/compra', autenticadorCliente, clienteController.compra);
 router.get('/compra/:id', autenticadorCliente, clienteController.detalheCompra);
 router.get('/compras', autenticadorCliente, clienteController.listaCompras);

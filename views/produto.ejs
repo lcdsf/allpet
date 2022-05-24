@@ -23,6 +23,8 @@
 
     <%- include('./partials/header') %>
 
+    <script defer src="/js/paginaProduto.js" ></script>
+
 
     
     
@@ -70,7 +72,7 @@
 
                 <div id="infoprod">
                     <h2> <%= produto.nome %> </h2>
-                    <h1>R$ <%= produto.preco %></h1>
+                    <h1>R$ <%= produto.preco.toFixed(2).replace(".", ",") %></h1>
 
                     <% if (produto.quantidade > 0){%>
                         <p>Quantidade disponível: <%=produto.quantidade%></p>
@@ -125,24 +127,63 @@
 
                     <% if (!avaliou && (typeof usuario != 'undefined')){ %>
                         <div>
-                            <p><strong>Avalie este produto:</strong></p>
+                            <!-- <p><strong>Avalie este produto:</strong> </p> -->
 
-                            <form action="/produto/<%=produto.id%>/avaliar" method="POST">
-                                <label for="">Comentário: </label>
-                                <br>
-                                <textarea style="width: 100%;" name="comentario" id=""></textarea> 
-                                <br>
-                                <label for="">Nota: </label>
-                                <input type="number" name="nota" id="" min="1" max="10" style="width: 10%;">
-                                <br><br>
+                            <div id="btnsprod"><button id="btnAvaliarProduto">Avaliar produto</button></div>
 
-                                <div id="btnsprod"><button type="submit" >Avaliar</button></div>
-                            </form>
+                            <div id="formCriaAvaliacao" style="display: none">
+
+                                <form   action="/produto/<%=produto.id%>/avaliar" method="POST" >
+                                    <label for="">Comentário: </label>
+                                    <br>
+                                    <textarea style="width: 100%;" name="comentario" id=""></textarea> 
+                                    <br>
+                                    <label for="">Nota: </label>
+                                    <input type="number" name="nota" id="" min="1" max="10" style="width: 10%;">
+                                    <br><br>
+    
+                                    <div id="btnsprod"><button type="submit" >Avaliar</button></div>
+                                </form>
+                                <br>
+                                <button id="btnCancelaAvaliacao">Cancelar</button>
+                            </div>
+
 
                         </div>
+
                     <% }else{ %>
                         <% if (avaliou && (typeof usuario != 'undefined')){ %>
-                            <h4>Você já avaliou este produto</h4>
+                            <h4 id="msgAvaliou" >Você já avaliou este produto &nbsp; <button id="editaAvaliacao" >Editar avaliação</button> </h4>
+
+                            <div id="formEditaAvaliacao"  style="display: none;">
+
+                                <form action="/produto/<%=produto.id%>/avaliar" method="POST">
+                                    <label for="">Comentário: </label>
+                                    <br>
+                                    <textarea style="width: 100%;" name="comentario"><%=avaliacao.descricao%></textarea> 
+                                    <br>
+                                    <label for="">Nota: </label>
+                                    <input type="number" name="nota" id="" min="1" max="10" style="width: 10%;" value="<%=avaliacao.nota%>">
+                                    <br><br>
+    
+                                    <div id="btnsprod"><button type="submit" >Salvar</button></div>
+                                </form>
+                                <br>
+                                <div id="btnsprod">
+                                    <button id="fechaEdicao">Fechar</button>
+                                    <br>
+                                    <form action="/produto/<%=produto.id%>/avaliardelete?_method=DELETE" method="POST">
+                                        <button id="btnDeletaAvaliacao" type="submit" style="background-color: red;">Excluir avaliação</button>
+                                    </form> 
+                                </div>
+                                    
+
+
+                            </div>
+
+
+
+
                         <% } %>
                     <% } %>
 
