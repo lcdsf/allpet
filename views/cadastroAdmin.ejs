@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+
+
+
+
+
+    <title>AllPet - Cadastro de Administrador</title>
+</head>
+
+<body>
+
+    <%- include('./partials/header') %>
+    
+    <main>
+
+        <div id="bannercadastro">
+            <h2>Cadastro AllPet - Administrador</h2>
+        </div>
+
+        <img src="/img/cadastro.png" id="capacadastro">
+
+        <form action="/admin/user/cadastro" method="POST" id="formuser">
+
+            <% if (typeof erro !== 'undefined'){ %>
+                <p style="color: red; text-align: center;"><%= erro %></p>
+            <% } %>
+
+           <% if (typeof erros !== 'undefined'){ %>
+                <p style="color: red; text-align: center;"><%= erros+'\n' %></p>
+            <% } %>
+
+            <% if (typeof cadastroOK !== 'undefined'){ %>
+                <p style="color: green; text-align: center;"><%= cadastroOK %></p>
+            <% } %>
+
+            <fieldset>
+                <legend>Complete as informações a seguir:</legend>
+
+                <h3>Dados pessoais</h3>
+
+
+                <label for="nome">Nome</label>
+                <input type="text" name="nome" id="nome"> <br><br>
+
+                <label for="sobrenome">Sobrenome</label>
+                <input type="text" name="sobrenome" id="sobrenome"> <br><br>
+
+
+                <h3>Dados de login</h3>
+
+                <label for="email">E-mail</label> 
+                <input type="email" name="email" id="email"> <br><br>
+
+                <label for="senha">Senha</label> 
+                <input type="password" name="senha" id="senha"> <br><br>
+
+                <label for="confirmaSenha">Confirmar senha</label> 
+                <input type="password" name="confirmaSenha" id="confirmaSenha"> <br><br>
+
+                
+ 
+
+                <button type="submit" id="btncaduser">Enviar</button> &nbsp;
+                <a href="/admin">VOLTAR</a>
+
+            </fieldset>
+
+
+
+        </form>
+
+    </main>
+
+</body>
+
+<%- include('./partials/footer') %>
+
+</html>

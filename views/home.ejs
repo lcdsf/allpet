@@ -82,7 +82,7 @@
                     <div id="pg1">
                         <img src="/img/<%=produto.fotos[0].fotourl%>">
                         <p><%= produto.nome %></p>
-                        <p>R$ <%= produto.preco %></p>
+                        <p>R$ <%= produto.preco.toFixed(2).replace(".", ",") %></p>
                     </div>
                 </a>
                 &nbsp;&nbsp;
@@ -133,7 +133,7 @@
                                 <img src="/img/<%= fotos[0] %>">
                                 <label><%=produto.nome %></label>
                                 <br>
-                                <label>R$ <%= produto.preco %></label>
+                                <label>R$ <%= produto.preco.toFixed(2).replace(".", ",") %></label>
                             </a>
                         </div>
                      

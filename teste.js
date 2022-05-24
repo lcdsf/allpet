@@ -378,5 +378,11 @@ async function teste3MaisVendidos(){
      console.log(i.filename);
  }*/
 
- let x = new Date().toLocaleString('pt-br')
- console.log(x)
+//  let x = new Date().toLocaleString('pt-br')
+
+async function todasCompras(){
+    let x = await Compra.findAll();
+    console.log(x)
+}
+
+todasCompras();

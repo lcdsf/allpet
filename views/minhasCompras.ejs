@@ -33,9 +33,9 @@
                         
                         <label>ID: <%=compra.id%></label>
                         <br>
-                        <label>Data/hora: <%=compra.data.toLocaleString('pt-br')%>></label>
+                        <label>Data/hora: <%=compra.data.toLocaleString('pt-br')%></label>
                         <br>
-                        <label><%=compra.forma_pgto%> - R$ <%=compra.valor%></label>
+                        <label><%=compra.forma_pgto%> - R$ <%=compra.valor.toFixed(2).replace('.', ',')%></label>
 
                     </div>
                     <a href="/cliente/compra/<%=compra.id%>"><button>Ver detalhes</button></a> 

@@ -310,7 +310,19 @@ const clienteController = {
         const cliente_id = req.session.usuario.id;
         
         const compra = await Compra.findByPk(compra_id, {
-            include: ['produtos', 'statuscompra', 'endereco']
+            // include: ['produtos', 'statuscompra', 'endereco']
+            include: [{
+                model: Produto, 
+                as: 'produtos', 
+                include:[{
+                    model: Foto, 
+                    as: 'fotos'
+                }]
+                },
+                'endereco',
+                'statuscompra',
+                'requerimento'
+            ]
         });
 
 
@@ -518,20 +530,50 @@ const clienteController = {
 
         if (usuarioJaAvaliou){
             req.session.usuario.avaliou = idproduto;
+
+            //SE JA EXISTE AVALIACAO, ENTAO ALTERA
+            await Avaliacao.update(
+                {
+                    descricao: comentario,
+                    datahora: Date.now(),
+                    nota
+                },
+                {
+                    where: {
+                        produtos_id: idproduto,
+                        clientes_id: idcliente
+                    }
+                }
+            );
+        }else{
+            //SE NAO EXISTE AVALIACAO, ENTAO CRIA
+            await Avaliacao.create({
+                descricao: comentario,
+                datahora: Date.now(),
+                nota,
+                produtos_id: idproduto,
+                clientes_id: idcliente,
+
+            });
         }
 
-        await Avaliacao.create({
-            descricao: comentario,
-            datahora: Date.now(),
-            nota,
-            produtos_id: idproduto,
-            clientes_id: idcliente,
-
-        });
 
 
         res.redirect('/produto/'+req.params.id);
 
+
+    },
+
+    deletaAvaliacao: async (req, res) =>{
+        await Avaliacao.destroy({
+            where: {
+                produtos_id: req.params.id,
+                clientes_id: req.session.usuario.id
+            }
+
+        });
+
+        res.redirect('/produto/'+req.params.id);
 
     },
 

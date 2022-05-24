@@ -22,6 +22,11 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false
         },
+        finalizado: {
+            type: DataTypes.BOOLEAN, 
+            allowNull: false,
+            defaultValue: false
+        },
         enderecos_id: {
             type: DataTypes.INTEGER,
             allowNull: true

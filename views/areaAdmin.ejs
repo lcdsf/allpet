@@ -35,25 +35,39 @@
                     <label href="/"> <strong><%= admin.nome %> <%= admin.sobrenome %></strong></label>
                     <br><br>
                     <!-- <a href="/">Alterar dados pessoais</a> -->
-                    <a href="/">Excluir conta</a>
-                    <br><br>
+                    
+                    <br>
                     <a href="/admin/sair">Sair</a>
+                    <br>
+                    <a href="/">Página inicial</a>
+                    <br>
+                    <a href="/admin/delete">Excluir conta</a>
 
                 </div>
 
                 
                 <div id="painelopuser">
+                    
+                    <h4>Clientes</h4>
+
                     <a href="/admin/clientes" ><button >Exibir Clientes</button></a> 
                     <br>
+                    <a href="/admin/compras" ><button >Exibir Compras</button></a> 
+                    <br>
+                    <a href="/admin/requerimentos" ><button >Exibir Requerimentos</button></a> 
+
+                    <h4>Produtos</h4>
+
                     <a href="/admin/produtos"><button  >Exibir Produtos</button></a>
                     <br>
+                    <a href="/admin/produtos/cadastro"><button>Cadastrar Produto</button></a>
+
+                    <h4>Administradores</h4>
+                    
                     <a href="/admin/users"><button>Exibir Administradores</button></a> 
                     <br>
-                    <a href="/admin/produtos/cadastro"><button>Cadastrar Produto</button></a>
-                    <br>
                     <a href="/admin/user/cadastro"><button>Cadastrar Administrador</button></a>
-                    <br>
-                    <a href="/"><button>Página Inicial</button></a>
+
 
                 </div>
             

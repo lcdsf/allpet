@@ -18,6 +18,8 @@
 <body>
 
     <%- include('./partials/header') %>
+
+    <script defer src="/js/adminCompra.js"></script>
     
     <main id="maindetalhecompra"> 
 
@@ -26,7 +28,7 @@
         </div>
 
         <div id="infodetalhecompra">
-            <h2>Data/hora: <%=compra.data.toLocaleString('pt-br')%> | Valor: R$ <%=compra.valor%> | <%=compra.forma_pgto%></h2>
+            <h2>Data/hora: <%=compra.data.toLocaleString('pt-br')%> | Valor: R$ <%=compra.valor.toFixed(2).replace('.', ',')%> | <%=compra.forma_pgto%></h2>
 
             <div id="separador"></div>
 
@@ -37,11 +39,11 @@
                     <% compra.produtos.forEach(item => { %>
 
                         <div id="itemdetalhecompra">
-                            <img src="/img/racao.png"> 
+                            <img src="/img/<%=item.fotos[0].fotourl%>"> 
                             <br>
                             <label><%=item.nome%></label>
                             <br>
-                            <label>R$ <%=item.preco%></label>
+                            <label>R$ <%=item.preco.toFixed(2).replace('.', ',')%></label>
                             <br>
                             <label>Qtd: <%=item.ItemCompra.quantidade%></label>    
                         </div>
@@ -54,7 +56,14 @@
 
         <div id="separador"></div>
 
-        <h2>Status da compra</h2>
+        <h2>
+            Status da compra <% if (compra.finalizado){%>
+            (Compra finalizada)
+           <%} %>
+        </h2>
+
+
+
 
         <% if (compra.endereco !== null){%>
             <h3>Endereço de entrega: Rua <%=compra.endereco.rua%>, <%=compra.endereco.numero%>, <%=compra.endereco.bairro%>, <%=compra.endereco.cidade%> - <%=compra.endereco.estado%></h3>
@@ -77,10 +86,84 @@
 
         </div>
 
+        <% if (i > 2){%> 
+        
+            <div id="formeditastatus" style="margin: 0px auto; display: none;">
+            
+                <form action="/admin/compra/<%=compra.id%>/editastatuscompra?_method=PUT"  method="POST" >
+                        <input type="number" name="statusid" style="display: none;" value="<%=compra.statuscompra[compra.statuscompra.length-1].id%>">
+                        <fieldset style="margin: 0px auto; max-width: 70%;" >
+                        <legend>Status nº <%= i-1 %></legend>
+                    
+
+                            <textarea name="descricao" id="" style="width: 90%;"><%=compra.statuscompra[compra.statuscompra.length-1].status%></textarea>
+                    
+                            <div id="btnsdetalhecompra" >
+                                <button type="submit">SALVAR</button>
+
+                            </div>
+                        </fieldset> 
+                    </form>
+                    
+                    <div id="btnsdetalhecompra"><button id="cancelaedicaostatus" style="background-color: orange;">CANCELAR</button></div>
+            </div>
+        <% } %>
+
+        <div id="formaddstatus" style="margin: 0px auto; display: none;">
+            
+            <form action="/admin/compra/<%=compra.id%>/addstatuscompra"  method="POST" >
+                    <fieldset style="margin: 0px auto; max-width: 70%;" >
+                    <legend>Status nº <%= i%></legend>
+                
+
+                        <textarea name="descricao" id="" style="width: 90%;"></textarea>
+                
+                        <div id="btnsdetalhecompra" >
+                            <button type="submit">ADICIONAR</button>
+                           
+                        </div>
+                    </fieldset> 
+                </form>
+
+                <div id="btnsdetalhecompra"><button id="cancelaaddstatus" style="background-color: orange;">CANCELAR</button></div>
+            
+        </div>
+
+
+
+        
+    
+    <% if (typeof usuario !== 'undefined'){ %>
+
         <div id="btnsdetalhecompra">
            <a href="/cliente/compras"><button>VER TODAS AS MINHAS COMPRAS</button></a>
-            <a href="/cliente/ajuda"><button>AJUDA</button></a>
+           
+            <% if (!compra.requerimento){%>
+                <a href="/cliente/ajuda"><button>AJUDA</button></a>
+            <% }else{%>
+                <a href="/cliente/requerimento/<%=compra.requerimento.id%>"><button>VER REQUERIMENTO</button></a>
+            <% } %>
         </div>
+
+    <% }else{%>
+        <% if (typeof admin !== 'undefined'){ %>
+            <div id="btnsdetalhecompra">
+                <% if (!compra.finalizado){%>
+                <button id="addstatus" >ADICIONAR STATUS</button>
+                <button id="editastatus" >EDITAR STATUS</button>
+                <form action="/admin/compra/<%=compra.id%>/deletestatuscompra?_method=DELETE" method="POST">
+                    <input type="number" name="statusid" style="display: none;" value="<%=compra.statuscompra[compra.statuscompra.length-1].id%>">
+                    <button type="submit">REMOVER STATUS</button>
+                </form>
+                <form action="/admin/compra/<%=compra.id%>/finalizar?_method=PUT" id="formfinalizacompra" method="POST">
+                    <input type="number" name="statusid" style="display: none;" value="<%=compra.statuscompra[compra.statuscompra.length-1].id%>">
+                    <button type="submit">FINALIZAR COMPRA</button>
+                </form>
+                <% } %>
+                <a href="/admin/compras"><button>VER TODAS AS COMPRAS</button></a>
+             </div>
+        <% } %>
+    <% } %>
       
 
     </main>
