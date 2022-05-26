@@ -25,29 +25,87 @@
             <h2>Meus Requerimentos</h2>
         </div>
 
+
+
+
         <div id="painelminhascompras">
 
-            <% requerimentos.forEach(requerimento => { %>
-                    <div id="contcompra">
-                        <div id="infocompra">
-                            
-                            <label>Protocolo: #<%=requerimento.id%></label>
-                            <br><br>
-                            <label> Compra #<%=requerimento.compra.id%></label>
-                            <br>
-                            <label><%=requerimento.compra.data.toLocaleString('pt-br')%></label>
-                            <br>
-                            <label><%=requerimento.compra.forma_pgto%> - R$ <%=requerimento.compra.valor%></label>
-                            <br><br>
-                            <label><%=requerimento.motivo%></label>
-                        </div>
-                        <a href="/cliente/requerimento/<%=requerimento.id%>"><button>Ver detalhes</button></a>
-                    </div>
+            <h3>Requerimentos em aberto</h3>
 
+            <% reqsabertos.forEach(req => { %>
+
+                        <div>
+                            <div id="contcompra">
+
+
+                                <div id="infocompra">
+                                    
+                                    <label>Nº Protocolo: <%=req.id%></label>
+                                    <br>
+                                    <label>Data de abertura: <%=req.datahora.toLocaleString('pt-br')%></label>
+                                    <br>
+                                    <label>Motivo: <%=req.motivo%></label>
+                                    <br><br>
+                                    <% if (typeof req.compra.id !== null){ %>
+                                        <label> Compra ID: <%=req.compra.id%></label>
+                                        <br>
+                                        <!-- <label> Cliente: <%=req.compra.cliente.nome%> <%=req.compra.cliente.sobrenome%></label> -->
+                                       
+                                        <label>Data da compra: <%=req.compra.data.toLocaleString('pt-br')%></label>
+                                        <br>
+                                        <label><%=req.compra.forma_pgto%> - R$ <%=req.compra.valor.toFixed(2).replace('.', ',')%></label>
+                                    <% } %>
+                                    <br><br>
+                                    
+                                   
+
+                                </div>
+                                 <a href="/cliente/requerimento/<%=req.id%>"><button>Ver detalhes</button></a> 
+                            </div>
+                        </div>
             <% }) %>
 
+        </div>
+
+        <div id="painelminhascompras">
+
+            <h3>Requerimentos finalizados</h3>
+
+            
+                <% reqsfechados.forEach(req => { %>
+                    <%if (req !== null){%>
+
+                            <div>
+                                <div id="contcompra">
 
 
+                                    <div id="infocompra">
+                                        
+                                        <label>Nº Protocolo: <%=req.id%></label>
+                                        <br>
+                                        <label>Data de abertura: <%=req.datahora.toLocaleString('pt-br')%></label>
+                                        <br>
+                                        <label>Motivo: <%=req.motivo%></label>
+                                        <br><br>
+                                        <label> Compra ID: <%=req.compra.id%></label>
+                                        <br>
+                                        <!-- <label> Cliente: <%=req.compra.cliente.nome%> <%=req.compra.cliente.sobrenome%></label> -->
+                                       
+                                        <label>Data da compra: <%=req.compra.data.toLocaleString('pt-br')%></label>
+                                        <br>
+                                        <label><%=req.compra.forma_pgto%> - R$ <%=req.compra.valor.toFixed(2).replace('.', ',')%></label>
+                                        <br><br>
+                                        
+                                    
+
+                                    </div>
+                                    <a href="/cliente/requerimento/<%=req.id%>"><button>Ver detalhes</button></a> 
+                                </div>
+                            </div>
+                        <% } %>
+
+                <% }) %>
+            
         </div>
 
         <div id="btnsminhascompras">

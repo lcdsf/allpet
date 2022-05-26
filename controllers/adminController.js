@@ -1,4 +1,4 @@
-const {Administrador, Requerimento, StatusRequerimento, Compra, StatusCompra, Produto, Foto} = require('../database/models');
+const {Administrador, Requerimento, StatusRequerimento, Compra, StatusCompra, Produto, Foto, Cliente} = require('../database/models');
 const {validationResult} = require('express-validator');
 const bcrypt = require('bcrypt');
 const { compra } = require('./clienteController');
@@ -95,16 +95,14 @@ const adminController = {
                 }]
                 },
                 'endereco',
-                'statuscompra'
+                'statuscompra',
+                'requerimento', 
+                'cliente'
             ]
         });
 
 
         res.render('detalheCompra', {compra, admin: req.session.admin});
-
-    },
-
-    addStatusCompra: async (req, res) => {
 
     },
 
@@ -137,9 +135,15 @@ const adminController = {
 
     deleteStatusCompra: async (req, res) => {
 
-        await StatusCompra.destroy({where: {id: req.body.statusid}});
+        const status = await StatusCompra.findAll({ where: {compras_id: req.params.id}});
 
-        res.redirect('/admin/compra/'+req.params.id+'?Status removido com sucesso!')
+        if (status.length > 1){
+            await StatusCompra.destroy({where: {id: req.body.statusid}});
+            res.redirect('/admin/compra/'+req.params.id+'?Status removido com sucesso!')
+        }else{
+            res.redirect('/admin/compra/'+req.params.id+'?Não é permitido remover o primeiro status')
+        }
+
 
     },
 
@@ -153,9 +157,107 @@ const adminController = {
 
     listaReqs: async (req, res) => {
 
-        const reqs = await Requerimento.findAll({ include: 'compra' });
+        const reqsabertos = await Requerimento.findAll({
+            where: {finalizado: false},
+            include: [{
+                model: Compra, 
+                as: 'compra', 
+                include:[{
+                    model: Cliente, 
+                    as: 'cliente'
+                }]
+            }] 
+        
+        });
 
-        res.render('listaReqs', {admin: req.session.admin, reqs});
+        const reqsfechados = await Requerimento.findAll({
+            where: {finalizado: true},
+            include: [{
+                model: Compra, 
+                as: 'compra', 
+                include:[{
+                    model: Cliente, 
+                    as: 'cliente'
+                }]
+            }] 
+        
+        });
+
+        res.render('listaReqs', {admin: req.session.admin, reqsabertos, reqsfechados});
+    },
+
+    detalheReq: async (req, res) => {
+
+        const requerimento = await Requerimento.findByPk(req.params.id, {
+            include: [{
+                model: Compra, 
+                as: 'compra', 
+                    include:[
+                        {
+                            model: Cliente, 
+                            as: 'cliente'
+                        }]
+                },
+                'status'
+
+            ] 
+        
+        });
+
+        res.render('detalheRequerimento', {admin: req.session.admin, requerimento});
+    },
+
+    editaStatusReq: async (req, res) => {
+
+        // console.log('STATUSCOMPRA EDIT: ', req.body);
+        
+        await StatusRequerimento.update(
+            {
+                status: req.body.descricao,
+                data: Date.now()
+            },
+            {where: {id: req.body.statusid}}
+        );
+
+        res.redirect('/admin/requerimento/'+req.params.id+'?Status atualizado com sucesso!')
+    },
+
+    addStatusReq: async (req, res) => {
+
+        
+        await StatusRequerimento.create({
+                status: req.body.descricao,
+                datahora: Date.now(),
+                requerimentos_id: req.params.id
+        });
+
+        res.redirect('/admin/requerimento/'+req.params.id+'?Status adicionado com sucesso!')
+    },
+
+    deleteStatusReq: async (req, res) => {
+
+        const status = await StatusRequerimento.findAll({ where: {requerimentos_id: req.params.id}});
+
+        if (status.length > 1){
+            await StatusRequerimento.destroy({where: {id: req.body.statusid}});
+            res.redirect('/admin/requerimento/'+req.params.id+'?Status removido com sucesso!')
+        }else{
+            res.redirect('/admin/requerimento/'+req.params.id+'?Não é permitido remover o primeiro status')
+        }
+    },
+
+    finalizaReq: async (req, res) => {
+        await Requerimento.update({finalizado: true}, {where: {id: req.params.id}});
+
+        await StatusRequerimento.create({
+            status: 'Requerimento finalizado pelo sistema',
+            datahora: Date.now(),
+            requerimentos_id: req.params.id
+        });
+
+
+        res.redirect('/admin/requerimento/'+req.params.id+'?Requerimento finalizado com sucesso!')
+
     },
 
     sair: async (req, res) => {

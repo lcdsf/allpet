@@ -36,7 +36,7 @@
 
             <div id="detalhescompra">
                 <p>DETALHES DA COMPRA - ID: <%=compra.id%></p>
-                <p>Valor: R$ <%=valortotal%> - <%=compra.forma_pgto%></p>
+                <p>Valor: R$ <%=valortotal.toFixed(2).replace('.', ',')%> - <%=compra.forma_pgto%></p>
                 
                 <div id="contdetcompra">
 
@@ -47,7 +47,7 @@
                                 <br>
                                 <label><%=item.produto.nome%></label>
                                 <br>
-                                <label>R$ <%=item.produto.preco%></label>
+                                <label>R$ <%=item.produto.preco.toFixed(2).replace('.', ',')%></label>
                                 <br>
                                 <label>Qtd: <%=item.quantidade%></label>    
                             </div>
@@ -73,7 +73,7 @@
         <div id="btnscompraconcluida">
              <a href="/cliente/compra/<%=compra.id%>"><button>VER DETALHES</button></a> 
 
-            <button>AJUDA</button>
+            <a href="/cliente/ajuda"><button>AJUDA</button></a>
 
         </div>
 

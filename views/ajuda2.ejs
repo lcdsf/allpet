@@ -40,7 +40,7 @@
             <div id="inforequerimento">
 
                 <h3>Protocolo #<%=requerimento.id%></h2>
-                <p>Compra: ID: <%=compra.id%> - <%=compra.data%> - R$ <%=compra.valor%> - <%=compra.forma_pgto%></p>                    
+                <p>Compra: ID: <%=compra.id%> - <%=compra.data.toLocaleString('pt-br')%> - R$ <%=compra.valor.toFixed(2).replace('.', ',')%> - <%=compra.forma_pgto%></p>                    
                 <p>Motivo: <%=requerimento.motivo%></p>
             
             </div>
@@ -52,8 +52,8 @@
 
             <div id="btnsajudacompra2">
                 <a href="/cliente/requerimento/<%=requerimento.id%>"><button>Ver detalhes</button></a>
-                <button>Ver todos os requerimentos</button>
-                <button>Página inicial</button>
+                <a href="/cliente/requerimentos"><button>Ver todos os requerimentos</button></a>
+                <a href="/"><button>Página inicial</button></a>
             </div>
 
 

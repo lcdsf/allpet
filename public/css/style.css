@@ -415,12 +415,14 @@
 }
 
 #btnsdetalhecompra{
-    width: 70%;
+    width: 90%;
+    height: fit-content;
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
     margin-left: auto; margin-right: auto;
     margin-top: 50px;
+    
 }
 
 #btnsdetalhecompra button{

@@ -23,6 +23,45 @@ const clienteController = {
 
         res.render('editaCliente', {usuario});
     },
+
+    alteraDados: async (req, res) =>{
+
+        const {nome, sobrenome, telefone} = req.body;
+
+            
+        //SE MUDOU FOTO DE PERFIL, ENTÃO ALTERA NOME DA FOTO
+        if (req.file){
+            await Cliente.update(
+                {fotourl: req.file.filename},
+                {where: {id: req.session.usuario.id}}
+            );
+
+            //ALTERA NA SESSAO TAMBEM
+            req.session.usuario.fotourl = req.file.filename;
+        }
+
+        await Cliente.update(
+            {nome, sobrenome, telefone},
+            {where: {id: req.session.usuario.id}}
+        );
+
+        //ALTERA DADOS DA SESSAO TAMBEM
+        req.session.usuario.nome = nome;
+        req.session.usuario.sobrenome = sobrenome;
+        req.session.usuario.telefone = telefone;
+
+        res.render('areaCliente', {usuario: req.session.usuario});
+    },
+
+    delete: async(req, res) => {
+        await Cliente.destroy({
+            where: {id: req.session.usuario.id}
+        })
+
+        req.session.destroy();
+
+        res.redirect('/?Cadastro removido com sucesso!');
+    },
     
     home: async(req, res) => {
 
@@ -97,14 +136,18 @@ const clienteController = {
 
         const itensCarrinho = await ItemCarrinho.findAll({
             where: {clientes_id: cliente_id},
-            include: 'produto'
+            // include: 'produto'
+            include: [{
+                model: Produto, 
+                as: 'produto', 
+                include:[{
+                    model: Foto, 
+                    as: 'fotos'
+                }]
+            }]
         })
         .then(result => result.map(produto => produto.toJSON()));
 
-        // //BUSCA FORMAS DE PAGAMENTO
-        // const formasPgto = await FormaPgto.findAll()
-        // .then(result => result.map(item => item.toJSON()))
-        // .catch(error => console.log('ERRO AO BUSCAR FORMA PGTO: ', error));
 
         //BUSCA ENDERECOS DO CLIENTE
         const enderecos = await Endereco.findAll({
@@ -321,7 +364,8 @@ const clienteController = {
                 },
                 'endereco',
                 'statuscompra',
-                'requerimento'
+                'requerimento',
+                'cliente'
             ]
         });
 
@@ -337,22 +381,37 @@ const clienteController = {
 
     listaCompras: async (req, res) => {
 
-        const cliente_id = req.session.usuario.id;
+        // const cliente_id = req.session.usuario.id;
 
-        const compras = await Compra.findAll({
-            where: {clientes_id: cliente_id}
-        })
+        // const compras = await Compra.findAll({
+        //     where: {clientes_id: cliente_id}
+        // })
+
+        const todasComprasAbertas = await Compra.findAll({
+            where: {finalizado: false, clientes_id: req.session.usuario.id}
+        });
+
+        const todasComprasFinalizadas = await Compra.findAll({
+            where: {finalizado: true, clientes_id: req.session.usuario.id}
+        });
 
 
-        res.render('minhasCompras', {usuario: req.session.usuario, compras});
+        const comprasabertas = todasComprasAbertas.filter( c => c.clientes_id === req.session.usuario.id);
+        const comprasfinalizadas = todasComprasFinalizadas.filter( c => c.clientes_id === req.session.usuario.id);
+
+
+        res.render('minhasCompras', {usuario: req.session.usuario, comprasabertas, comprasfinalizadas});
     },
 
     ajuda: async (req, res) => {
 
-        const compras = await Compra.findAll({ 
+        const todasCompras = await Compra.findAll({ 
             where: {clientes_id: req.session.usuario.id},
-            exclude: 'requerimento'
+            include: 'requerimento'
         });
+
+        //FILTRAR SOMENTE COMPRAS EM ABERTO QUE NAO POSSUEM REQUERIMENTOS
+        const compras = todasCompras.filter( c => c.requerimento === null && !c.finalizado);
 
         res.render('ajuda', {usuario: req.session.usuario, compras});
     },
@@ -382,7 +441,19 @@ const clienteController = {
     detalheRequerimento: async (req, res) => {
 
         const requerimento = await Requerimento.findByPk(req.params.id, {
-            include: ['status', 'compra']
+            // include: ['status', 'compra']
+            include: [{
+                model: Compra, 
+                as: 'compra', 
+                    include:[
+                        {
+                            model: Cliente, 
+                            as: 'cliente'
+                        }]
+                },
+                'status'
+
+            ] 
         })
 
         res.render('detalheRequerimento', {usuario: req.session.usuario, requerimento})
@@ -390,22 +461,52 @@ const clienteController = {
 
     listaRequerimentos: async (req, res) => {
 
-        const compras = await Compra.findAll({raw: true, where: {clientes_id: req.session.usuario.id}})
-        //.then(result => result.map(produto => produto.toJSON()));
 
-
-
-        let idscompras = compras.map(compra => compra.id);
-
-        const requerimentos = await Requerimento.findAll({
-            where: {
-                compras_id: idscompras,
-                finalizado: false
-            },
-            include: 'compra'
+        const todosReqsAbertos = await Requerimento.findAll({
+            where: {finalizado: false},
+            include: [{
+                model: Compra, 
+                as: 'compra', 
+                include:[{
+                    model: Cliente, 
+                    as: 'cliente',
+                    where: {id: req.session.usuario.id}
+                }]
+            }] 
+        
         });
 
-        res.render('meusRequerimentos', {usuario: req.session.usuario, requerimentos})
+        const todosReqsFechados = await Requerimento.findAll({
+            where: {finalizado: true},
+            include: [{
+                model: Compra, 
+                as: 'compra', 
+                include:[{
+                    model: Cliente,
+                    as: 'cliente', 
+                }]
+            }] 
+        
+        });
+
+        const reqsabertos = todosReqsAbertos.filter( r => r.compra.cliente.id === req.session.usuario.id);
+        const reqsfechados = todosReqsFechados.filter( r => r.compra.cliente.id === req.session.usuario.id);
+
+        res.render('meusRequerimentos', {usuario: req.session.usuario, reqsabertos, reqsfechados});
+    },
+
+    cancelaRequerimento: async (req, res) => {
+        await Requerimento.update({finalizado: true}, {where: {id: req.params.id}});
+
+        await StatusRequerimento.create({
+            status: 'Requerimento cancelado pelo cliente',
+            datahora: Date.now(),
+            requerimentos_id: req.params.id
+        });
+
+
+        res.redirect('/cliente/requerimento/'+req.params.id+'?Requerimento cancelado com sucesso!')
+
     },
     
     store: async (req, res) => {
@@ -583,6 +684,58 @@ const clienteController = {
         });
 
         res.redirect('/cliente/historico');
+    },
+
+    listaEnderecos: async (req, res) =>{
+
+        const enderecos = await Endereco.findAll({
+            where: {clientes_id: req.session.usuario.id}
+        });
+
+        res.render('listaEnderecos', {usuario: req.session.usuario, enderecos});
+    },
+
+    editaEndereco: async (req, res) =>{
+
+        const endereco = await Endereco.findByPk(req.params.id);
+        const estados = ['AC', 'AL', 'AP', 'AM', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MT',
+        'MG', 'MS', 'PA', 'PB', 'PE', 'PI', 'PR', 'RJ', 'RN', 'RS', 'RO', 'RR', 'SC', 'SE', 'TO'];
+
+        res.render('editaEndereco', {usuario: req.session.usuario, endereco, estados});
+    },
+
+    alteraEndereco: async (req, res) =>{
+
+        const {cep, rua, numero, bairro, cidade, estado, complemento} = req.body;
+
+        await Endereco.update(
+            {cep, rua, numero, bairro, cidade, estado, complemento},
+            {where: {id: req.params.id}}
+        );
+
+        res.redirect('/cliente/enderecos?Endereco alterado com sucesso!');
+    },
+
+    criaEndereco: async (req, res) =>{
+       res.render('addEndereco');
+    },
+
+    deletaEndereco: async (req, res) =>{
+        await Endereco.destroy({
+            where: {id: req.params.id}
+        });
+
+        res.redirect('/cliente/enderecos?Endereco removido com sucesso!');
+     },
+
+    salvaEndereco: async (req, res) => {
+        const {cep, rua, numero, bairro, cidade, estado, complemento} = req.body;
+
+        await Endereco.create(
+            {cep, rua, numero, bairro, cidade, estado, complemento, clientes_id: req.session.usuario.id}
+        );
+
+        res.redirect('/cliente/enderecos?Endereco adicionado com sucesso!');
     }
 
 };

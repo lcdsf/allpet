@@ -18,11 +18,13 @@
 <body>
 
     <%- include('./partials/header') %>
+
+    <script defer src="/js/adminReq.js"></script>
     
     <main id="maindetalhecompra"> 
 
         <div id="bannercadastro">
-            <h2>Detalhes do Requerimento #<%=requerimento.id%></h2>
+            <h2>Requerimento Protocolo Nº <%=requerimento.id%> <%if(requerimento.finalizado){%>(FINALIZADO)<%}%></h2>
         </div>
 
         <div id="infodetalhecompra">
@@ -37,9 +39,15 @@
                     <div id="inforeqcompra">
                         <h3>Compra ID #<%=requerimento.compra.id%></h3>
                         <p>Data/hora da compra: <%=requerimento.compra.data.toLocaleString('pt-br')%></p>
-                        <p><%=requerimento.compra.forma_pgto%> - R$ <%=requerimento.compra.valor%></p>
+                        <p><%=requerimento.compra.forma_pgto%> - R$ <%=requerimento.compra.valor.toFixed(2).replace('.', ',')%></p>
 
-                        <a href="/cliente/compra/<%=requerimento.compra.id%>"><button>Ver detalhes da compra</button></a> 
+                        <p>Cliente: <%=requerimento.compra.cliente.nome%> <%=requerimento.compra.cliente.sobrenome%></p>
+
+                        <% if (typeof admin !== 'undefined'){%>
+                            <a href="/admin/compra/<%=requerimento.compra.id%>"><button>Ver detalhes da compra</button></a> 
+                        <% }else{%>
+                            <a href="/cliente/compra/<%=requerimento.compra.id%>"><button>Ver detalhes da compra</button></a> 
+                        <%} %>
                     </div>
                     
 
@@ -58,7 +66,7 @@
 
                 <div id="statuschk">
                     <div id="dotcompra"><%=i%></div>
-                    <p><%=status.datahora%></p>
+                    <p><%=status.datahora.toLocaleString('pt-br')%></p>
                     <p><%=status.status%></p>
                 </div>
                 <%i++%>
@@ -67,9 +75,93 @@
 
         </div>
 
-        <div id="btnsdetalhereq">
-            <a href="/cliente/requerimentos"><button>VER TODOS OS MEUS REQUERIMENTOS</button></a>
-            <a href="/cliente/painel"><button>ÁREA DO CLIENTE</button></a> 
+        <% if (i > 2){%> 
+        
+            <div id="formeditastatus" style="margin: 0px auto; display: none;">
+            
+                <form action="/admin/requerimento/<%=requerimento.id%>/editastatusreq?_method=PUT"  method="POST" >
+                        <input type="number" name="statusid" style="display: none;" value="<%=requerimento.status[requerimento.status.length-1].id%>">
+                        <fieldset style="margin: 0px auto; max-width: 70%;" >
+                        <legend>Status nº <%= i-1 %></legend>
+                    
+
+                            <textarea name="descricao" id="" style="width: 90%;"><%=requerimento.status[requerimento.status.length-1].status%></textarea>
+                    
+                            <div id="btnsdetalhecompra" >
+                                <button type="submit">SALVAR</button>
+
+                            </div>
+                        </fieldset> 
+                    </form>
+                    
+                    <div id="btnsdetalhecompra"><button id="cancelaedicaostatus" style="background-color: orange;">CANCELAR</button></div>
+            </div>
+        <% } %>
+
+        <div id="formaddstatus" style="margin: 0px auto; display: none;">
+            
+            <form action="/admin/requerimento/<%=requerimento.id%>/addstatusreq"  method="POST" >
+                    <fieldset style="margin: 0px auto; max-width: 70%;" >
+                    <legend>Status nº <%= i%></legend>
+                        <textarea name="descricao" id="" style="width: 90%;"></textarea>
+                
+                        <div id="btnsdetalhecompra" >
+                            <button type="submit">ADICIONAR</button>
+                           
+                        </div>
+                    </fieldset> 
+                </form>
+
+                <div id="btnsdetalhecompra"><button id="cancelaaddstatus" style="background-color: orange;">CANCELAR</button></div>
+            
+        </div>
+
+
+        <div id="btnsdetalhecompra">
+
+            <% if (!requerimento.finalizado){%>
+
+                    <% if (typeof admin !== 'undefined'){%>
+                        <button id="addstatus" >ADICIONAR STATUS</button>&nbsp;&nbsp;
+
+                        <button id="editastatus" >EDITAR STATUS</button>&nbsp;&nbsp;
+
+                        <form action="/admin/requerimento/<%=requerimento.id%>/deletestatusreq?_method=DELETE" method="POST">
+                            <input type="number" name="statusid" style="display: none;" value="<%=requerimento.status[requerimento.status.length-1].id%>">
+                            <button type="submit">REMOVER STATUS</button>&nbsp;&nbsp;
+                        </form>&nbsp;&nbsp;
+                    <% } %>
+
+                        <% if (typeof admin !== 'undefined'){%>
+                            <form action="/admin/requerimento/<%=requerimento.id%>/finalizar?_method=PUT" id="formfinalizareq" method="POST">
+                                <input type="number" name="statusid" style="display: none;" value="<%=requerimento.status[requerimento.status.length-1].id%>">
+                                <button type="submit">FINALIZAR REQUERIMENTO</button>&nbsp;&nbsp;
+                            </form>
+                        <%}else{%>
+                            <% if (typeof usuario !== 'undefined'){%>
+                                <form action="/cliente/requerimento/<%=requerimento.id%>/cancelar?_method=PUT"  id="formcancelareq" method="POST">
+                                    <input type="number" name="statusid" style="display: none;" value="<%=requerimento.status[requerimento.status.length-1].id%>">
+                                    <button type="submit">CANCELAR REQUERIMENTO</button>&nbsp;&nbsp;
+                                </form>
+                            <% } %>
+                        <% } %>
+                    
+
+                
+
+            <% } %>
+                        
+
+            <% if (typeof admin !== 'undefined'){%>
+                <a href="/admin/requerimentos"><button>VER REQUERIMENTOS</button></a>
+            <%}else{%>
+                <a href="/cliente/requerimentos"><button>VER REQUERIMENTOS</button></a>
+            <% } %>
+            <% if (typeof admin !== 'undefined'){%>
+                <a href="/admin"><button>PAINEL ADMINISTRATIVO</button></a> 
+            <%}else{%>
+                <a href="/cliente/painel"><button>ÁREA DO CLIENTE</button></a> 
+            <% } %>
             <a href="/"><button>PÁGINA INICIAL</button></a> 
         </div>
       
