@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+
+
+
+
+
+    <title>AllPet - Adicionar Endereço</title>
+</head>
+
+<body>
+
+    <%- include('./partials/header') %>
+
+    <!-- <script defer src="/js/cadastroCliente.js"></script> -->
+    
+    <main>
+
+        <div id="bannercadastro">
+            <h2>Adicionar um endereço</h2>
+        </div>
+
+        <img src="/img/cadastro.png" id="capacadastro">
+
+        <form action="/cliente/endereco/<%=endereco.id%>/editar?_method=PUT" method="POST" id="formuser">
+
+            <% if (typeof erro !== 'undefined'){ %>
+                <p style="color: red; text-align: center;"><%= erro %></p>
+            <% } %>
+
+           <% if (typeof erros !== 'undefined'){ %>
+                <p style="color: red; text-align: center;"><%= erros+'\n' %></p>
+            <% } %>
+
+            <% if (typeof cadastroOK !== 'undefined'){ %>
+                <p style="color: green; text-align: center;"><%= cadastroOK %></p>
+            <% } %>
+
+            <fieldset>
+                <legend>Complete as informações a seguir:</legend>
+
+                <h3>Endereço</h3>
+
+                    <label for="cep">CEP</label> 
+                    <input type="text" name="cep" id="cep" value="<%=endereco.cep%>"> <br><br>
+                    
+                    <label for="rua">Rua</label> 
+                    <input type="text" name="rua" id="rua" value="<%=endereco.rua%>"> <br><br>
+
+                    <label for="numero">Número</label> 
+                    <input type="number" name="numero" id="numero" value="<%=endereco.numero%>"> <br><br>
+
+                    <label for="bairro">Bairro</label> 
+                    <input type="text" name="bairro" id="bairro" value="<%=endereco.bairro%>"> <br><br>
+
+                    <label for="cidade">Cidade</label> 
+                    <input type="text" name="cidade" id="cidade" value="<%=endereco.cidade%>"> <br><br>
+
+                    <label for="estado">Estado</label> 
+                    <select name="estado" id="estado">
+                        <% estados.forEach(estado => {%>
+                            <% if (estado == endereco.estado){ %>
+                                <option selected value="<%=estado%>"><%=estado%></option>
+                            <% }else{ %>
+                                <option value="<%=estado%>"><%=estado%></option>
+                            <% } %>
+                        <% }) %>
+
+                    </select> <br><br>
+
+                    <label for="complemento">Complemento</label> 
+                    <input type="text" name="complemento" id="complemento" value="<%=endereco.complemento%>"> <br><br>
+                
+ 
+
+                <button type="submit" id="btncaduser">Salvar</button> &nbsp;&nbsp; <a href="/cliente/enderecos">VOLTAR</a>
+
+            </fieldset>
+
+
+
+        </form>
+
+    </main>
+
+</body>
+
+<%- include('./partials/footer') %>
+
+</html>

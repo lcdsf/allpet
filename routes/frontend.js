@@ -39,31 +39,31 @@ router.post("/cadastro", upload.single('fotoperfil'), validadores.cadastroClient
 //    res.render('cadastroUser');
 //});
 
-router.get('/cadastroprod', function(req, res){
-    res.render('cadastroProduto');
-});
+// router.get('/cadastroprod', function(req, res){
+//     res.render('cadastroProduto');
+// });
 
-router.get('/produto', function(req, res){
-    res.render('produto');
-});
+// router.get('/produto', function(req, res){
+//     res.render('produto');
+// });
 
 
 
-router.get('/carrinho', function(req, res){
-    res.render('carrinho');
-});
+// router.get('/carrinho', function(req, res){
+//     res.render('carrinho');
+// });
 
-router.get('/compraconcluida', function(req, res){
-    res.render('compraConcluida');
-});
+// router.get('/compraconcluida', function(req, res){
+//     res.render('compraConcluida');
+// });
 
-router.get('/detalhecompra', function(req, res){
-    res.render('detalheCompra');
-});
+// router.get('/detalhecompra', function(req, res){
+//     res.render('detalheCompra');
+// });
 
-router.get('/resultadobusca', function(req, res){
-    res.render('resultadoBusca');
-});
+// router.get('/resultadobusca', function(req, res){
+//     res.render('resultadoBusca');
+// });
 
 
 

@@ -25,24 +25,57 @@
             <h2>Minhas Compras</h2>
         </div>
 
+
+
         <div id="painelminhascompras">
 
-            <% compras.forEach(compra => {%>
-                <div id="contcompra">
-                    <div id="infocompra">
-                        
-                        <label>ID: <%=compra.id%></label>
-                        <br>
-                        <label>Data/hora: <%=compra.data.toLocaleString('pt-br')%></label>
-                        <br>
-                        <label><%=compra.forma_pgto%> - R$ <%=compra.valor.toFixed(2).replace('.', ',')%></label>
+            <h3>Compras em aberto</h3>
 
-                    </div>
-                    <a href="/cliente/compra/<%=compra.id%>"><button>Ver detalhes</button></a> 
-                </div>
-            <%}) %>
+            <% comprasabertas.forEach(compra => { %>
+
+                        <div>
+                            <div id="contcompra">
+
+                                <div id="infocompra">
+                                    
+                                    <label>ID: <%=compra.id%></label>
+                                    <br>
+                                    <label>Data/hora: <%=compra.data.toLocaleString('pt-br')%></label>
+                                    <br>
+                                    <label><%=compra.forma_pgto%> - R$ <%=compra.valor.toFixed(2).replace('.', ',')%></label>
+                                </div>
+                                <a href="/cliente/compra/<%=compra.id%>"><button>Ver detalhes</button></a> 
+                            </div>
+                        </div>
+            <% }) %>
+
+            
+
+        
 
         </div>
+
+        <div id="painelminhascompras">
+
+            <h3>Compras finalizadas</h3>
+
+            <% comprasfinalizadas.forEach(compra => { %>
+
+                        <div>
+                            <div id="contcompra">
+
+                                <div id="infocompra">
+                                    
+                                    <label>ID: <%=compra.id%></label>
+                                    <br>
+                                    <label>Data/hora: <%=compra.data.toLocaleString('pt-br')%></label>
+                                    <br>
+                                    <label><%=compra.forma_pgto%> - R$ <%=compra.valor.toFixed(2).replace('.', ',')%></label>
+                                </div>
+                                <a href="/cliente/compra/<%=compra.id%>"><button>Ver detalhes</button></a> 
+                            </div>
+                        </div>
+            <% }) %>
 
         <div id="btnsminhascompras">
             <a href="/cliente/painel"><button>Área do Cliente</button></a> 

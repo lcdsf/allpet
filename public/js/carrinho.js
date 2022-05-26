@@ -9,3 +9,18 @@ frete.addEventListener('change', function (){
         selectEndereco.disabled = false;
     }
 });
+
+
+if (document.querySelectorAll('#removeitem') !== undefined){
+
+    let removeItens = document.querySelectorAll('#removeitem');
+
+    Array.from(removeItens).forEach( item => {
+        item.addEventListener('click', function(event){
+            let deleta = confirm("Tem certeza que deseja remover este item do carrinho?")
+            if (!deleta) event.preventDefault();
+        });
+    });
+
+
+}

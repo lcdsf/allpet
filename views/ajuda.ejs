@@ -27,57 +27,57 @@
         
         <div id="contajudacompra">
 
-
+            <% if (typeof compras !== 'undefined' && compras.length > 0 ){ %>
 
             <h2>Aqui, você pode realizar tratativas para solucionar problemas com suas compras</h2>
 
 
             <div id="painelajudacompra">
 
-                <div id="painelajudacompra1">
-                    <h3>1. Informações iniciais</h3>
+                
+                    <div id="painelajudacompra1">
+                        <h3>1. Informações iniciais</h3>
 
-                    <!-- <p>O que deseja fazer?</p>
+                    <form action="/cliente/ajuda2" method="POST">
+                        <p>Qual é o motivo da sua solicitação?</p>
 
-                    <select name="opdevcanc" id="opdevcanc">
-                        <option value="devolucao">Devolver a minha compra</option>
-                        <option value="cancelar">Cancelar a minha compra</option>
-                        <option value="naorecebi">Ainda não recebi a minha compra</option>
-                    </select> -->
-                <form action="/cliente/ajuda2" method="POST">
-                    <p>Qual é o motivo da sua solicitação?</p>
+                        <select name="motivo" id="motivodevcanc">
+                            <option value="Me arrependi da compra">Me arrependi da compra</option>
+                            <option value="Um ou mais produtos diferentes do que foi comprado">Um ou mais produtos diferentes do que foi comprado</option>
+                            <option value="Desejo reembolso, não recebi a minha compra">Desejo reembolso, não recebi a minha compra</option>
+                            <option value="Um ou mais produtos avariados/defeituosos">Um ou mais produtos avariados/defeituosos</option>
+                            <option value="Compra feita por engano, desejo cancelar">Compra feita por engano, desejo cancelar</option>
+                        </select>
 
-                    <select name="motivo" id="motivodevcanc">
-                        <option value="Me arrependi da compra">Me arrependi da compra</option>
-                        <option value="Um ou mais produtos diferentes do que foi comprado">Um ou mais produtos diferentes do que foi comprado</option>
-                        <option value="Desejo reembolso, não recebi a minha compra">Desejo reembolso, não recebi a minha compra</option>
-                        <option value="Um ou mais produtos avariados/defeituosos">Um ou mais produtos avariados/defeituosos</option>
-                        <option value="Compra feita por engano, desejo cancelar">Compra feita por engano, desejo cancelar</option>
-                    </select>
+                    </div>
 
-                </div>
+                    <div id="painelajudacompra2">
 
-                <div id="painelajudacompra2">
+                        <h3>2. Informações da Compra</h3>
 
-                    <h3>2. Informações da Compra</h3>
+                        <p>Por favor, selecione a compra em questão </p>
 
-                    <p>Por favor, selecione a compra em questão </p>
+                        <select name="compracontestada" id="compracontestada">
 
-                    <select name="compracontestada" id="compracontestada">
+                            <% compras.forEach(compra => { %>
+                                <option value="<%=compra.id%>">ID: <%=compra.id%> - <%=compra.data.toLocaleString('pt-br')%> - R$ <%=compra.valor.toFixed(2).replace('.', ',')%> - <%=compra.forma_pgto%></option>
+                            <%}) %>
 
-                        <% compras.forEach(compra => { %>
-                            <option value="<%=compra.id%>">ID: <%=compra.id%> - <%=compra.data%> - R$ <%=compra.valor%> - <%=compra.forma_pgto%></option>
-                        <%}) %>
+                        </select>
 
-                    </select>
-
-                </div>
+                    </div>
 
             </div>
 
             <button>Enviar</button>
 
             </form>
+
+            <% }else{%>
+                <h2>Você não possui compras em aberto ou compras sem requerimento</h2>
+                <a href="/cliente/painel">Clique aqui para acessar a Área do Cliente</a>
+            <% } %>
+
 
          </div>  
 

@@ -35,13 +35,19 @@
                     
                     <img src="/img/<%=usuario.fotourl%>">
                     <br>
-                    <label><%= usuario.nome %> <%= usuario.sobrenome %></label>
+                    <label><strong><%= usuario.nome %> <%= usuario.sobrenome %></strong></label>
                     <br><br>
                     <a href="/cliente/<%= usuario.id %>/editar">Alterar dados pessoais</a>
-                    <!-- <a href="/cliente/<%= usuario.id %>/formapgto">Alterar formas de pagamento</a> -->
-                    <a id="deletaCliente" href="/cliente/<%= usuario.id %>/deleteeee">Excluir conta</a>
+                    <br>
+                    <a href="/cliente/enderecos">Endereços</a>
                     <br><br>
                     <a href="/cliente/sair">Sair</a>
+                    <br><br>
+                    <div id="painelopuser">
+                    <form action="/cliente/<%= usuario.id %>/delete?_method=DELETE" method="POST" id="formdeletacliente">
+                        <button type="submit" style="background-color: red;">Excluir conta</button>
+                    </form>
+                    </div>
 
                 </div>
 

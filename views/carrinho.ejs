@@ -36,7 +36,7 @@
                 <% itenscarrinho.forEach(item => { %>
                     
                     <div id="prcrr1">
-                        <img src="/img/racao.png">
+                        <img src="/img/<%=item.produto.fotos[0].fotourl%>">
                         <div id="infoprcrr1">
 
                             <div id="nomeqtdcrr">
@@ -115,16 +115,20 @@
                                         <option value="end3">Rodovia MT-130 KM 59, S/N, Zona Rural, Poxoréu - MT</option> -->
 
                                         <% enderecos.forEach(endereco => { %>
-                                            <option  value="<%=endereco.id%>"> ID: <%=endereco.id%> Rua <%= endereco.rua %>, nº <%= endereco.numero %>, Bairro <%= endereco.bairro %>, <%= endereco.cidade %> - <%= endereco.estado %></option>
+                                            <option  value="<%=endereco.id%>">CEP: <%=endereco.cep%> - Rua <%= endereco.rua %>, nº <%= endereco.numero %>, Bairro <%= endereco.bairro %>, <%= endereco.cidade %> - <%= endereco.estado %></option>
                                             <!-- <option value=""><%=endereco.id%></option> -->
                                             <% }) %>
-                                    </select> &nbsp;
+                                    </select> 
+
+                                    <br>
+
+                                    <!-- <a href="/cliente/endereco/criar" style="color: orange;">Clique aqui para adicionar um endereço</a> -->
                                     
-                                    <!-- <button>NOVO ENDEREÇO</button> -->
+                                    <!-- <button id="removeitem">NOVO ENDEREÇO</button> -->
 
 
 
-                                    <br><br>
+                                    <br>
                                     <label for="retirada">Não precisa entregar, vou retirar na loja</label>
                                     <input type="checkbox" name="semfrete" id="semfrete">
                                 </div>
