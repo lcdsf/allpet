@@ -13,6 +13,7 @@ router.get("/", autenticadorAdmin, adminController.index);
 
 //GERENCIAMENTO DE CLIENTES (EXIBICAO)
 router.get("/clientes", autenticadorAdmin, clienteController.index);
+router.get("/cliente/:id", autenticadorAdmin, clienteController.details);
 
 
 //GERENCIAMENTO DE PRODUTOS

@@ -25,76 +25,58 @@
             <h2>Detalhes do produto: <%= produto.nome %></h2>
         </div>
 
-        <img style="width: 20vw; margin: 0 auto;" src="/img/<%= produto.fotourl %>">
+        <div style="width: inherit; margin: 0px auto; margin-top: 20px;">
+            <% produto.fotos.forEach(foto => {%>
+                <img style="max-height: 200px;" src="/img/<%= foto.fotourl %>">    
+            <% }) %>
+        </div>
         
 
         <div id="infodetalhecompra">
-            <h2>Preço: R$ <%= produto.preco %> -  Categoria: <%= categoria.nome %></h2>
+            <h2>Preço: R$ <%= produto.preco.toFixed(2).replace('.', ',') %> -  Categoria: <%= categoria.nome %></h2>
 
             <div id="separador"></div>
 
-            <h2>Vendas: <%= qtdcompras %></h2>
+            <% if (qtdcompras > 0){%>
+                <h3>Vendas: <%= qtdcompras %> - Valor total vendido: R$ <%= (qtdcompras*produto.preco).toFixed(2).replace('.', ',') %></h3>
+            <% }else{ %>
+                <h3>Este produto nunca foi vendido</h3>
+            <% } %>
 
             <h2>Avaliações do produto</h2>
 
-                <div id="contdetalhecompra">
+            <% if (avaliacoes.length > 0){%>
+                <h4 style="text-align: center;">Nota média: <%= notamedia.toFixed(1) %></h4>
+            <% } %>>
 
-                <% avaliacoes.forEach(avaliacao => {%>
+                <div id="contdetalhecompra" style="display: flex; flex-direction: column; width: 50%;">
 
-                    <div> <!-- id="itemdetalhecompra"-->
-                        <label>"<%= avaliacao.descricao %>"</label>
-                        <br><br>
-                        <label><i>Cliente: <%= avaliacao.clientes_id%></i></label><br>
-                        <label><i><%=avaliacao.datahora.getDate()%>/<%=avaliacao.datahora.getMonth()+1%>/<%=avaliacao.datahora.getFullYear()%> - <%=avaliacao.datahora.getHours()%>:<%=avaliacao.datahora.getMinutes()%></i></label>
- 
-                    </div>
+                <% if (avaliacoes.length > 0){%>
 
-                <%})%>
->
+                    <% avaliacoes.forEach(avaliacao => {%>
+
+                        <div id="itemdetalhecompra" style="margin: 5px auto; width: 90%;"> <!-- id="itemdetalhecompra"-->
+                            <h3>"<%= avaliacao.descricao %>"</h3>
+                            <label><i>Cliente: <%= avaliacao.cliente.nome%> <%= avaliacao.cliente.sobrenome%></i></label><br>
+                            <label><i>Nota: <%= avaliacao.nota%></i></label><br>
+                            <label><i>Data: <%=avaliacao.datahora.toLocaleString('pt-br')%></i></label>
+    
+                        </div>
+
+                    <%})%>
+                
+                <% }else{%>
+                    <h3 style="color: white;">Este produto não recebeu nenhuma avaliação</h3>
+                <% } %>
+
                 </div>
 
         </div>
 
-        <div id="separador"></div>
-
-        <h2>Status da compra</h2>
-
-        <h3>Endereço de entrega: Rua Severino Pereira Lins, 956, Alto da Conceição, Serra Talhada - PE</h3>
-
-        <div id="statuscompra">
-
-            <div id="statuschk">
-                <div id="dotcompra">1</div>
-                <p>31/01/2022 - 12:53</p>
-                <p>Pagamento aprovado</p>
-                <p>Cartão de Crédito</p>
-            </div>
-
-            <div id="statuschk">
-                <div id="dotcompra">2</div>
-                <p>31/01/2022 - 12:55</p>
-                <p>Pedido recebido pela loja</p>
-                <p>#20220201999999</p>
-            </div>
-
-            <div id="statuschk">
-                <div id="dotcompra">3</div>
-                <p>01/02/2022 - 08:30</p>
-                <p>Pedido despachado</p>
-                <button action="https://rastreamento.correios.com.br/app/index.php">Rastreio</button>
-            </div>
-
-            <div id="statuschk">
-                <div id="dotcompra">4</div>
-                <p>03/02/2022 - 14:27</p>
-                <p>Entrega efetuada</p>
-            </div>
-
-        </div>
 
         <div id="btnsdetalhecompra">
-            <button>VER TODAS AS MINHAS COMPRAS</button>
-            <button>AJUDA</button>
+            <a href="/admin/produtos"><button>VER TODOS OS PRODUTOS</button></a>
+            <a href="/admin"><button>PAINEL ADMINISTRATIVO</button></a>
         </div>
       
 

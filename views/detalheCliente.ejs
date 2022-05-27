@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+
+
+
+
+
+    <title>AllPet - <%= cliente.nome %> <%= cliente.sobrenome %> </title>
+</head>
+
+<body>
+
+    <%- include('./partials/header') %>
+    
+    <main id="maindetalhecompra"> 
+
+        <div id="bannercadastro">
+            <h2>Detalhes do cliente: <%= cliente.nome %> <%= cliente.sobrenome %></h2>
+        </div>
+
+        <div style="width: inherit; margin: 0px auto; margin-top: 20px;">
+            <img style="max-height: 200px; border-radius: 100px;" src="/img/<%= cliente.fotourl %>">    
+        </div>
+        
+
+        <div id="infodetalhecompra">
+            <!-- <div id="separador"></div> -->
+
+            <% if (totalgasto > 0){%>
+                <h3><%=cliente.nome%> gastou no total R$ <%= (totalgasto).toFixed(2).replace('.', ',') %> na loja</h3>
+
+                <h2>Compras de <%=cliente.nome%></h2>
+
+                <div id="contdetalhecompra" style="display: flex; flex-direction: column; width: 50%;">
+                    <% cliente.compras.forEach(compra => {%>
+                        <a href="/admin/compra/<%=compra.id%>">
+                            <div id="itemdetalhecompra" style="margin: 5px auto; width: 90%; color: black;">
+                                <h4>ID: <%=compra.id%> - R$ <%=compra.valor.toFixed(2).replace('.', ',')%></h4>
+                                <p>Data: <%=compra.data.toLocaleString('pt-br')%></p>
+                            </div>
+                        </a>
+                    <% }) %>
+                </div>
+
+
+            <% }else{ %>
+                <h3><%=cliente.nome%> nunca comprou na loja</h3>
+            <% } %>
+
+            <h2>Avaliações de <%=cliente.nome%></h2>
+
+                <div id="contdetalhecompra" style="display: flex; flex-direction: column; width: 50%;">
+
+                <% if (avaliacoes.length > 0){%>
+
+                    <% avaliacoes.forEach(avaliacao => {%>
+
+                        <div id="itemdetalhecompra" style="margin: 5px auto; width: 90%;">
+                            <h3>"<%= avaliacao.descricao %>"</h3>
+                            <label><i>Produto: <%= avaliacao.produto.nome%></i></label><br>
+                            <label><i>Nota: <%= avaliacao.nota%></i></label><br>
+                            <label><i>Data: <%=avaliacao.datahora.toLocaleString('pt-br')%></i></label>
+    
+                        </div>
+
+                    <%})%>
+                
+                <% }else{%>
+                    <h3 style="color: white;"><%= cliente.nome %> nunca fez uma avaliação</h3>
+                <% } %>
+
+                </div>
+
+        </div>
+
+
+        <div id="btnsdetalhecompra">
+            <a href="/admin/clientes"><button>VER TODOS OS CLIENTES</button></a>
+            <a href="/admin"><button>PAINEL ADMINISTRATIVO</button></a>
+        </div>
+      
+
+    </main>
+
+</body>
+
+<%- include('./partials/footer') %>
+
+</html>
