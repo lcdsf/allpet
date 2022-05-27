@@ -88,7 +88,7 @@ const produtoController = {
     index: async (req, res) => {
         const produtos = await Produto.findAll({include: 'fotos'})
         .then(result => result.map(produto => produto.toJSON()));
-        res.render('listaProdutos', { produtos});
+        res.render('listaProdutos', { produtos, admin: req.session.admin});
     },
 
     indexHome: async (req, res) =>{
@@ -477,26 +477,33 @@ const produtoController = {
     details: async (req, res) => {
         
         const {id} = req.params;
-        const produto = await Produto.findByPk(id);
+        const produto = await Produto.findByPk(id, {include: 'fotos'});
         const categoria = await CategoriaEspecifica.findByPk(produto.categorias_especificas_id);
 
-        const qtdcompras = await ItemCompra.count({
+        const comprasproduto = await ItemCompra.findAll({
             where: {produtos_id: id}
         });
 
-        //console.log('QTDCOMPRAS: ', qtdcompras)
+        let qtdcompras = 0;
+        comprasproduto.forEach(produto => qtdcompras += produto.quantidade);
+
+        // console.log('QTDCOMPRAS: ', qtdcompras)
 
 
 
         const avaliacoes = await Avaliacao.findAll({
-            raw: true, 
             where: {produtos_id: id},
             include: 'cliente'
         
         });
 
-        console.log('AVALIAÇÕES: ', avaliacoes)
-        res.render('detalheProduto', {produto, avaliacoes, categoria, qtdcompras});
+        let notamedia = 0.0;
+
+        avaliacoes.forEach(a => notamedia += a.nota);
+        notamedia = (notamedia/avaliacoes.length);
+
+        // console.log('AVALIAÇÕES: ', avaliacoes)
+        res.render('detalheProduto', {admin: req.session.admin, notamedia, produto, avaliacoes, categoria, qtdcompras});
 
 
     },
@@ -514,14 +521,6 @@ const produtoController = {
 
 
         const cat_esp = await CategoriaEspecifica.findAll({raw: true,  where: {nome: catespnome} })
-       // .then(console.log("CATEGORIA ESPECÍFICA ENCONTRADA"))
-        //.catch(error => console.log("ERRO AO BUSCAR CATEGORIA ESPECÍFICA: ", error));
-        
-        //console.log("CATEGORIA ESPECÍFICA ENCONTRADA COM ID : ", cat_esp[0].id);
-
-
-        //console.log(req.files[0].filename);
-        //console.log('TAMANHO DO REQFILES: ',req.files.length);
 
 
         const produtoNovo = await Produto.create(
@@ -611,8 +610,8 @@ const produtoController = {
             .then(result => result.map(foto => foto.toJSON()));
             
 
-            console.log('TAMANHO DO FOTOSATUAIS: ', fotosatuais.length);
-            console.log('CONTEUDO FOTOS ATUAIS: ', fotosatuais);
+            // console.log('TAMANHO DO FOTOSATUAIS: ', fotosatuais.length);
+            // console.log('CONTEUDO FOTOS ATUAIS: ', fotosatuais);
 
             for (let i = 0; i < fotosatuais.length; i++){
             

@@ -14,6 +14,22 @@ const clienteController = {
         res.render('listaClientes', { clientes } );
     },
 
+    details: async (req, res) =>{
+        const cliente = await Cliente.findByPk(req.params.id, {
+            include: ['compras', 'avaliacoes']
+        });
+
+        let totalgasto = 0.0;
+        cliente.compras.forEach(c => totalgasto += c.valor);
+
+        const avaliacoes = await Avaliacao.findAll({
+            where: {clientes_id : req.params.id},
+            include: 'produto'
+        })
+
+        res.render('detalheCliente', { admin: req.session.admin, cliente, totalgasto, avaliacoes } );
+    },
+
     create: (req, res) => {
         res.render("cadastroUser");
     },
