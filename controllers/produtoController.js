@@ -526,7 +526,7 @@ const produtoController = {
         const produtoNovo = await Produto.create(
             {
                 nome,
-                preco,
+                preco: parseFloat(preco),
                 descricao,
                 quantidade,
                 categorias_especificas_id: cat_esp[0].id,
@@ -592,7 +592,7 @@ const produtoController = {
         await Produto.update(
             {
                 nome: nome,
-                preco: preco,
+                preco: parseFloat(preco),
                 descricao: descricao,
                 quantidade: quantidade,
                 categorias_especificas_id: categoria.id
