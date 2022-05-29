@@ -18,6 +18,8 @@
 <body>
 
     <%- include('./partials/header') %>
+
+    <script defer src="/js/cadastroProduto.js"></script>
     
     <main>
 
@@ -52,7 +54,8 @@
 
 
                 <label for="preco">Preço</label> 
-                <input type="number" name="preco" id="preco"> <br><br>
+                <input type="text" name="preco" id="preco" step="0.01"> <br><br>
+                <!-- <input type="number" name="preco" id="preco"> <br><br> -->
 
                 <label for="quantidade">Quantidade</label> 
                 <input type="number" name="quantidade" id="quantidade"> <br><br>

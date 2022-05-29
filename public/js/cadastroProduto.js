@@ -1,17 +1,3 @@
-//EXIBE ALERTA ANTES DO ADMIN DELETAR PRODUTO
-let deletaProduto = document.querySelector('.deletaProduto');
-
-// console.log(deletaCliente);
-
-deletaProduto.addEventListener('click', function(event){
-    // console.log('CLICA DELETE')
-    let deleta = confirm("Tem certeza que deseja excluir este produto?")
-
-    if (!deleta) event.preventDefault();
-
-});
-
-
 
 
 if (document.querySelector("#preco") !== undefined){
@@ -46,6 +32,13 @@ if (document.querySelector("#preco") !== undefined){
             alert('O valor deve ser menor que 100.000');
             event.preventDefault();
         }
+        // if (preco.value.length == 3){
+        //     console.log('tam3')
+        // }
+        // if (preco.value.length == 4){
+        //     console.log('tam4')
+        // }
+
 
     });
 };
