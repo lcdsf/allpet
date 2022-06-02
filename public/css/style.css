@@ -2,6 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Rufina:wght@700&display=swap');
 
 
+
 #box-form {
     width: 70%;
     margin: 50px auto;
@@ -538,7 +539,7 @@
     border-radius: 4px;
     background-color: #d1d1d1;
     width: 20vw;
-    height: fit-content%;
+    height: fit-content;
     padding: 20px 20px 60px 20px;
    /* z-index: 2;
     margin-top: 100px;*/
@@ -1404,27 +1405,6 @@ footer ul li, footer p, footer a{
     color: white;
 }
 
-#redessociais{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 200px;
-    /*border: 1px solid salmon;*/
-    text-align: center;
-}
-
-#iconsrs{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    width: 100%;
-}
-
-#iconsrs svg{
-    width: 30px;
-    height: 30px;
-}
-
 /*#conteudofooter{
     display: flex;
     justify-content: space-around;
@@ -1664,7 +1644,6 @@ footer ul li, footer p, footer a{
     align-items: center;
     justify-content: center;
     background-color: #feae11;
-    border-radius: 5px;
     color: white;
     width: 200px;
     height: 40px;
@@ -1687,7 +1666,6 @@ footer ul li, footer p, footer a{
     font-size: 15px;
     display: flex;
     justify-content: center;
-    border-radius: 5px;
     padding-top: 10px;
     padding-bottom: 10px;
     width: 150px;
@@ -1703,7 +1681,9 @@ footer ul li, footer p, footer a{
 
 
 
+
 /*************************************************************************************************/
+
 
 
 /* LAYOUT RESPONSIVO */

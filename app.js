@@ -16,12 +16,17 @@ const session = require('express-session');
 
 
 app.set('view engine', 'ejs');
+app.use(express.static("public"));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(methodOverride("_method"));
 
+app.get('/', (req, res) =>{
+
+    res.render('home');
+});
 app.use(session({ 
     secret: process.env.SESSION_SECRET,
     resave: true,
@@ -35,18 +40,6 @@ app.use("/cliente", autenticadorCliente, clienteRouter);
 app.use("/admin", autenticadorAdmin, adminRouter);
 app.use('/', loginRouter);
 app.use(logAllPet);
-
-
-
-
-
-
-
-
-
-
-
-
 
 app.listen(4000);
 console.log("Server rodando... 4000.");
