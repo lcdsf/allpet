@@ -42,3 +42,95 @@ if (document.querySelector("#preco") !== undefined){
 
     });
 };
+
+
+//VALIDACAO CAMPOS CADASTRO PRODUTO
+if (document.querySelector('#formuser') != undefined){
+    let form = document.getElementById('formuser');
+    let nomeInput = document.getElementById("nome");
+    let descricaoInput = document.getElementById("descricao");
+    let precoInput = document.getElementById("preco");
+    let qtdInput = document.getElementById("quantidade");
+    let erro  = [];
+
+//VALIDACAO AO DAR SUBMIT
+    form.addEventListener('submit', function(e){
+        if (nomeInput.value == "") {
+            alert("O campo nome deve ser preenchido")
+            nomeInput.style.border = "2px solid red"
+            nomeInput.style.backgroundColor = "#f5939362";
+            erro.push(1);
+        }
+
+        if (descricaoInput.value == "") {
+            alert("O campo descrição deve ser preenchido")
+            descricaoInput.style.border = "2px solid red"
+            descricaoInput.style.backgroundColor = "#f5939362";
+            erro.push(1);
+        }
+        
+        if (precoInput.value == "") {
+            alert("O campo preço deve ser preenchido")
+            precoInput.style.border = "2px solid red"
+            precoInput.style.backgroundColor = "#f5939362";
+            erro.push(1);
+        }
+
+        if (qtdInput.value == "") {
+            alert("O campo quantidade deve ser preenchido")
+            qtdInput.style.border = "2px solid red"
+            qtdInput.style.backgroundColor = "#f5939362";
+            erro.push(1);
+        }
+
+        if (erro.length > 0){
+            e.preventDefault();
+            erro = [];
+        }else{
+            alert('Informações enviadas com sucesso!');
+        }
+    })
+
+
+//MUDANCA DE COR DOS INPUTS
+    nomeInput.addEventListener('blur', function(){
+        if (nomeInput.value != "") {
+            nomeInput.style.border = "2px solid green"
+            nomeInput.style.backgroundColor = "#d0e2d0";
+        }else{
+            nomeInput.style.border = "2px solid red"
+            nomeInput.style.backgroundColor = "#f5939362";
+        }
+    });
+
+    descricaoInput.addEventListener('blur', function(){
+        if (descricaoInput.value != "") {
+            descricaoInput.style.border = "2px solid green"
+            descricaoInput.style.backgroundColor = "#d0e2d0";
+        }else{
+            descricaoInput.style.border = "2px solid red"
+            descricaoInput.style.backgroundColor = "#f5939362";
+        }
+    });
+
+    precoInput.addEventListener('blur', function(){
+        if (precoInput.value != "") {
+            precoInput.style.border = "2px solid green"
+            precoInput.style.backgroundColor = "#d0e2d0";
+        }else{
+            precoInput.style.border = "2px solid red"
+            precoInput.style.backgroundColor = "#f5939362";
+        }
+    });
+
+    qtdInput.addEventListener('blur', function(){
+        if (qtdInput.value != "") {
+            qtdInput.style.border = "2px solid green"
+            qtdInput.style.backgroundColor = "#d0e2d0";
+        }else{
+            qtdInput.style.border = "2px solid red"
+            qtdInput.style.backgroundColor = "#f5939362";
+        }
+    });
+
+}

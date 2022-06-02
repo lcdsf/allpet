@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+
+
+
+
+
+    <title>All Pet - Home</title>
+</head>
+
+
+
+
+<body>
+
+    <%- include('./partials/header') %>
+    
+    <div id="bemvindo">
+       <!-- <p>Sejam bem-vindos, apaixonados por Pets!</p> -->
+
+        <% if (typeof erro !== 'undefined'){ %>
+            <p style="color: red; text-align: center;"><%= erro %></p><br>
+        <% } %>
+
+        <% if (typeof usuario !== 'undefined'){ %>
+            <p style="font-size: 20px; text-align: center;">Bem vindo, <%= usuario.nome %></p>
+        <% } %>
+
+
+        <img src="/img/dog.png">        
+    </div>
+
+    <div id="carrossel">
+
+        <div id="btcarrossel">
+            <div id="btnesq">
+                <svg width="10" height="18" viewBox="0 0 10 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M9 1L1 9L9 17" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            
+            <div id="btndir">
+                <svg width="10" height="18" viewBox="0 0 10 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1 1L9 9L1 17" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>                
+            </div>
+        </div>
+
+        <img src="/img/promo1.png">
+
+        <div id="grupodots">
+            <div id="d1"></div>
+            <div id="d2"></div>
+            <div id="d3"></div>
+            <!-- <div id="d4"></div>
+            <div id="d5"></div>
+            <div id="d6"></div> -->
+        </div>
+
+    </div>
+
+    
+    <div id="sugestoes">
+        <div id="titulosugestoes">
+            <h3>Os mais vendidos</h3>
+        </div>
+        
+        <div id="petgostar">
+
+            <% if (typeof top3 != 'undefined'){ %>
+
+                <% top3.forEach(produto => { %>
+
+                <a href="/produto/<%=produto.id%>">
+                    <div id="pg1">
+                        <img src="/img/<%=produto.fotos[0].fotourl%>">
+                        <p><%= produto.nome %></p>
+                        <p>R$ <%= produto.preco.toFixed(2).replace(".", ",") %></p>
+                    </div>
+                </a>
+                &nbsp;&nbsp;
+
+                <% }) %>
+
+            <% } %>
+
+            <% if (typeof usuario !== 'undefined' && (ultimovisto)){ %>
+                <div id="visualizou">
+                        <div id="grpvis">
+                            <p>Você visualizou</p>
+                            <img src="/img/<%=ultimovisto%>">
+                            <p>Acesse seu histórico de navegação <a href="/cliente/historico">aqui</a></p>
+                        </div>
+                    
+                </div>
+            <% } %>
+
+
+
+        </div>
+
+
+
+        <div id="barra"></div>
+
+    </div>
+
+    <br><br><br><br>
+
+    <h3>Nossos produtos</h3>
+
+    <div id="molditems">
+
+        <div id="grupoitems">
+
+            <% if (typeof produtos !== 'undefined'){%>
+                <% produtos.forEach(produto => {%>
+                         <div id="prodresbusca">
+
+                            <% let fotos = produto.fotos.map(foto => foto.fotourl) %>
+
+                                <!-- <a href="/cliente/produto/<%= produto.id %>"> -->
+                       
+                                <a href="/produto/<%= produto.id %>">
+                            
+                                <img src="/img/<%= fotos[0] %>">
+                                <label><%=produto.nome %></label>
+                                <br>
+                                <label>R$ <%= produto.preco.toFixed(2).replace(".", ",") %></label>
+                            </a>
+                        </div>
+                     
+                <%}) %>
+            <% } %>
+        </div>
+
+
+    </div>
+
+    <button id="btnvermais">VER MAIS</button>
+
+
+
+
+</body>
+
+<%- include('./partials/footer') %>
+
+</html>

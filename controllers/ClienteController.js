@@ -187,6 +187,16 @@ const clienteController = {
 
         const produtoAtual = await Produto.findByPk(produto_id, {raw: true});
 
+        let temNoCarrinho = await ItemCarrinho.findAll({
+            where: {produtos_id: produto_id, clientes_id: cliente_id}
+        })
+
+        if (temNoCarrinho.length > 0){ 
+            temNoCarrinho.pop();
+            res.redirect('/produto/'+req.params.id+'?error="Este item já está no carrinho"'); 
+            return;
+        } 
+
 
         if (qtditem > 0 && (qtditem <= produtoAtual.quantidade)){
             await ItemCarrinho.create({
@@ -266,9 +276,16 @@ const clienteController = {
 
         const itensCarrinho = await ItemCarrinho.findAll({
             where: {clientes_id: cliente_id},
-            include: 'produto'
+            include:{ 
+                model: Produto, 
+                as: 'produto', 
+                include:[{
+                    model: Foto, 
+                    as: 'fotos'
+                }]
+            }
         })
-        .then(result => result.map(item => item.toJSON()));
+        // .then(result => result.map(item => item.toJSON()));
 
         // console.log('RESULTADO CARRINHO: ', itensCarrinho);
 

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <title>Editar Usuário</title>
+</head>
+
+<body>
+    <%- include('./partials/header') %>
+
+        <div class="container-fluid" id="box-form">
+
+
+            <form action="/cadastro" enctype="multipart/form-data" method="POST" id="formuser" class="formuser">
+
+
+
+                <legend>Editar Usuário</legend>
+
+                <label for="nome">Nome</label>
+                <input type="text" name="nome" id="nome" value="<%=usuario.nome%>">
+
+                <label for="sobrenome">Sobrenome</label>
+                <input type="text" name="sobrenome" id="sobrenome" value="<%=usuario.sobrenome%>">
+
+                <label for="telefone">Telefone</label>
+                <input type="text" name="telefone" id="telefone" value="<%=usuario.telefone%>">
+
+                <label for="fotoperfil">Foto de perfil</label>
+                <input type="file" name="fotoperfil" id="fotoperfil">
+
+                <label for="fotoperfil">Foto de perfil atual: </label>
+
+                <img style="width: 30%;" src="/img/<%=usuario.fotourl%>">
+
+
+
+                <button type="submit" class="btn btn-dark">Atualizar</button>
+
+                <a href="/cliente/painel">VOLTAR</a>
+
+                <p id="sucesso-msg">Formulario enviado com sucesso</p>
+
+
+
+
+
+            </form>
+
+
+        </div>
+
+        <script src="cadastroUser.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+<%- include('./partials/footer') %>
+
+</html>

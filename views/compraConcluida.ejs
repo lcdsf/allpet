@@ -43,7 +43,7 @@
                     <% if (typeof itenscompra !== 'undefined'){ %>
                         <% itenscompra.forEach(item => { %>    
                             <div id="itemcompra">
-                                <img src="/img/racao.png"> 
+                                <img src="/img/<%=item.produto.fotos[0].fotourl%>"> 
                                 <br>
                                 <label><%=item.produto.nome%></label>
                                 <br>
