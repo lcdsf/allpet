@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <title>Editar Produto</title>
+</head>
+
+<body>
+
+    <%- include('./partials/header') %>
+
+        <div class="container-fluid" id="box-form">
+
+            <form id="formuser" class="formuser" action="/admin/produtos/<%= produto.id %>/editar?_method=PUT"
+                enctype="multipart/form-data" method="POST">
+
+
+                <legend>Editar produto: <%= produto.nome %>
+                </legend>
+
+                <label for="nome">Nome do produto</label>
+                <input type="text" name="nome" id="nome" value="<%= produto.nome %>">
+
+                <label for="descricao">Descrição</label>
+                <textarea name="descricao" id="descricao"><%= produto.descricao %></textarea>
+
+
+                <label>Categoria</label>
+
+                <select name="catespnome" id="catespnome">
+
+                    <% catesps.forEach(catesp=> { %>
+                        <% if ( catesp.nome==catprod.nome ) { %>
+                            <option selected value="<%= catesp.nome %>">
+                                <%= catesp.nome %>
+                            </option>
+                            <% }else{ %>
+                                <option value="<%= catesp.nome %>">
+                                    <%= catesp.nome %>
+                                </option>
+                                <% } %>
+                                    <% })%>
+
+                </select>
+
+
+
+                <label for="preco">Preço</label>
+                <input type="number" name="preco" id="preco" value="<%= produto.preco %>">
+
+                <label for="quantidade">Quantidade</label>
+                <input type="number" name="quantidade" id="quantidade" value="<%= produto.quantidade %>">
+
+
+                <label>Foto</label>
+                <input type="file" name="imgprod" id="imgprod" multiple>
+
+                <label>Fotos atuais:</label><br>
+
+                <% let fotos=produto.fotos.map(foto=> foto.fotourl) %>
+
+                    <img style="width: 20%;" src="/img/<%= fotos[0]%>">
+                    <img style="width: 20%;" src="/img/<%= fotos[1]%>">
+                    <img style="width: 20%;" src="/img/<%= fotos[2]%>">
+                    <img style="width: 20%;" src="/img/<%= fotos[3]%>">
+
+
+                    <button type="submit" class="btn btn-dark">Salvar</button>
+
+
+
+            </form>
+
+            <form action="/admin/produtos/<%= produto.id %>/excluir?_method=DELETE" method="POST">
+                <button type="submit" class="btn btn-danger" id="btncaduser" style="width: 100%">Excluir
+                    produto</button>
+            </form>
+
+        </div>
+        <script>
+            document.getElementById("btncaduser").addEventListener("click", function () {
+                alert("Tem certeza que deseja excluir ?")
+            })
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+<%- include('./partials/footer') %>
+
+</html>

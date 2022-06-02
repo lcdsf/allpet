@@ -130,29 +130,35 @@ const produtoController = {
 
         //BUSCA COM SOMA DE QUANTIDADE VENDIDA, AGRUPADA POR PRODUTOS
         let produtosVendidos = await ItemCompra.findAll({
-            attributes: [[sequelize.fn('sum', sequelize.col('quantidade')), 'total_vendido'],
+            attributes: [[sequelize.cast(sequelize.fn('sum', sequelize.col('quantidade')), 'SIGNED'), 'total_vendido'],
                 'produtos_id'
             ],
-            group: ['produtos_id'],
+             group: ['produtos_id'],
         })
-        //.then(result => result.map(produto => produto.toJSON()));
 
         //ORDENA POR MAIOR QTD VENDIDA
-        produtosVendidos = produtosVendidos.sort(function (a, b){
-            return b.total_vendido - a.total_vendido;
+        produtosVendidos.sort((a, b) => {
+            return b.dataValues.total_vendido - a.dataValues.total_vendido;
         });
+
+        //onsole.log('ORDEM PRODUTOS MAIS VENDIDOS: ', produtosVendidos);
 
         //SELECIONA OS 3 COM MAIS VENDAS
         let tresMais = produtosVendidos.slice(0, 3);
         //GUARDA SOMENTE OS IDS DOS 3 MAIS VENDIDOS
-        tresMais = tresMais.map(item => item.produtos_id);
+        tresMais = tresMais.map(item => item.dataValues.produtos_id);
+
+        //console.log('IDS TOP 3: ', tresMais);
 
         //BUSCA OS 3 MAIS VENDIDOS
         let top3Produtos = await Produto.findAll({
             include: 'fotos',
             where: {id: tresMais}
         })
-        //.then(result => result.map(produto => produto.toJSON()));
+        .then(result => result.map(produto => produto.toJSON()));
+
+
+        
 
         res.render('home', {produtos, usuario: usuariologado, admin: adminlogado, ultimovisto, top3: top3Produtos});
     },
@@ -213,8 +219,37 @@ const produtoController = {
         // console.log('AVALIACAO DO USUARIO')
         // console.log(usuarioJaAvaliou);
 
+                //BUSCA COM SOMA DE QUANTIDADE VENDIDA, AGRUPADA POR PRODUTOS
+                let produtosVendidos = await ItemCompra.findAll({
+                    attributes: [[sequelize.cast(sequelize.fn('sum', sequelize.col('quantidade')), 'SIGNED'), 'total_vendido'],
+                        'produtos_id'
+                    ],
+                     group: ['produtos_id'],
+                })
+        
+                //ORDENA POR MAIOR QTD VENDIDA
+                produtosVendidos.sort((a, b) => {
+                    return b.dataValues.total_vendido - a.dataValues.total_vendido;
+                });
+        
+                //onsole.log('ORDEM PRODUTOS MAIS VENDIDOS: ', produtosVendidos);
+        
+                //SELECIONA OS 3 COM MAIS VENDAS
+                let tresMais = produtosVendidos.slice(0, 3);
+                //GUARDA SOMENTE OS IDS DOS 3 MAIS VENDIDOS
+                tresMais = tresMais.map(item => item.dataValues.produtos_id);
+        
+                //console.log('IDS TOP 3: ', tresMais);
+        
+                //BUSCA OS 3 MAIS VENDIDOS
+                let top3Produtos = await Produto.findAll({
+                    include: 'fotos',
+                    where: {id: tresMais}
+                });
+                //.then(result => result.map(produto => produto.toJSON()));
 
-        res.render('produto', {avaliacao: usuarioJaAvaliou, produto, avaliacoes, mediageral, usuario: usuariologado, admin: adminlogado, avaliou: req.session.avaliou, ultimovisto});
+
+        res.render('produto', {avaliacao: usuarioJaAvaliou, produto, avaliacoes, mediageral, usuario: usuariologado, admin: adminlogado, avaliou: req.session.avaliou, ultimovisto, top3: top3Produtos});
     },
 
     filtraBuscaAcessBrinqs: async (req, res) =>{
@@ -478,7 +513,8 @@ const produtoController = {
         
         const {id} = req.params;
         const produto = await Produto.findByPk(id, {include: 'fotos'});
-        const categoria = await CategoriaEspecifica.findByPk(produto.categorias_especificas_id);
+        const categoria = await CategoriaEspecifica.findByPk(produto.categorias_especificas_id)
+        .catch(error => console.log('ERRO AO BUSCAR CAT ESP: ', error));
 
         const comprasproduto = await ItemCompra.findAll({
             where: {produtos_id: id}

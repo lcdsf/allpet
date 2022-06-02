@@ -34,7 +34,8 @@ const loginController = {
         // console.log('REQ SESSION CLIENTE: ', req.session);
 
 
-        res.redirect('/cliente/home');
+        res.redirect('/');
+        // res.redirect('/cliente/home');
     },
 
     adminIndex: async (req, res) => {

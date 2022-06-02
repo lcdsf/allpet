@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <title>Cadastrar Produto</title>
+</head>
+
+<body>
+
+    <%- include('./partials/header') %>
+
+    <script defer src="/js/cadastroProduto.js"></script>
+
+        <div class="container-fluid" id="box-form">
+
+            <form id="formuser" class="formuser" enctype="multipart/form-data" method="POST">
+
+
+                <legend>Cadastro produto</legend>
+
+                <label for="nome">Nome do produto</label>
+                <input type="text" name="nome" id="nome" required>
+
+                <label for="descricao">Descrição</label>
+                <textarea name="descricao" id="descricao"></textarea>
+
+
+                <label>Categoria</label>
+
+                <!-- <select name="catespnome" id="catespnome">
+
+                    <% catesps.forEach(catesp=> { %>
+                        <option value="<%= catesp.nome %>">
+                            <%= catesp.nome %>
+                        </option>
+                        <% })%>
+
+                </select> -->
+
+                <!-- <select name="catespnome" id="catespnome">
+                    <% catesps.forEach(catesp => { %>
+                        <option value="<%= catesp.nome %>"><%= catesp.nome %></option>
+                    <% })%>
+                </select> -->
+
+
+
+                <label for="preco">Preço</label>
+                <input type="number" name="preco" id="preco" required>
+
+                <label for="quantidade">Quantidade</label>
+                <input type="number" name="quantidade" id="quantidade">
+
+
+                <label>Foto (No máximo 4)</label>
+                <input type="file" name="imgprod" id="imgprod" multiple>
+
+
+                <button type="submit" class="btn btn-dark">Enviar</button>
+
+                <p id="sucesso-msg">Formulario enviado com sucesso</p>
+
+
+            </form>
+
+        </div>
+
+        <!-- <script src="cadastroProduto.js"></script> -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+<%- include('./partials/footer') %>
+
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+
+
+
+
+
+    <title>AllPet - Cadastro de usuário</title>
+</head>
+
+<body>
+
+    <%- include('./partials/header') %>
+    
+    <main>
+
+        <div id="bannercadastro">
+            <h2>AllPet - Alterar dados pessoais</h2>
+        </div>
+
+        <img src="/img/cadastro.png" id="capacadastro">
+
+        <form action="/cliente/<%=usuario.id%>/editar?_method=PUT"  enctype="multipart/form-data" method="POST" id="formuser">
+
+            
+
+            <fieldset>
+                <legend>Edite as informações a seguir:</legend>
+
+                <h3>Dados pessoais</h3>
+
+
+                <label for="nome">Nome</label>
+                <input type="text" name="nome" id="nome" value="<%=usuario.nome%>"> <br><br>
+
+                <label for="sobrenome">Sobrenome</label>
+                <input type="text" name="sobrenome" id="sobrenome" value="<%=usuario.sobrenome%>"> <br><br>
+
+
+                <!-- <label for="cpf">CPF (apenas números)</label> 
+                <input type="text" name="cpf" id="cpf" value="<%=usuario.cpf%>"> <br><br> -->
+
+                <label for="telefone">Telefone</label> 
+                <input type="text" name="telefone" id="telefone" value="<%=usuario.telefone%>"> <br><br>
+
+                <label for="fotoperfil">Foto de perfil</label> <br><br>
+                <input type="file" name="fotoperfil" id="fotoperfil"> <br><br>
+
+                <label for="fotoperfil">Foto de perfil atual: </label> <br><br>
+
+                <img style="width: 30%;" src="/img/<%=usuario.fotourl%>"> <br><br>
+
+                
+ 
+
+                <button type="submit" id="btncaduser">Salvar</button>
+                <!-- <br><br> --> &nbsp;
+               <a href="/cliente/painel">VOLTAR</a>
+
+            </fieldset>
+
+
+
+        </form>
+
+    </main>
+
+</body>
+
+<%- include('./partials/footer') %>
+
+</html>

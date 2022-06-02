@@ -1,154 +1,151 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-
-
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/style.css">
-
-
-
-
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <title>All Pet - Home</title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
-
-
 
 
 <body>
 
     <%- include('./partials/header') %>
-    
-    <div id="bemvindo">
-       <!-- <p>Sejam bem-vindos, apaixonados por Pets!</p> -->
 
-        <% if (typeof erro !== 'undefined'){ %>
-            <p style="color: red; text-align: center;"><%= erro %></p><br>
-        <% } %>
+        <div id="bemvindo">
+            <!-- <p>Sejam bem-vindos, apaixonados por Pets!</p> -->
 
-        <% if (typeof usuario !== 'undefined'){ %>
-            <p style="font-size: 20px; text-align: center;">Bem vindo, <%= usuario.nome %></p>
-        <% } %>
+            <% if (typeof erro !=='undefined' ){ %>
+                <p style="color: red; text-align: center;">
+                    <%= erro %>
+                </p><br>
+                <% } %>
+
+                    <% if (typeof usuario !=='undefined' ){ %>
+                        <p style="font-size: 20px; text-align: center;">Bem vindo, <%= usuario.nome %>
+                        </p>
+                        <% } %>
 
 
-        <img src="/img/dog.png">        
-    </div>
+                            <img src="/img/dog.png">
+        </div>
 
-    <div id="carrossel">
 
-        <div id="btcarrossel">
-            <div id="btnesq">
-                <svg width="10" height="18" viewBox="0 0 10 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M9 1L1 9L9 17" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
+        <div class="container-fluid">
+            <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="/img/promo1.png" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="/img/promo2.png" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="/img/promo3.png" class="d-block w-100" alt="...">
+                </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+
+
+
+        <div id="sugestoes">
+            <div id="titulosugestoes" style="text-align: center;">
+                <h3>Os mais vendidos</h3>
             </div>
             
-            <div id="btndir">
-                <svg width="10" height="18" viewBox="0 0 10 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M1 1L9 9L1 17" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>                
-            </div>
-        </div>
-
-        <img src="/img/promo1.png">
-
-        <div id="grupodots">
-            <div id="d1"></div>
-            <div id="d2"></div>
-            <div id="d3"></div>
-            <!-- <div id="d4"></div>
-            <div id="d5"></div>
-            <div id="d6"></div> -->
-        </div>
-
-    </div>
-
+            <div id="petgostar">
     
-    <div id="sugestoes">
-        <div id="titulosugestoes">
-            <h3>Os mais vendidos</h3>
-        </div>
-        
-        <div id="petgostar">
-
-            <% if (typeof top3 != 'undefined'){ %>
-
-                <% top3.forEach(produto => { %>
-
-                <a href="/produto/<%=produto.id%>">
-                    <div id="pg1">
-                        <img src="/img/<%=produto.fotos[0].fotourl%>">
-                        <p><%= produto.nome %></p>
-                        <p>R$ <%= produto.preco.toFixed(2).replace(".", ",") %></p>
-                    </div>
-                </a>
-                &nbsp;&nbsp;
-
-                <% }) %>
-
-            <% } %>
-
-            <% if (typeof usuario !== 'undefined' && (ultimovisto)){ %>
-                <div id="visualizou">
-                        <div id="grpvis">
-                            <p>Você visualizou</p>
-                            <img src="/img/<%=ultimovisto%>">
-                            <p>Acesse seu histórico de navegação <a href="/cliente/historico">aqui</a></p>
-                        </div>
-                    
-                </div>
-            <% } %>
-
-
-
-        </div>
-
-
-
-        <div id="barra"></div>
-
-    </div>
-
-    <br><br><br><br>
-
-    <h3>Nossos produtos</h3>
-
-    <div id="molditems">
-
-        <div id="grupoitems">
-
-            <% if (typeof produtos !== 'undefined'){%>
-                <% produtos.forEach(produto => {%>
-                         <div id="prodresbusca">
-
-                            <% let fotos = produto.fotos.map(foto => foto.fotourl) %>
-
-                                <!-- <a href="/cliente/produto/<%= produto.id %>"> -->
-                       
-                                <a href="/produto/<%= produto.id %>">
-                            
-                                <img src="/img/<%= fotos[0] %>">
-                                <label><%=produto.nome %></label>
-                                <br>
-                                <label>R$ <%= produto.preco.toFixed(2).replace(".", ",") %></label>
+                <% if (typeof top3 != 'undefined'){ %>
+    
+                    <% top3.forEach(produto => { %>
+                        <div id="pg1">
+                            <a href="/produto/<%=produto.id%>">
+                        
+                            <img src="/img/<%=produto.fotos[0].fotourl%>">
+                            <p><%= produto.nome %></p>
+                            <p>R$ <%= produto.preco.toFixed(2).replace(".", ",") %></p>
+                        
                             </a>
                         </div>
-                     
-                <%}) %>
-            <% } %>
+                        &nbsp;&nbsp;
+    
+                    <% }) %>
+    
+                <% } %>
+    
+                <% if (typeof usuario !== 'undefined' && (ultimovisto)){ %>
+                    <div id="visualizou">
+                            <div id="grpvis">
+                                <p>Você visualizou</p>
+                                <img src="/img/<%=ultimovisto%>">
+                                <p>Acesse seu histórico de navegação <a href="/cliente/historico">aqui</a></p>
+                            </div>
+                        
+                    </div>
+                <% } %>
+    
+    
+    
+            </div>
+    
+    
+    
+            <div id="barra"></div>
+    
         </div>
 
 
-    </div>
 
-    <button id="btnvermais">VER MAIS</button>
+        <section id="todos-produtos" class="container">
+            
+            <!-- <h3>Nossos produtos</h3> -->
+
+            <button style="background-color: orange; border: none;" class="btn btn-primary" id="btn-vermais" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+               CLIQUE AQUI E VEJA OS NOSSOS PRODUTOS
+            </button>
+            </p>
+            <div class="collapse" id="collapseExample">
+                <div class="container-fluid">
+
+                    <!-- <p>HELLO WORLD</p> -->
+                    <div id="grupoitems">
+                        <% if (typeof produtos !== 'undefined'){%>
+                            <% produtos.forEach(produto => { %>
+                               
+                                <div id="prodresbusca">
+                                    <a href="/produto/<%= produto.id %>">
+                                    <% let fotos = produto.fotos.map(foto => foto.fotourl) %>
+                                    
+                                        
+                                        <img src="/img/<%= fotos[0] %>">
+                                        <label><%=produto.nome %></label>
+                                        <br>
+                                        <label>R$ <%= produto.preco.toFixed(2).replace(".", ",") %></label>
+                                    </a>
+                                </div>
+                                
+                            <% }) %>
+                        <% } %>
+                    </div>
+
+                </div>
+            </div>
+        </section>
 
 
-
-
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
 </body>
 
 <%- include('./partials/footer') %>

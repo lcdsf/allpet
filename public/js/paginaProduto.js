@@ -37,3 +37,41 @@ if (document.querySelector('#formEditaAvaliacao') != undefined){
     });
 
 }
+
+//CARROSSEL FOTOS DO PRODUTO
+let esq = document.querySelector('#thumbesq');
+let dir = document.querySelector('#thumbdir');
+let t0 = document.querySelector('#mainthumb');
+let t1 = document.querySelector('#thumb1');
+let t2 = document.querySelector('#thumb2');
+let t3 = document.querySelector('#thumb3');
+let aux;
+esq.addEventListener('click', function(){
+    aux = t1.attributes.src.value;
+    t1.attributes.src.value = t0.attributes.src.value;
+    t0.attributes.src.value = t3.attributes.src.value;
+    t3.attributes.src.value = t2.attributes.src.value;
+    t2.attributes.src.value = aux;
+
+});
+
+dir.addEventListener('click', function(){
+    aux = t0.attributes.src.value;
+    t0.attributes.src.value = t1.attributes.src.value;
+    t1.attributes.src.value = t2.attributes.src.value;
+    t2.attributes.src.value = t3.attributes.src.value;
+    t3.attributes.src.value = aux;
+
+});
+
+//ALERTA ITEM JA ADD NO CARRINHO
+
+// if (document.querySelector('#btnaddcart') != undefined){
+//     document.querySelector('#btnaddcart').addEventListener('click', function(){
+//         if (window.location.search != ""){
+//             alert(decodeURIComponent(window.location.search));
+//         }
+//     })
+// }
+
+
