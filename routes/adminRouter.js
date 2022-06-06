@@ -56,5 +56,8 @@ router.put("/requerimento/:id/finalizar", autenticadorAdmin, adminController.fin
 //LOGOUT ADMIN
 router.get('/sair', adminController.sair);
 
+//DELETAR PROPRIA CONTA
+router.delete('/:id/delete', autenticadorAdmin, adminController.delete);
+
 
 module.exports = router;

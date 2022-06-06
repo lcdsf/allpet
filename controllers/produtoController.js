@@ -545,7 +545,7 @@ const produtoController = {
     },
     create: async (req, res) => {
         const catesps = await CategoriaEspecifica.findAll();
-        res.render("cadastroProduto", { catesps });
+        res.render("cadastroProduto", { catesps, admin: req.session.admin });
     },
 
     store: async (req, res) => {
@@ -617,7 +617,7 @@ const produtoController = {
 
         //console.log('CATPROD: ', catprod);
 
-        res.render('editaProduto', {produto, catesps, catprod});
+        res.render('editaProduto', {produto, catesps, catprod, admin: req.session.admin});
     },
     update: async (req, res) => {
         const {nome, preco, descricao, quantidade, catespnome} = req.body;

@@ -18,6 +18,8 @@
 <body>
 
     <%- include('./partials/header') %>
+
+    <script defer src="/js/painelAdmin.js"></script>
     
     <main> 
 
@@ -41,7 +43,13 @@
                     <br>
                     <a href="/">Página inicial</a>
                     <br>
-                    <a href="/admin/delete">Excluir conta</a>
+                    <!-- <a href="/admin/delete">Excluir conta</a> -->
+
+                    <div id="painelopuser">
+                        <form action="/admin/<%= admin.id %>/delete?_method=DELETE" method="POST" id="formdeletacliente">
+                            <button type="submit" style="background-color: red;">Excluir conta</button>
+                        </form>
+                    </div>
 
                 </div>
 

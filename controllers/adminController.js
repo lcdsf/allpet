@@ -24,6 +24,17 @@ const adminController = {
         res.render('cadastroAdmin', {admin: req.session.admin});
     },
 
+    delete: async (req, res) => {
+        await Administrador.destroy({
+            where: {id: req.session.admin.id}
+        })
+
+        req.session.destroy();
+
+        res.redirect('/?Cadastro removido com sucesso!');
+    },
+    
+
     store: async (req, res) => {
 
         //console.log('DADOS DO ADMIN A SER CADASTRADO: ', req.body);
