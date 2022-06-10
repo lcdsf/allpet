@@ -11,7 +11,7 @@ const clienteController = {
 
     index: async (req, res) =>{
         const clientes = await Cliente.findAll();
-        res.render('listaClientes', { clientes } );
+        res.render('listaClientes', { clientes, admin: req.session.admin } );
     },
 
     details: async (req, res) =>{

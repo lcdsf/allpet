@@ -13,9 +13,9 @@ if (document.querySelector('#formuser') != undefined){
     let bairroInput = document.getElementById("bairro");
     let cidadeInput = document.getElementById("cidade");
 
-    let emailInput = document.getElementById("email");
-    let senhaInput = document.getElementById("senha");
-    let cSenhaInput = document.getElementById("confirmaSenha");
+    let emailInput = document.querySelector(".email");
+    let senhaInput = document.querySelector(".senha");
+    let cSenhaInput = document.querySelector(".confirmaSenha");
 
     let erro  = [];
 
